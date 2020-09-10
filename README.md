@@ -7,4 +7,5 @@ parser将将订阅结构完全统一化，订阅自带的规则组和规则完�
 
 参照
 [https://github.com/Fndroid/clash_for_windows_pkg/issues/1092](https://github.com/Fndroid/clash_for_windows_pkg/issues/1092)
+
 [https://docs.cfw.lbyczf.com/contents/parser.html](https://docs.cfw.lbyczf.com/contents/parser.html)

@@ -2,13 +2,13 @@ module.exports.parse = (raw, { axios, yaml, notify }) => {
   const doc = yaml.parse(raw);
   
   //兼容性
-  if (doc.proxies === undefined) {
-    doc.proxies = content.Proxy;
-    delete doc.Proxy;
+  if (doc['proxies'] === undefined) {
+    doc['proxies'] = doc['Proxy'];
+    delete doc['Proxy'];
     doc['proxy-groups'] = doc['Proxy Group'];
     delete doc['Proxy Group'];
-    doc.rules = doc.Rule;
-    delete doc.Rule;
+    doc['rules'] = doc['Rule'];
+    delete doc['Rule'];
   }
 
   //temp规则组
@@ -22,14 +22,14 @@ module.exports.parse = (raw, { axios, yaml, notify }) => {
   unm['name'] = 'UNM_Network';
   unm['type'] = 'http';
   unm['server'] = '0.0.0.0';
-  unm['port'] = 0;
+  unm['port'] = 5555;
   doc['proxies'].push(unm)
   //自定义节点
   var azure = {}
   azure['name'] = 'Azure'
   azure['type'] = 'vmess'
   azure['server'] = '0.0.0.0'
-  azure['port'] = 0
+  azure['port'] = 5555
   azure['uuid'] = '0'
   azure['alterId'] = 2
   azure['cipher'] = 'auto'
@@ -80,10 +80,18 @@ module.exports.parse = (raw, { axios, yaml, notify }) => {
   delete doc['external-controller']
   delete doc['secret']
   delete doc['socks-port'];
+  delete doc['dns'];
   
-  notify("profile has been updated", "Personal rules has been updated.", true);
+  //规则，应用在每次更新
   var temp_rules = [
 'rules:',
+'  - DOMAIN-KEYWORD,suying,DIRECT',
+'  - DOMAIN-KEYWORD,yandex,Proxy',
+'  - DOMAIN-SUFFIX,lauchdarkly.com,DIRECT',
+'  - DOMAIN-SUFFIX,dlsite.com,Proxy',
+'  - DOMAIN-SUFFIX,supanx.com,DIRECT',
+'  - DOMAIN-SUFFIX,firefox.com,DIRECT',
+'  - DOMAIN-SUFFIX,ppy.sh,DIRECT',
 '  - IP-CIDR,91.108.23.100/32,Proxy,no-resolve',
 '  - IP-CIDR,149.154.160.0/22,Proxy,no-resolve',
 '  - IP-CIDR,149.154.164.0/22,Proxy,no-resolve',
@@ -2540,6 +2548,7 @@ module.exports.parse = (raw, { axios, yaml, notify }) => {
 '  - GEOIP,CN,DIRECT',
 '  - MATCH,🐟漏网之鱼'
 ].join('\n');
+  //rule provders
   var temp_providers = [
 'rule-providers:',
 '  Unbreak:',
@@ -2583,5 +2592,6 @@ module.exports.parse = (raw, { axios, yaml, notify }) => {
   const rule_providers = yaml.parse(temp_providers);
   doc['rule-providers'] = rule_providers['rule-providers'];
   doc['rules'] = rules['rules'];
+  notify("profile has been updated", "Personal rules has been updated.", true);
   return yaml.stringify(doc);
 }
