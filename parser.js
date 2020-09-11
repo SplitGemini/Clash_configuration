@@ -1,5 +1,5 @@
 module.exports.parse = (raw, { axios, yaml, notify }) => {
-  const doc = yaml.parse(raw);
+  var doc = yaml.parse(raw);
   
   //兼容性
   if (doc['proxies'] === undefined) {
@@ -70,21 +70,22 @@ module.exports.parse = (raw, { axios, yaml, notify }) => {
   doc['proxy-groups'][5]['proxies'] = ['UNM_Network', 'DIRECT'];
   
   //清理无用字典
-  delete doc['rules']
-  delete doc['port']
-  delete doc['socks-por']
-  delete doc['redir-port']
-  delete doc['allow-lan']
-  delete doc['mode']
-  delete doc['log-level']
-  delete doc['external-controller']
-  delete doc['secret']
+  delete doc['rules'];
+  delete doc['port'];
+  delete doc['socks-por'];
+  delete doc['redir-port'];
+  delete doc['allow-lan'];
+  delete doc['mode'];
+  delete doc['log-level'];
+  delete doc['external-controller'];
+  delete doc['secret'];
   delete doc['socks-port'];
   delete doc['dns'];
   
   //规则，应用在每次更新
   var temp_rules = [
 'rules:',
+'  - DOMAIN-SUFFIX,appcenter.ms,DIRECT',
 '  - DOMAIN-KEYWORD,suying,DIRECT',
 '  - DOMAIN-KEYWORD,yandex,Proxy',
 '  - DOMAIN-SUFFIX,lauchdarkly.com,DIRECT',
