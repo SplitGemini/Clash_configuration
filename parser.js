@@ -15,32 +15,34 @@ module.exports.parse = (raw, { axios, yaml, notify }) => {
   var proxies = [];
   doc['proxies'].forEach((v, i) => { 
     proxies.push(v['name']);
-  })
+  });
+  var proxies_munual = JSON.parse(JSON.stringify(proxies));
   
   //节点添加UNM
   var unm = {};
   unm['name'] = 'UNM_Network';
   unm['type'] = 'http';
-  unm['server'] = '0.0.0.0';
-  unm['port'] = 5555;
-  doc['proxies'].push(unm)
+  unm['server'] = '0';
+  unm['port'] = 0;
+  doc['proxies'].push(unm);
+  
   //自定义节点
-  var azure = {}
-  azure['name'] = 'Azure'
-  azure['type'] = 'vmess'
-  azure['server'] = '0.0.0.0'
-  azure['port'] = 5555
-  azure['uuid'] = '0'
-  azure['alterId'] = 2
-  azure['cipher'] = 'auto'
-  doc['proxies'].push(azure)
-  proxies.push(azure['name']);
+  var azure = {};
+  azure['name'] = 'Azure 亚洲';
+  azure['type'] = 'vmess';
+  azure['server'] = '0';
+  azure['port'] = 0;
+  azure['uuid'] = '0';
+  azure['alterId'] = 5;
+  azure['cipher'] = 'auto';
+  doc['proxies'].push(azure);
+  proxies_munual.push(azure['name']);
   
   doc['proxy-groups'] = [];
   doc['proxy-groups'][0] = {};
   doc['proxy-groups'][0]['name'] = 'Manual';
   doc['proxy-groups'][0]['type'] = 'select';
-  doc['proxy-groups'][0]['proxies'] = proxies;
+  doc['proxy-groups'][0]['proxies'] = proxies_munual;
   
   doc['proxy-groups'][1] = {};
   doc['proxy-groups'][1]['name'] = 'Auto';
