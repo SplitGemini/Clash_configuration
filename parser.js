@@ -14,7 +14,9 @@ module.exports.parse = (raw, { yaml, notify }) => {
   //temp规则组
   var proxies = [];
   doc['proxies'].forEach((v, i) => { 
-    proxies.push(v['name']);
+    if (v['name'].indexOf("NeteaseUnblock") == -1) {
+      proxies.push(v['name']);
+    }
   });
   var proxies_munual = JSON.parse(JSON.stringify(proxies));
   
@@ -28,7 +30,7 @@ module.exports.parse = (raw, { yaml, notify }) => {
   
   //自定义节点1
   var azure = {};
-  azure['name'] = 'Azure';
+  azure['name'] = 'Azure 亚洲';
   azure['type'] = 'vmess';
   azure['server'] = '';
   azure['port'] = ;
@@ -40,7 +42,7 @@ module.exports.parse = (raw, { yaml, notify }) => {
   
   //自定义节点2
   var ibm = {};
-  ibm['name'] = 'IBM';
+  ibm['name'] = 'IBM 达拉斯';
   ibm['type'] = 'vmess';
   ibm['server'] = '';
   ibm['port'] = ;
@@ -88,6 +90,11 @@ module.exports.parse = (raw, { yaml, notify }) => {
   doc['proxy-groups'][5]['name'] = '解锁网易云灰色歌曲';
   doc['proxy-groups'][5]['type'] = 'select';
   doc['proxy-groups'][5]['proxies'] = ['UNM_Network', 'DIRECT'];
+  doc['proxies'].forEach((v, i) => { 
+    if (v['name'].indexOf("NeteaseUnblock") != -1) {
+      doc['proxy-groups'][5]['proxies'].push(v['name']);
+    }
+  });
   
   //清理无用字典
   delete doc['rules'];
@@ -107,7 +114,7 @@ module.exports.parse = (raw, { yaml, notify }) => {
 '  - RULE-SET,CustomRulesDirect,DIRECT',
 '  - RULE-SET,CustomRulesProxy,Proxy',
 '  - RULE-SET,adBlock,⛔️屏蔽广告',
-'  - RULE-SET,UNMProxy,解锁网易云灰色歌曲',
+'  - RULE-SET,UNMProxy,UNM_Network',
 '  - IP-CIDR,91.108.23.100/32,Proxy,no-resolve',
 '  - IP-CIDR,149.154.160.0/22,Proxy,no-resolve',
 '  - IP-CIDR,149.154.164.0/22,Proxy,no-resolve',
