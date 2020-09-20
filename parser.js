@@ -107,7 +107,7 @@ module.exports.parse = (raw, { yaml, notify }) => {
 '  - RULE-SET,CustomRulesDirect,DIRECT',
 '  - RULE-SET,CustomRulesProxy,Proxy',
 '  - RULE-SET,adBlock,⛔️屏蔽广告',
-'  - RULE-SET,UNMProxy,UNM_Network',
+'  - RULE-SET,UNMProxy,解锁网易云灰色歌曲',
 '  - IP-CIDR,91.108.23.100/32,Proxy,no-resolve',
 '  - IP-CIDR,149.154.160.0/22,Proxy,no-resolve',
 '  - IP-CIDR,149.154.164.0/22,Proxy,no-resolve',
