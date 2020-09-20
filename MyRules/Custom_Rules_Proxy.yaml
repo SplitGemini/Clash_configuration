@@ -1,8 +1,6 @@
 payload:
   - DOMAIN-KEYWORD,yandex
   - DOMAIN-SUFFIX,dlsite.com
-  - DOMAIN-SUFFIX,ppy.sh,DIRECT,
-  - DOMAIN-SUFFIX,epicgames.com,DIRECT,
   - DOMAIN-SUFFIX,pytorch.org
   - DOMAIN-SUFFIX,appveyor.com
   - DOMAIN-SUFFIX,redd.it
@@ -55,9 +53,6 @@ payload:
   - DOMAIN-SUFFIX,storetorrents.xyz
   - DOMAIN-SUFFIX,streamable.com
   - DOMAIN-SUFFIX,torrentkitty.tv
-  - DOMAIN-SUFFIX,ubi.com,DIRECT,
-  - DOMAIN-SUFFIX,ubisoft.com,DIRECT,
-  - DOMAIN-SUFFIX,uplay.com,DIRECT,
   - DOMAIN-SUFFIX,usertrust.com
   - DOMAIN-SUFFIX,wemod.com
   - DOMAIN-SUFFIX,wixmp.com
