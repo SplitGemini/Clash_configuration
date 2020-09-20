@@ -11,22 +11,44 @@ module.exports.parse = (raw, { yaml, notify }) => {
     delete doc['Rule'];
   }
 
-  //temp规则组
+  //自动节点组，不包含解锁网易云音乐节点和自定义节点
   var proxies = [];
   doc['proxies'].forEach((v, i) => { 
     if (v['name'].indexOf("NeteaseUnblock") == -1) {
       proxies.push(v['name']);
     }
   });
+  // 手动节点组，深拷贝
   var proxies_munual = JSON.parse(JSON.stringify(proxies));
   
-  //节点添加UNM
+  //全部节点中添加UNM。解锁网易云音乐灰色歌曲
   var unm = {};
   unm['name'] = 'UNM_Network';
   unm['type'] = 'http';
   unm['server'] = '';
   unm['port'] = ;
   doc['proxies'].push(unm);
+  var unm2 = {};
+  unm2['name'] = 'NeteaseUnblock-JP-PC';
+  unm2['type'] = 'ss';
+  unm2['server'] = '';
+  unm2['port'] = ;
+  unm2['cipher'] = '';
+  unm2['password'] = '';
+  var unm3 = {};
+  unm3['name'] = 'NeteaseUnblock-CN-HHHT-PC';
+  unm3['type'] = 'ss';
+  unm3['server'] = '';
+  unm3['port'] = ;
+  unm3['cipher'] = '';
+  unm3['password'] = '';
+  // 订阅本身就包含解锁节点就不添加
+  if (doc['proxies'].findIndex (function(value, index, arr) {
+      return value['name'].indexOf("NeteaseUnblock") != -1;
+    }) == -1) {
+   doc['proxies'].push(unm2);
+   doc['proxies'].push(unm3);
+  }
   
   //自定义节点1
   var azure = {};
@@ -89,12 +111,8 @@ module.exports.parse = (raw, { yaml, notify }) => {
   doc['proxy-groups'][5] = {};
   doc['proxy-groups'][5]['name'] = '解锁网易云灰色歌曲';
   doc['proxy-groups'][5]['type'] = 'select';
-  doc['proxy-groups'][5]['proxies'] = ['UNM_Network', 'DIRECT'];
-  doc['proxies'].forEach((v, i) => { 
-    if (v['name'].indexOf("NeteaseUnblock") != -1) {
-      doc['proxy-groups'][5]['proxies'].push(v['name']);
-    }
-  });
+  doc['proxy-groups'][5]['proxies'] = ['UNM_Network', 'NeteaseUnblock-CN-HHHT-PC', 'NeteaseUnblock-JP-PC', 'DIRECT'];
+
   
   //清理无用字典
   delete doc['rules'];
@@ -114,7 +132,7 @@ module.exports.parse = (raw, { yaml, notify }) => {
 '  - RULE-SET,CustomRulesDirect,DIRECT',
 '  - RULE-SET,CustomRulesProxy,Proxy',
 '  - RULE-SET,adBlock,⛔️屏蔽广告',
-'  - RULE-SET,UNMProxy,UNM_Network',
+'  - RULE-SET,UNMProxy,解锁网易云灰色歌曲',
 '  - IP-CIDR,91.108.23.100/32,Proxy,no-resolve',
 '  - IP-CIDR,149.154.160.0/22,Proxy,no-resolve',
 '  - IP-CIDR,149.154.164.0/22,Proxy,no-resolve',
