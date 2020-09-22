@@ -1,4 +1,0 @@
-[submodule "Profiles"]
-	path = Profiles
-	url = https://github.com/DivineEngine/Profiles.git
-    branch = master
