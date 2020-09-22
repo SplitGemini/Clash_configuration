@@ -11,48 +11,60 @@ module.exports.parse = (raw, { yaml, notify }) => {
     delete doc['Rule'];
   }
 
+  // 删除订阅本身包含的解锁节点
+  var i = doc['proxies'].length;
+  while (i--) {
+    if(doc['proxies'][i]['name'].indexOf("NeteaseUnblock") != -1){
+      doc['proxies'].splice(i,1);
+    }
+  }
+
+  // 添加前缀
+  var prefix = {'🇭🇰':'香港', '🇨🇳':'台湾','🇸🇬':'新加坡', '🇯🇵':'日本', '🇺🇸':'美国', '🇷🇺':'俄罗斯', '🇰🇷':'韩国', '🇦🇺':'澳大利亚'};
+  for(i = 0;i < doc['proxies'].length;i ++) {
+    for(var key in prefix){
+      if(doc['proxies'][i]['name'].indexOf(key) == -1 && doc['proxies'][i]['name'].indexOf(prefix[key]) != -1) {
+        doc['proxies'][i]['name'] = key + ' ' + doc['proxies'][i]['name'];
+      }
+    }
+  }
+
   //自动节点组，不包含解锁网易云音乐节点和自定义节点
   var proxies = [];
   doc['proxies'].forEach((v, i) => { 
-    if (v['name'].indexOf("NeteaseUnblock") == -1) {
-      proxies.push(v['name']);
-    }
+    proxies.push(v['name']);
   });
   // 手动节点组，深拷贝
   var proxies_munual = JSON.parse(JSON.stringify(proxies));
   
   //全部节点中添加UNM。解锁网易云音乐灰色歌曲
   var unm = {};
-  unm['name'] = 'UNM_Network';
+  unm['name'] = '🇨🇳 UNM_Network';
   unm['type'] = 'http';
   unm['server'] = '';
   unm['port'] = ;
   doc['proxies'].push(unm);
   var unm2 = {};
-  unm2['name'] = 'NeteaseUnblock-JP-PC';
+  unm2['name'] = '🇯🇵 NeteaseUnblock-JP-PC';
   unm2['type'] = 'ss';
   unm2['server'] = '';
   unm2['port'] = ;
   unm2['cipher'] = '';
   unm2['password'] = '';
   var unm3 = {};
-  unm3['name'] = 'NeteaseUnblock-CN-HHHT-PC';
+  unm3['name'] = '🇨🇳 NeteaseUnblock-CN-HHHT-PC';
   unm3['type'] = 'ss';
   unm3['server'] = '';
   unm3['port'] = ;
   unm3['cipher'] = '';
   unm3['password'] = '';
-  // 订阅本身就包含解锁节点就不添加
-  if (doc['proxies'].findIndex (function(value, index, arr) {
-      return value['name'].indexOf("NeteaseUnblock") != -1;
-    }) == -1) {
-   doc['proxies'].push(unm2);
-   doc['proxies'].push(unm3);
-  }
+  doc['proxies'].push(unm2);
+  doc['proxies'].push(unm3);
+  
   
   //自定义节点1
   var azure = {};
-  azure['name'] = 'Azure 亚洲';
+  azure['name'] = '🇭🇰 Azure';
   azure['type'] = 'vmess';
   azure['server'] = '';
   azure['port'] = ;
@@ -64,7 +76,7 @@ module.exports.parse = (raw, { yaml, notify }) => {
   
   //自定义节点2
   var ibm = {};
-  ibm['name'] = 'IBM 达拉斯';
+  ibm['name'] = '🇺🇸 IBM';
   ibm['type'] = 'vmess';
   ibm['server'] = '';
   ibm['port'] = ;
@@ -80,6 +92,7 @@ module.exports.parse = (raw, { yaml, notify }) => {
   doc['proxies'].push(ibm);
   proxies_munual.push(ibm['name']);
   
+  //规则组
   doc['proxy-groups'] = [];
   doc['proxy-groups'][0] = {};
   doc['proxy-groups'][0]['name'] = 'Manual';
@@ -111,7 +124,7 @@ module.exports.parse = (raw, { yaml, notify }) => {
   doc['proxy-groups'][5] = {};
   doc['proxy-groups'][5]['name'] = '解锁网易云灰色歌曲';
   doc['proxy-groups'][5]['type'] = 'select';
-  doc['proxy-groups'][5]['proxies'] = ['UNM_Network', 'NeteaseUnblock-CN-HHHT-PC', 'NeteaseUnblock-JP-PC', 'DIRECT'];
+  doc['proxy-groups'][5]['proxies'] = ['🇨🇳 UNM_Network', '🇨🇳 NeteaseUnblock-CN-HHHT-PC', '🇯🇵 NeteaseUnblock-JP-PC', 'DIRECT'];
 
   
   //清理无用字典
@@ -1335,68 +1348,68 @@ module.exports.parse = (raw, { yaml, notify }) => {
 '  - GEOIP,CN,DIRECT',
 '  - MATCH,🐟漏网之鱼'
 ].join('\n');
-  //rule provders
+  //rule providers
   var temp_providers = [
 'rule-providers:',
 '  Unbreak:',
 '    type: http',
 '    behavior: classical',
 '    path: ./RuleSet/Unbreak.yaml',
-'    url: https://raw.githubusercontent.com/DivineEngine/Profiles/master/Clash/RuleSet/Unbreak.yaml',
+'    url: https://gitee.com/sunliang711/Profiles/raw/master/Clash/RuleSet/Unbreak.yaml',
 '    interval: 86400',
 '  Streaming:',
 '    type: http',
 '    behavior: classical',
 '    path: ./RuleSet/StreamingMedia/Streaming.yaml',
-'    url: https://raw.githubusercontent.com/DivineEngine/Profiles/master/Clash/RuleSet/StreamingMedia/Streaming.yaml',
+'    url: https://gitee.com/sunliang711/Profiles/raw/master/Clash/RuleSet/StreamingMedia/Streaming.yaml',
 '    interval: 86400',
 '  StreamingSE:',
 '    type: http',
 '    behavior: classical',
 '    path: ./RuleSet/StreamingMedia/StreamingSE.yaml',
-'    url: https://raw.githubusercontent.com/DivineEngine/Profiles/master/Clash/RuleSet/StreamingMedia/StreamingSE.yaml',
+'    url: https://gitee.com/sunliang711/Profiles/raw/master/Clash/RuleSet/StreamingMedia/StreamingSE.yaml',
 '    interval: 86400',
 '  Global:',
 '    type: http',
 '    behavior: classical',
 '    path: ./RuleSet/Global.yaml',
-'    url: https://raw.githubusercontent.com/DivineEngine/Profiles/master/Clash/RuleSet/Global.yaml',
+'    url: https://gitee.com/sunliang711/Profiles/raw/master/Clash/RuleSet/Global.yaml',
 '    interval: 86400',
 '  China:',
 '    type: http',
 '    behavior: classical',
 '    path: ./RuleSet/China.yaml',
-'    url: https://raw.githubusercontent.com/DivineEngine/Profiles/master/Clash/RuleSet/China.yaml',
+'    url: https://gitee.com/sunliang711/Profiles/raw/master/Clash/RuleSet/China.yaml',
 '    interval: 86400',
 '  ChinaIP:',
 '    type: http',
 '    behavior: ipcidr',
 '    path: ./RuleSet/Extra/ChinaIP.yaml',
-'    url: https://raw.githubusercontent.com/DivineEngine/Profiles/master/Clash/RuleSet/Extra/ChinaIP.yaml',
+'    url: https://gitee.com/sunliang711/Profiles/raw/master/Clash/RuleSet/Extra/ChinaIP.yaml',
 '    interval: 86400',
 '  adBlock:',
 '    type: http',
 '    behavior: classical',
 '    path: ./MyRules/adBlock.yaml',
-'    url: https://raw.githubusercontent.com/SplitGemini/Clash_configuration/master/MyRules/adBlock.yaml',
+'    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/adBlock.yaml',
 '    interval: 86400',
 '  UNMProxy:',
 '    type: http',
 '    behavior: classical',
 '    path: ./MyRules/UNM_proxy.yaml',
-'    url: https://raw.githubusercontent.com/SplitGemini/Clash_configuration/master/MyRules/UNM_proxy.yaml',
+'    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/UNM_proxy.yaml',
 '    interval: 86400',
 '  CustomRulesProxy:',
 '    type: http',
 '    behavior: classical',
 '    path: ./MyRules/Custom_Rules_Proxy.yaml',
-'    url: https://raw.githubusercontent.com/SplitGemini/Clash_configuration/master/MyRules/Custom_Rules_Proxy.yaml',
+'    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/Custom_Rules_Proxy.yaml',
 '    interval: 86400',
 '  CustomRulesDirect:',
 '    type: http',
 '    behavior: classical',
 '    path: ./MyRules/Custom_Rules_Direct.yaml',
-'    url: https://raw.githubusercontent.com/SplitGemini/Clash_configuration/master/MyRules/Custom_Rules_Direct.yaml',
+'    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/Custom_Rules_Direct.yaml',
 '    interval: 86400',
 ].join('\n');
   const rules = yaml.parse(temp_rules);
