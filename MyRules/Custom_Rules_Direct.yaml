@@ -4,8 +4,5 @@ payload:
   - DOMAIN-SUFFIX,supanx.com
   - DOMAIN-SUFFIX,firefox.com
   - DOMAIN-SUFFIX,lauchdarkly.com
-  - DOMAIN-SUFFIX,ubi.com
-  - DOMAIN-SUFFIX,ubisoft.com
-  - DOMAIN-SUFFIX,uplay.com
-  - DOMAIN-SUFFIX,ppy.sh
-  - DOMAIN-SUFFIX,epicgames.com
+  - DOMAIN-SUFFIX,mozilla.org
+  - DOMAIN-SUFFIX,publicsuffix.org
