@@ -45,7 +45,7 @@ module.exports.parse = (raw, { yaml, notify }) => {
   unm['name'] = '🇨🇳 UNM_Network';
   unm['type'] = 'http';
   unm['server'] = '';
-  unm['port'] = 19951;
+  unm['port'] = ;
   doc['proxies'].push(unm);
   var unm2 = {};
   unm2['name'] = '🇯🇵 NeteaseUnblock-JP-PC';
@@ -67,7 +67,7 @@ module.exports.parse = (raw, { yaml, notify }) => {
   
   //自定义节点1
   var azure = {};
-  azure['name'] = '🇭🇰 Azure';
+  azure['name'] = '🇭🇰 Azure 亚洲';
   azure['type'] = 'vmess';
   azure['server'] = '';
   azure['port'] = ;
@@ -79,7 +79,7 @@ module.exports.parse = (raw, { yaml, notify }) => {
   
   //自定义节点2
   var ibm = {};
-  ibm['name'] = '🇺🇸 IBM';
+  ibm['name'] = '🇺🇸 IBM 达拉斯';
   ibm['type'] = 'vmess';
   ibm['server'] = '';
   ibm['port'] = ;
@@ -1362,37 +1362,37 @@ module.exports.parse = (raw, { yaml, notify }) => {
 '    type: http',
 '    behavior: classical',
 '    path: ./RuleSet/Unbreak.yaml',
-'    url: https://gitee.com/sunliang711/Profiles/raw/master/Clash/RuleSet/Unbreak.yaml',
+'    url: https://gitee.com/SplitGemini/Profiles/raw/master/Clash/RuleSet/Unbreak.yaml',
 '    interval: 86400',
 '  Streaming:',
 '    type: http',
 '    behavior: classical',
 '    path: ./RuleSet/StreamingMedia/Streaming.yaml',
-'    url: https://gitee.com/sunliang711/Profiles/raw/master/Clash/RuleSet/StreamingMedia/Streaming.yaml',
+'    url: https://gitee.com/SplitGemini/Profiles/raw/master/Clash/RuleSet/StreamingMedia/Streaming.yaml',
 '    interval: 86400',
 '  StreamingSE:',
 '    type: http',
 '    behavior: classical',
 '    path: ./RuleSet/StreamingMedia/StreamingSE.yaml',
-'    url: https://gitee.com/sunliang711/Profiles/raw/master/Clash/RuleSet/StreamingMedia/StreamingSE.yaml',
+'    url: https://gitee.com/SplitGemini/Profiles/raw/master/Clash/RuleSet/StreamingMedia/StreamingSE.yaml',
 '    interval: 86400',
 '  Global:',
 '    type: http',
 '    behavior: classical',
 '    path: ./RuleSet/Global.yaml',
-'    url: https://gitee.com/sunliang711/Profiles/raw/master/Clash/RuleSet/Global.yaml',
+'    url: https://gitee.com/SplitGemini/Profiles/raw/master/Clash/RuleSet/Global.yaml',
 '    interval: 86400',
 '  China:',
 '    type: http',
 '    behavior: classical',
 '    path: ./RuleSet/China.yaml',
-'    url: https://gitee.com/sunliang711/Profiles/raw/master/Clash/RuleSet/China.yaml',
+'    url: https://gitee.com/SplitGemini/Profiles/raw/master/Clash/RuleSet/China.yaml',
 '    interval: 86400',
 '  ChinaIP:',
 '    type: http',
 '    behavior: ipcidr',
 '    path: ./RuleSet/Extra/ChinaIP.yaml',
-'    url: https://gitee.com/sunliang711/Profiles/raw/master/Clash/RuleSet/Extra/ChinaIP.yaml',
+'    url: https://gitee.com/SplitGemini/Profiles/raw/master/Clash/RuleSet/Extra/ChinaIP.yaml',
 '    interval: 86400',
 '  adBlock:',
 '    type: http',
