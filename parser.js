@@ -20,7 +20,10 @@ module.exports.parse = (raw, { yaml, notify }) => {
   }
 
   // 添加前缀
-  var prefix = {'🇭🇰':'香港', '🇨🇳':'台湾','🇸🇬':'新加坡', '🇯🇵':'日本', '🇺🇸':'美国', '🇷🇺':'俄罗斯', '🇰🇷':'韩国', '🇦🇺':'澳大利亚'};
+  var prefix = {'🇭🇰':'香港', '🇨🇳':'大陆','🇸🇬':'新加坡', '🇯🇵':'日本', 
+                '🇺🇸':'美国', '🇷🇺':'俄罗斯', '🇰🇷':'韩国', '🇦🇺':'澳大利亚',
+                '🇩🇪':'德国', '🇬🇧':'英国', '🇻🇳':'越南', '🇹🇼':'台湾',
+                '🇹🇭':'泰国', '🇮🇹':'意大利', '🇮🇳':'印度', '🇫🇷':'法国'};
   for(i = 0;i < doc['proxies'].length;i ++) {
     for(var key in prefix){
       if(doc['proxies'][i]['name'].indexOf(key) == -1 && doc['proxies'][i]['name'].indexOf(prefix[key]) != -1) {
@@ -42,7 +45,7 @@ module.exports.parse = (raw, { yaml, notify }) => {
   unm['name'] = '🇨🇳 UNM_Network';
   unm['type'] = 'http';
   unm['server'] = '';
-  unm['port'] = ;
+  unm['port'] = 19951;
   doc['proxies'].push(unm);
   var unm2 = {};
   unm2['name'] = '🇯🇵 NeteaseUnblock-JP-PC';
@@ -109,7 +112,7 @@ module.exports.parse = (raw, { yaml, notify }) => {
   doc['proxy-groups'][2] = {};
   doc['proxy-groups'][2]['name'] = '⛔️屏蔽广告';
   doc['proxy-groups'][2]['type'] = 'select';
-  doc['proxy-groups'][2]['proxies'] = ['REJECT', 'DIRECT'];
+  doc['proxy-groups'][2]['proxies'] = ['REJECT', '🐟漏网之鱼'];
   
   doc['proxy-groups'][3] = {};
   doc['proxy-groups'][3]['name'] = '🐟漏网之鱼';
@@ -137,7 +140,11 @@ module.exports.parse = (raw, { yaml, notify }) => {
   delete doc['log-level'];
   delete doc['external-controller'];
   delete doc['secret'];
-  delete doc['dns'];
+  delete doc['cfw-bypass'];
+  delete doc['cfw-latency-timeout'];
+  delete doc['Proxy'];
+  delete doc['Proxy Group'];
+  delete doc['Rule'];
   
   //规则，应用在每次更新
   var temp_rules = [
