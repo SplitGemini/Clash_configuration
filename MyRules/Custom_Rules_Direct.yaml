@@ -9,6 +9,8 @@ payload:
   - DOMAIN-SUFFIX,bandi.so
   - DOMAIN-SUFFIX,freedownloadmanager.org
   - DOMAIN-SUFFIX,xboxlive.com
+  - DOMAIN,api.ikuuu.science
+  - DOMAIN,api.wcc.best
   # DNS
   - IP-CIDR,8.8.8.8/32  #谷歌
   - IP-CIDR,8.8.4.4/32
