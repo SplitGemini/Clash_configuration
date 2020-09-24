@@ -2091,6 +2091,7 @@ payload:
   - DOMAIN-SUFFIX,adver.qq.com
   - DOMAIN-SUFFIX,advertise.baicizhan.com
   - DOMAIN-SUFFIX,advertise.baicizhan.org
+  - DOMAIN-SUFFIX,adverweb.cjenm.com
   - DOMAIN-SUFFIX,adview.cn
   - DOMAIN-SUFFIX,advmob.cn
   - DOMAIN-SUFFIX,advombat.ru
@@ -2242,6 +2243,7 @@ payload:
   - DOMAIN-SUFFIX,ana.tatahn.com
   - DOMAIN-SUFFIX,analy.qq.com
   - DOMAIN-SUFFIX,analysys.cn
+  - DOMAIN-SUFFIX,analytics.ad.daum.net
   - DOMAIN-SUFFIX,analytics.query.yahoo.com
   - DOMAIN-SUFFIX,andmejs.com
   - DOMAIN-SUFFIX,android-lrcresource.wps.cn
@@ -6865,8 +6867,10 @@ payload:
   - DOMAIN-SUFFIX,p.yizuya.com
   - DOMAIN-SUFFIX,p.ynjczy.net
   - DOMAIN-SUFFIX,p0y.cn
+  - DOMAIN-SUFFIX,p1-play.edge4k.com
   - DOMAIN-SUFFIX,p1.18zhongyao.com
   - DOMAIN-SUFFIX,p1.qinsx.cn
+  - DOMAIN-SUFFIX,p2-play.edge4k.com
   - DOMAIN-SUFFIX,p2.hyz86.com
   - DOMAIN-SUFFIX,p2.qinsx.cn
   - DOMAIN-SUFFIX,p2.ykauto.cn
@@ -7063,6 +7067,7 @@ payload:
   - DOMAIN-SUFFIX,pl14369502.puserving.com
   - DOMAIN-SUFFIX,plat.videojj.com
   - DOMAIN-SUFFIX,platform.wondershare.com
+  - DOMAIN-SUFFIX,play.kakao.com
   - DOMAIN-SUFFIX,playad.xjmg.com
   - DOMAIN-SUFFIX,player.1800coupon.com
   - DOMAIN-SUFFIX,player.1stcreditrepairs.com
@@ -7867,6 +7872,7 @@ payload:
   - DOMAIN-SUFFIX,smartnews-ads.com
   - DOMAIN-SUFFIX,smblock.s3.amazonaws.com
   - DOMAIN-SUFFIX,smgru.net
+  - DOMAIN-SUFFIX,smr.tvpot.daum.net
   - DOMAIN-SUFFIX,smucdn.com
   - DOMAIN-SUFFIX,smxay.com
   - DOMAIN-SUFFIX,smxsg.com
@@ -8658,6 +8664,7 @@ payload:
   - DOMAIN-SUFFIX,video.cooguo.com
   - DOMAIN-SUFFIX,video.ureport.push.qq.com
   - DOMAIN-SUFFIX,video.wap.mpush.qq.com
+  - DOMAIN-SUFFIX,videofarm.daum.net
   - DOMAIN-SUFFIX,videojj.com
   - DOMAIN-SUFFIX,videondun.com
   - DOMAIN-SUFFIX,videopush.baidu.com
@@ -9651,3 +9658,4 @@ payload:
   - IP-CIDR,69.28.57.245/32,no-resolve
   - IP-CIDR,74.117.182.77/32,no-resolve
   - IP-CIDR,78.140.131.214/32,no-resolve
+
