@@ -19,7 +19,7 @@ module.exports.parse = (raw, { yaml, notify }) => {
     }
   }
 
-  // 添加前缀
+  // 添加常用前缀
   var prefix = {'🇭🇰':'香港', '🇨🇳':'大陆','🇸🇬':'新加坡', '🇯🇵':'日本', 
                 '🇺🇸':'美国', '🇷🇺':'俄罗斯', '🇰🇷':'韩国', '🇦🇺':'澳大利亚',
                 '🇩🇪':'德国', '🇬🇧':'英国', '🇻🇳':'越南', '🇹🇼':'台湾',
@@ -63,7 +63,6 @@ module.exports.parse = (raw, { yaml, notify }) => {
   unm3['cipher'] = '';
   unm3['password'] = '';
   doc['proxies'].push(unm3);
-  
   
   //自定义节点1
   var azure = {};
@@ -128,12 +127,12 @@ module.exports.parse = (raw, { yaml, notify }) => {
   doc['proxy-groups'][5]['name'] = '🔓解锁网易云灰色歌曲';
   doc['proxy-groups'][5]['type'] = 'select';
   doc['proxy-groups'][5]['proxies'] = ['🇨🇳 UNM_Network', '🇨🇳 NeteaseUnblock-CN-HHHT-PC', '🇯🇵 NeteaseUnblock-JP-PC', 'DIRECT'];
-
   
   //清理无用字典
   delete doc['rules'];
   delete doc['port'];
   delete doc['socks-port'];
+  delete doc['mixed-port'];
   delete doc['redir-port'];
   delete doc['allow-lan'];
   delete doc['mode'];
@@ -141,6 +140,9 @@ module.exports.parse = (raw, { yaml, notify }) => {
   delete doc['external-controller'];
   delete doc['secret'];
   delete doc['cfw-bypass'];
+  delete doc['cfw-latency-url'];
+  delete doc['cfw-conn-break-strategy'];
+  delete doc['cfw-child-process'];
   delete doc['cfw-latency-timeout'];
   delete doc['Proxy'];
   delete doc['Proxy Group'];
@@ -158,11 +160,11 @@ module.exports.parse = (raw, { yaml, notify }) => {
 '  - IP-CIDR,149.154.164.0/22,🚀Proxy,no-resolve',
 '  - IP-CIDR,149.154.168.0/22,🚀Proxy,no-resolve',
 '  - IP-CIDR,149.154.172.0/22,🚀Proxy,no-resolve',
+'  - DOMAIN-SUFFIX,msn.com,DIRECT',
+'  - DOMAIN,config.edge.skype.com,DIRECT',
 '  - DOMAIN-SUFFIX,iqiyi.com,DIRECT',
 '  - DOMAIN-SUFFIX,71.am,DIRECT',
 '  - DOMAIN-SUFFIX,bilibili.com,DIRECT',
-'  - DOMAIN-SUFFIX,bangumi.bilibili.com,DIRECT',
-'  - DOMAIN-SUFFIX,api.bilibili.com,DIRECT',
 '  - DOMAIN,upos-hz-mirrorakam.akamaized.net,DIRECT',
 '  - DOMAIN-SUFFIX,acgvideo.com,DIRECT',
 '  - DOMAIN-SUFFIX,biliapi.com,DIRECT',
