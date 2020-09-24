@@ -6,3 +6,22 @@ payload:
   - DOMAIN-SUFFIX,lauchdarkly.com
   - DOMAIN-SUFFIX,mozilla.org
   - DOMAIN-SUFFIX,publicsuffix.org
+  - DOMAIN-SUFFIX,bandi.so
+  - DOMAIN-SUFFIX,freedownloadmanager.org
+  - DOMAIN-SUFFIX,xboxlive.com
+  # DNS
+  - IP-CIDR,8.8.8.8/32  #谷歌
+  - IP-CIDR,8.8.4.4/32
+  - IP-CIDR,1.1.1.1/32  #cloudflare
+  - IP-CIDR,1.0.0.1/32
+  - IP-CIDR,80.80.80.80/32 #freenomm
+  - IP-CIDR,80.80.81.81/32
+  - IP-CIDR,4.2.2.2/32  #微软
+  - IP-CIDR,4.2.2.1/32
+  - IP-CIDR,1.2.4.8/32  #中科大
+  - IP-CIDR,223.5.5.5/32 #阿里
+  - IP-CIDR,223.6.6.6/32
+  - IP-CIDR,202.96.128.86/32 #电信dns
+  - IP-CIDR,202.96.134.33/32
+  - IP-CIDR,208.67.222.222/32  #opendns
+  - IP-CIDR,208.67.220.220/32

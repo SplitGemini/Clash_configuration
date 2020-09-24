@@ -6,7 +6,23 @@ interfaceName: ""
 fontFamily: 思源黑体
 bypassText: |
   bypass:
+    # 其他
     - "*.geforce.com"
+    - "*.nvidia.com"
+    - "*.launchdarkly.com"
+    - "*.423down.com"
+    - "*.bitwarden.com"
+    - "*.chaipip.com"
+    - "*.hrtsea.com"
+    - "*.laomo.me"
+    - "*.mpyit.com"
+    # 微软
+    - "*.xboxlive.com"
+    - "*.s-microsoft.com"
+    - "*.office.com"
+    - "*.live.com"
+    - "*.microsoft.net"
+    - "*.microsoft.com"
     - "aka.ms"
     - "*.msftauth.net"
     - "*.msft*.com"
@@ -24,19 +40,6 @@ bypassText: |
     - "*.msecnd.net"
     - "*.visualstudio.com"
     - "*.microsoftonline.com"
-    - "*.nvidia.com"
-    - "*.launchdarkly.com"
-    - "*.s-microsoft.com"
-    - "*.office.com"
-    - "*.live.com"
-    - "*.microsoft.net"
-    - "*.microsoft.com"
-    - "*.423down.com"
-    - "*.bitwarden.com"
-    - "*.chaipip.com"
-    - "*.hrtsea.com"
-    - "*.laomo.me"
-    - "*.mpyit.com"
     # CN域名直连
     - "*.cn"
     - "*.中国"
@@ -691,7 +694,8 @@ mixinText: |-
 profileParsersText: >-
   parsers: # array
     - url: 
-      file: 'C:\Users\Administrator\.config\clash\parser.js'
+      file: 'C:\Users\name\.config\clash\parser.js'
 connProfile: true
 shortcutSystemProxy: ""
 shortcutMixin: ""
+connMode: true
