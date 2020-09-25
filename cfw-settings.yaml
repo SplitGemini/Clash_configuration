@@ -695,6 +695,8 @@ profileParsersText: >-
   parsers: # array
     - url: 
       file: 'C:\Users\name\.config\clash\parser.js'
+    - url: 
+      file: 'C:\Users\name\.config\clash\parser.yaml'
 connProfile: true
 shortcutSystemProxy: ""
 shortcutMixin: ""
