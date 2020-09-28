@@ -29,12 +29,13 @@ module.exports.parse = (raw, { yaml, notify }) => {
     var key_str = '';
     for(var key in prefix){
       if(doc['proxies'][i]['name'].indexOf(key) != -1){
-          shouldAdd = false;
-          break;
+        shouldAdd = false;
+        break;
       }
       else if(doc['proxies'][i]['name'].indexOf(prefix[key]) != -1) {
         shouldAdd = true;
         key_str = key;
+        break;
       }
     }
     if(shouldAdd){
@@ -49,7 +50,8 @@ module.exports.parse = (raw, { yaml, notify }) => {
   });
   // 手动节点组，深拷贝
   var proxies_munual = JSON.parse(JSON.stringify(proxies));
-  proxies_munual = proxies_munual.concat(['🇭🇰 Azure 亚洲','🇺🇸 IBM 达拉斯']);
+  //添加自定义手动节点
+  //proxies_munual = proxies_munual.concat(['']);
   
   //规则组🚀⚙️🔓👋
   doc['proxy-groups'] = [];
@@ -83,7 +85,7 @@ module.exports.parse = (raw, { yaml, notify }) => {
   doc['proxy-groups'][5] = {};
   doc['proxy-groups'][5]['name'] = '🔓解锁网易云灰色歌曲';
   doc['proxy-groups'][5]['type'] = 'select';
-  doc['proxy-groups'][5]['proxies'] = ['DIRECT','🇨🇳 UNM_Network','🇯🇵 UNM-JP-PC','🇯🇵 UNM-CN-HHHT-PC'];
+  doc['proxy-groups'][5]['proxies'] = ['DIRECT'];
   
   //清理无用字典
   delete doc['rules'];
@@ -101,11 +103,11 @@ module.exports.parse = (raw, { yaml, notify }) => {
   delete doc['cfw-conn-break-strategy'];
   delete doc['cfw-child-process'];
   delete doc['cfw-latency-timeout'];
-  delete doc['Proxy'];
-  delete doc['Proxy Group'];
   delete doc['Rule'];
-  
-  //规则，不能删，否则js将不起作用
+  delete doc['Proxy Group'];
+  delete doc['Proxy'];
+  /*
+  //规则，不能删，否则js将不起作用，玄学，现在可以删了
   var temp_rules = [
 'rules:',
 '  #- GEOIP,CN,DIRECT',
@@ -113,6 +115,7 @@ module.exports.parse = (raw, { yaml, notify }) => {
 ].join('\n');
   const rules = yaml.parse(temp_rules);
   doc['rules'] = rules['rules'];
+  */
   notify("profile has been updated", "Personal rules has been updated.", true);
   return yaml.stringify(doc);
 }
