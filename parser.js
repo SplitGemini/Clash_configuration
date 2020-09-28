@@ -50,7 +50,8 @@ module.exports.parse = (raw, { yaml, notify }) => {
   });
   // 手动节点组，深拷贝
   var proxies_munual = JSON.parse(JSON.stringify(proxies));
-  proxies_munual = proxies_munual.concat(['🇭🇰 Azure 亚洲','🇺🇸 IBM 达拉斯']);
+  //添加自定义节点名
+  proxies_munual = proxies_munual.concat(['']);
   
   //规则组🚀⚙️🔓👋
   doc['proxy-groups'] = [
@@ -59,7 +60,7 @@ module.exports.parse = (raw, { yaml, notify }) => {
     {'name':'⛔️屏蔽广告', 'type':'select', 'proxies':['REJECT', '🐟漏网之鱼']},
     {'name':'🐟漏网之鱼', 'type':'select', 'proxies':['🚀Proxy', 'DIRECT']},
     {'name':'🚀Proxy', 'type':'select', 'proxies':['⚙️Auto', '👋Manual']},
-    {'name':'🔓解锁网易云灰色歌曲', 'type':'select', 'proxies':['DIRECT','🇨🇳 UNM_Network','🇯🇵 UNM-JP-PC','🇯🇵 UNM-CN-HHHT-PC']}
+    {'name':'🔓解锁网易云灰色歌曲', 'type':'select', 'proxies':['DIRECT']}
   ];
   
   //清理无用字典
