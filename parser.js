@@ -50,42 +50,17 @@ module.exports.parse = (raw, { yaml, notify }) => {
   });
   // 手动节点组，深拷贝
   var proxies_munual = JSON.parse(JSON.stringify(proxies));
-  //添加自定义手动节点
-  //proxies_munual = proxies_munual.concat(['']);
+  proxies_munual = proxies_munual.concat(['🇭🇰 Azure 亚洲','🇺🇸 IBM 达拉斯']);
   
   //规则组🚀⚙️🔓👋
-  doc['proxy-groups'] = [];
-  doc['proxy-groups'][0] = {};
-  doc['proxy-groups'][0]['name'] = '👋Manual';
-  doc['proxy-groups'][0]['type'] = 'select';
-  doc['proxy-groups'][0]['proxies'] = proxies_munual;
-  
-  doc['proxy-groups'][1] = {};
-  doc['proxy-groups'][1]['name'] = '⚙️Auto';
-  doc['proxy-groups'][1]['type'] = 'url-test';
-  doc['proxy-groups'][1]['url'] = 'http://www.gstatic.com/generate_204';
-  doc['proxy-groups'][1]['interval'] = 600;
-  doc['proxy-groups'][1]['proxies'] = proxies;
-  
-  doc['proxy-groups'][2] = {};
-  doc['proxy-groups'][2]['name'] = '⛔️屏蔽广告';
-  doc['proxy-groups'][2]['type'] = 'select';
-  doc['proxy-groups'][2]['proxies'] = ['REJECT', '🐟漏网之鱼'];
-  
-  doc['proxy-groups'][3] = {};
-  doc['proxy-groups'][3]['name'] = '🐟漏网之鱼';
-  doc['proxy-groups'][3]['type'] = 'select';
-  doc['proxy-groups'][3]['proxies'] = ['🚀Proxy', 'DIRECT'];
-  
-  doc['proxy-groups'][4] = {};
-  doc['proxy-groups'][4]['name'] = '🚀Proxy';
-  doc['proxy-groups'][4]['type'] = 'select';
-  doc['proxy-groups'][4]['proxies'] = ['⚙️Auto', '👋Manual'];
-  
-  doc['proxy-groups'][5] = {};
-  doc['proxy-groups'][5]['name'] = '🔓解锁网易云灰色歌曲';
-  doc['proxy-groups'][5]['type'] = 'select';
-  doc['proxy-groups'][5]['proxies'] = ['DIRECT'];
+  doc['proxy-groups'] = [
+    {'name': '👋Manual','type':'select', 'proxies':proxies_munual},
+    {'name':'⚙️Auto', 'type':'url-test', 'url':'http://www.gstatic.com/generate_204', 'interval':600, 'proxies':proxies},
+    {'name':'⛔️屏蔽广告', 'type':'select', 'proxies':['REJECT', '🐟漏网之鱼']},
+    {'name':'🐟漏网之鱼', 'type':'select', 'proxies':['🚀Proxy', 'DIRECT']},
+    {'name':'🚀Proxy', 'type':'select', 'proxies':['⚙️Auto', '👋Manual']},
+    {'name':'🔓解锁网易云灰色歌曲', 'type':'select', 'proxies':['DIRECT','🇨🇳 UNM_Network','🇯🇵 UNM-JP-PC','🇯🇵 UNM-CN-HHHT-PC']}
+  ];
   
   //清理无用字典
   delete doc['rules'];
@@ -106,16 +81,7 @@ module.exports.parse = (raw, { yaml, notify }) => {
   delete doc['Rule'];
   delete doc['Proxy Group'];
   delete doc['Proxy'];
-  /*
-  //规则，不能删，否则js将不起作用，玄学，现在可以删了
-  var temp_rules = [
-'rules:',
-'  #- GEOIP,CN,DIRECT',
-'  - MATCH,🐟漏网之鱼'
-].join('\n');
-  const rules = yaml.parse(temp_rules);
-  doc['rules'] = rules['rules'];
-  */
+
   notify("profile has been updated", "Personal rules has been updated.", true);
   return yaml.stringify(doc);
 }
