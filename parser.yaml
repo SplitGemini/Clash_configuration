@@ -9,23 +9,34 @@
 #mix-object            对象  对象合并至原配置最外层中
 
 append-proxies: # 自定义节点
-  - name: 🇨🇳 UNM_Network
+  - name: example
     type: http
-    server: 
-    port: 
+    server: 0.0.0.0
+    port: 1234
 mix-object:
   rules:
-    - PROCESS-NAME,DownloadService,DIRECT
+    # 应用程序
+    - RULE-SET,EpicGames,DIRECT
+    - RULE-SET,Git,DIRECT
+    - RULE-SET,GeforceExperience,DIRECT
+    - RULE-SET,UPlay,DIRECT
+    #Ibit
+    - PROCESS-NAME,Ibit6,DIRECT
+    #迅雷
+    - PROCESS-NAME,DownloadSDKServer,DIRECT
     - PROCESS-NAME,Thunder,DIRECT
+    #自定义规则
     - RULE-SET,CustomRulesDirect,DIRECT
     - RULE-SET,CustomRulesProxy,🚀Proxy
     - RULE-SET,UNMProxy,🔓解锁网易云灰色歌曲
     - RULE-SET,reject,⛔️屏蔽广告
+    #额外Telegram
     - IP-CIDR,91.108.23.100/32,🚀Proxy,no-resolve
     - IP-CIDR,149.154.160.0/22,🚀Proxy,no-resolve
     - IP-CIDR,149.154.164.0/22,🚀Proxy,no-resolve
     - IP-CIDR,149.154.168.0/22,🚀Proxy,no-resolve
     - IP-CIDR,149.154.172.0/22,🚀Proxy,no-resolve
+    #others
     - DOMAIN-SUFFIX,msn.com,DIRECT
     - DOMAIN,config.edge.skype.com,DIRECT
     - DOMAIN-SUFFIX,iqiyi.com,DIRECT
@@ -38,23 +49,23 @@ mix-object:
     - DOMAIN-SUFFIX,bilibili.tv,DIRECT
     - DOMAIN-SUFFIX,hdslb.com,DIRECT
     - DOMAIN-SUFFIX,apm-misaka.biliapi.net,DIRECT
-    - IP-CIDR,120.92.112.81/32,DIRECT
-    - IP-CIDR,119.29.29.29/32,DIRECT
-    - IP-CIDR,203.107.1.34/32,DIRECT
-    - IP-CIDR,203.107.1.65/32,DIRECT
-    - IP-CIDR,203.107.1.66/32,DIRECT
-    - IP-CIDR,150.116.92.250/32,DIRECT
-    - IP-CIDR,203.107.1.33/32,DIRECT
-    - IP-CIDR,116.62.182.15/32,DIRECT
-    - IP-CIDR,164.52.110.14/32,DIRECT
-    - IP-CIDR,117.156.18.96/32,DIRECT
-    - IP-CIDR,148.153.38.118/32,DIRECT
-    - IP-CIDR,164.52.76.18/32,DIRECT
-    - IP-CIDR,128.1.62.200/32,DIRECT
-    - IP-CIDR,128.1.62.199/32,DIRECT
-    - IP-CIDR,128.1.62.201/32,DIRECT
-    - IP-CIDR,36.255.222.157/32,DIRECT
-    - IP-CIDR,14.136.134.83/32,DIRECT
+    - IP-CIDR,120.92.112.81/32,DIRECT,no-resolve
+    - IP-CIDR,119.29.29.29/32,DIRECT,no-resolve
+    - IP-CIDR,203.107.1.34/32,DIRECT,no-resolve
+    - IP-CIDR,203.107.1.65/32,DIRECT,no-resolve
+    - IP-CIDR,203.107.1.66/32,DIRECT,no-resolve
+    - IP-CIDR,150.116.92.250/32,DIRECT,no-resolve
+    - IP-CIDR,203.107.1.33/32,DIRECT,no-resolve
+    - IP-CIDR,116.62.182.15/32,DIRECT,no-resolve
+    - IP-CIDR,164.52.110.14/32,DIRECT,no-resolve
+    - IP-CIDR,117.156.18.96/32,DIRECT,no-resolve
+    - IP-CIDR,148.153.38.118/32,DIRECT,no-resolve
+    - IP-CIDR,164.52.76.18/32,DIRECT,no-resolve
+    - IP-CIDR,128.1.62.200/32,DIRECT,no-resolve
+    - IP-CIDR,128.1.62.199/32,DIRECT,no-resolve
+    - IP-CIDR,128.1.62.201/32,DIRECT,no-resolve
+    - IP-CIDR,36.255.222.157/32,DIRECT,no-resolve
+    - IP-CIDR,14.136.134.83/32,DIRECT,no-resolve
     - DOMAIN-SUFFIX,c4assets.com,🚀Proxy
     - DOMAIN-SUFFIX,channel4.com,🚀Proxy
     - DOMAIN-SUFFIX,bahamut.com.tw,🚀Proxy
@@ -103,15 +114,15 @@ mix-object:
     - DOMAIN-SUFFIX,nflximg.net,🚀Proxy
     - DOMAIN-SUFFIX,nflxso.net,🚀Proxy
     - DOMAIN-SUFFIX,nflxvideo.net,🚀Proxy
-    - IP-CIDR,23.246.0.0/18,🚀Proxy
-    - IP-CIDR,37.77.184.0/21,🚀Proxy
-    - IP-CIDR,45.57.0.0/17,🚀Proxy
-    - IP-CIDR,64.120.128.0/17,🚀Proxy
-    - IP-CIDR,66.197.128.0/17,🚀Proxy
-    - IP-CIDR,108.175.32.0/20,🚀Proxy
-    - IP-CIDR,192.173.64.0/18,🚀Proxy
-    - IP-CIDR,198.38.96.0/19,🚀Proxy
-    - IP-CIDR,198.45.48.0/20,🚀Proxy
+    - IP-CIDR,23.246.0.0/18,🚀Proxy,no-resolve
+    - IP-CIDR,37.77.184.0/21,🚀Proxy,no-resolve
+    - IP-CIDR,45.57.0.0/17,🚀Proxy,no-resolve
+    - IP-CIDR,64.120.128.0/17,🚀Proxy,no-resolve
+    - IP-CIDR,66.197.128.0/17,🚀Proxy,no-resolve
+    - IP-CIDR,108.175.32.0/20,🚀Proxy,no-resolve
+    - IP-CIDR,192.173.64.0/18,🚀Proxy,no-resolve
+    - IP-CIDR,198.38.96.0/19,🚀Proxy,no-resolve
+    - IP-CIDR,198.45.48.0/20,🚀Proxy,no-resolve
     - DOMAIN-SUFFIX,dmc.nico,🚀Proxy
     - DOMAIN-SUFFIX,nicovideo.jp,🚀Proxy
     - DOMAIN-SUFFIX,nimg.jp,🚀Proxy
@@ -146,7 +157,7 @@ mix-object:
     - DOMAIN-SUFFIX,scdn.co,🚀Proxy
     - DOMAIN-SUFFIX,spotify.com,🚀Proxy
     - DOMAIN-SUFFIX,spoti.fi,🚀Proxy
-    - IP-CIDR,35.186.224.47/32,🚀Proxy
+    - IP-CIDR,35.186.224.47/32,🚀Proxy,no-resolve
     - DOMAIN-SUFFIX,tidal.com,🚀Proxy
     - DOMAIN-SUFFIX,appspot.com,🚀Proxy
     - DOMAIN-SUFFIX,blogger.com,🚀Proxy
@@ -156,23 +167,23 @@ mix-object:
     - DOMAIN-SUFFIX,gvt3.com,🚀Proxy
     - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,🚀Proxy
     - DOMAIN-KEYWORD,blogspot,🚀Proxy
-    - IP-CIDR,35.190.247.0/24,🚀Proxy
-    - IP-CIDR,64.233.160.0/19,🚀Proxy
-    - IP-CIDR,66.102.0.0/20,🚀Proxy
-    - IP-CIDR,66.249.80.0/20,🚀Proxy
-    - IP-CIDR,72.14.192.0/18,🚀Proxy
-    - IP-CIDR,74.125.0.0/16,🚀Proxy
-    - IP-CIDR,108.177.8.0/21,🚀Proxy
-    - IP-CIDR,172.217.0.0/16,🚀Proxy
-    - IP-CIDR,173.194.0.0/16,🚀Proxy
-    - IP-CIDR,209.85.128.0/17,🚀Proxy
-    - IP-CIDR,216.58.192.0/19,🚀Proxy
-    - IP-CIDR,216.239.32.0/19,🚀Proxy
+    - IP-CIDR,35.190.247.0/24,🚀Proxy,no-resolve
+    - IP-CIDR,64.233.160.0/19,🚀Proxy,no-resolve
+    - IP-CIDR,66.102.0.0/20,🚀Proxy,no-resolve
+    - IP-CIDR,66.249.80.0/20,🚀Proxy,no-resolve
+    - IP-CIDR,72.14.192.0/18,🚀Proxy,no-resolve
+    - IP-CIDR,74.125.0.0/16,🚀Proxy,no-resolve
+    - IP-CIDR,108.177.8.0/21,🚀Proxy,no-resolve
+    - IP-CIDR,172.217.0.0/16,🚀Proxy,no-resolve
+    - IP-CIDR,173.194.0.0/16,🚀Proxy,no-resolve
+    - IP-CIDR,209.85.128.0/17,🚀Proxy,no-resolve
+    - IP-CIDR,216.58.192.0/19,🚀Proxy,no-resolve
+    - IP-CIDR,216.239.32.0/19,🚀Proxy,no-resolve
     - DOMAIN-SUFFIX,onedrive.live.com,🚀Proxy
-    - IP-CIDR,103.2.30.0/23,🚀Proxy
-    - IP-CIDR,125.209.208.0/20,🚀Proxy
-    - IP-CIDR,147.92.128.0/17,🚀Proxy
-    - IP-CIDR,203.104.144.0/21,🚀Proxy
+    - IP-CIDR,103.2.30.0/23,🚀Proxy,no-resolve
+    - IP-CIDR,125.209.208.0/20,🚀Proxy,no-resolve
+    - IP-CIDR,147.92.128.0/17,🚀Proxy,no-resolve
+    - IP-CIDR,203.104.144.0/21,🚀Proxy,no-resolve
     - DOMAIN-SUFFIX,cdninstagram.com,🚀Proxy
     - DOMAIN-SUFFIX,fb.com,🚀Proxy
     - DOMAIN-SUFFIX,fb.me,🚀Proxy
@@ -188,21 +199,21 @@ mix-object:
     - DOMAIN-SUFFIX,whatsapp.com,🚀Proxy
     - DOMAIN-SUFFIX,whatsapp.net,🚀Proxy
     - DOMAIN-KEYWORD,facebook,🚀Proxy
-    - IP-CIDR,31.13.24.0/21,🚀Proxy
-    - IP-CIDR,31.13.64.0/18,🚀Proxy
-    - IP-CIDR,45.64.40.0/22,🚀Proxy
-    - IP-CIDR,66.220.144.0/20,🚀Proxy
-    - IP-CIDR,69.63.176.0/20,🚀Proxy
-    - IP-CIDR,69.171.224.0/19,🚀Proxy
-    - IP-CIDR,74.119.76.0/22,🚀Proxy
-    - IP-CIDR,103.4.96.0/22,🚀Proxy
-    - IP-CIDR,129.134.0.0/17,🚀Proxy
-    - IP-CIDR,157.240.0.0/17,🚀Proxy
-    - IP-CIDR,173.252.64.0/19,🚀Proxy
-    - IP-CIDR,173.252.96.0/19,🚀Proxy
-    - IP-CIDR,179.60.192.0/22,🚀Proxy
-    - IP-CIDR,185.60.216.0/22,🚀Proxy
-    - IP-CIDR,204.15.20.0/22,🚀Proxy
+    - IP-CIDR,31.13.24.0/21,🚀Proxy,no-resolve
+    - IP-CIDR,31.13.64.0/18,🚀Proxy,no-resolve
+    - IP-CIDR,45.64.40.0/22,🚀Proxy,no-resolve
+    - IP-CIDR,66.220.144.0/20,🚀Proxy,no-resolve
+    - IP-CIDR,69.63.176.0/20,🚀Proxy,no-resolve
+    - IP-CIDR,69.171.224.0/19,🚀Proxy,no-resolve
+    - IP-CIDR,74.119.76.0/22,🚀Proxy,no-resolve
+    - IP-CIDR,103.4.96.0/22,🚀Proxy,no-resolve
+    - IP-CIDR,129.134.0.0/17,🚀Proxy,no-resolve
+    - IP-CIDR,157.240.0.0/17,🚀Proxy,no-resolve
+    - IP-CIDR,173.252.64.0/19,🚀Proxy,no-resolve
+    - IP-CIDR,173.252.96.0/19,🚀Proxy,no-resolve
+    - IP-CIDR,179.60.192.0/22,🚀Proxy,no-resolve
+    - IP-CIDR,185.60.216.0/22,🚀Proxy,no-resolve
+    - IP-CIDR,204.15.20.0/22,🚀Proxy,no-resolve
     - DOMAIN-SUFFIX,pscp.tv,🚀Proxy
     - DOMAIN-SUFFIX,periscope.tv,🚀Proxy
     - DOMAIN-SUFFIX,t.co,🚀Proxy
@@ -211,49 +222,49 @@ mix-object:
     - DOMAIN-SUFFIX,twitpic.com,🚀Proxy
     - DOMAIN-SUFFIX,vine.co,🚀Proxy
     - DOMAIN-KEYWORD,twitter,🚀Proxy
-    - IP-CIDR,69.195.160.0/19,🚀Proxy
-    - IP-CIDR,104.244.42.0/21,🚀Proxy
-    - IP-CIDR,192.133.76.0/22,🚀Proxy
-    - IP-CIDR,199.16.156.0/22,🚀Proxy
-    - IP-CIDR,199.59.148.0/22,🚀Proxy
-    - IP-CIDR,199.96.56.0/21,🚀Proxy
-    - IP-CIDR,202.160.128.0/22,🚀Proxy
-    - IP-CIDR,209.237.192.0/19,🚀Proxy
+    - IP-CIDR,69.195.160.0/19,🚀Proxy,no-resolve
+    - IP-CIDR,104.244.42.0/21,🚀Proxy,no-resolve
+    - IP-CIDR,192.133.76.0/22,🚀Proxy,no-resolve
+    - IP-CIDR,199.16.156.0/22,🚀Proxy,no-resolve
+    - IP-CIDR,199.59.148.0/22,🚀Proxy,no-resolve
+    - IP-CIDR,199.96.56.0/21,🚀Proxy,no-resolve
+    - IP-CIDR,202.160.128.0/22,🚀Proxy,no-resolve
+    - IP-CIDR,209.237.192.0/19,🚀Proxy,no-resolve
     - DOMAIN-SUFFIX,t.me,🚀Proxy
     - DOMAIN-SUFFIX,tdesktop.com,🚀Proxy
     - DOMAIN-SUFFIX,telegra.ph,🚀Proxy
     - DOMAIN-SUFFIX,telegram.me,🚀Proxy
     - DOMAIN-SUFFIX,telegram.org,🚀Proxy
-    - IP-CIDR,67.198.55.0/24,🚀Proxy
-    - IP-CIDR,91.108.4.0/22,🚀Proxy
-    - IP-CIDR,91.108.8.0/22,🚀Proxy
-    - IP-CIDR,91.108.12.0/22,🚀Proxy
-    - IP-CIDR,91.108.16.0/22,🚀Proxy
-    - IP-CIDR,91.108.56.0/22,🚀Proxy
-    - IP-CIDR,109.239.140.0/24,🚀Proxy
-    - IP-CIDR,149.154.160.0/20,🚀Proxy
-    - IP-CIDR,205.172.60.0/22,🚀Proxy
-    - IP-CIDR,91.108.56.150/32,🚀Proxy
-    - IP-CIDR,91.108.56.141/32,🚀Proxy
-    - IP-CIDR,149.154.164.250/32,🚀Proxy
-    - IP-CIDR,149.154.175.51/32,🚀Proxy
-    - IP-CIDR,149.154.175.53/32,🚀Proxy
-    - IP-CIDR,149.154.167.50/32,🚀Proxy
-    - IP-CIDR,149.154.167.51/32,🚀Proxy
-    - IP-CIDR,172.217.160.74/32,🚀Proxy
+    - IP-CIDR,67.198.55.0/24,🚀Proxy,no-resolve
+    - IP-CIDR,91.108.4.0/22,🚀Proxy,no-resolve
+    - IP-CIDR,91.108.8.0/22,🚀Proxy,no-resolve
+    - IP-CIDR,91.108.12.0/22,🚀Proxy,no-resolve
+    - IP-CIDR,91.108.16.0/22,🚀Proxy,no-resolve
+    - IP-CIDR,91.108.56.0/22,🚀Proxy,no-resolve
+    - IP-CIDR,109.239.140.0/24,🚀Proxy,no-resolve
+    - IP-CIDR,149.154.160.0/20,🚀Proxy,no-resolve
+    - IP-CIDR,205.172.60.0/22,🚀Proxy,no-resolve
+    - IP-CIDR,91.108.56.150/32,🚀Proxy,no-resolve
+    - IP-CIDR,91.108.56.141/32,🚀Proxy,no-resolve
+    - IP-CIDR,149.154.164.250/32,🚀Proxy,no-resolve
+    - IP-CIDR,149.154.175.51/32,🚀Proxy,no-resolve
+    - IP-CIDR,149.154.175.53/32,🚀Proxy,no-resolve
+    - IP-CIDR,149.154.167.50/32,🚀Proxy,no-resolve
+    - IP-CIDR,149.154.167.51/32,🚀Proxy,no-resolve
+    - IP-CIDR,172.217.160.74/32,🚀Proxy,no-resolve
     - DOMAIN-SUFFIX,line.me,🚀Proxy
     - DOMAIN-SUFFIX,line-apps.com,🚀Proxy
     - DOMAIN-SUFFIX,line-scdn.net,🚀Proxy
     - DOMAIN-SUFFIX,naver.jp,🚀Proxy
-    - IP-CIDR,3.123.36.126/32,🚀Proxy
-    - IP-CIDR,35.157.215.84/32,🚀Proxy
-    - IP-CIDR,35.157.217.255/32,🚀Proxy
-    - IP-CIDR,52.58.209.134/32,🚀Proxy
-    - IP-CIDR,54.93.124.31/32,🚀Proxy
-    - IP-CIDR,54.162.243.80/32,🚀Proxy
-    - IP-CIDR,54.173.34.141/32,🚀Proxy
-    - IP-CIDR,54.235.23.242/32,🚀Proxy
-    - IP-CIDR,169.45.248.118/32,🚀Proxy
+    - IP-CIDR,3.123.36.126/32,🚀Proxy,no-resolve
+    - IP-CIDR,35.157.215.84/32,🚀Proxy,no-resolve
+    - IP-CIDR,35.157.217.255/32,🚀Proxy,no-resolve
+    - IP-CIDR,52.58.209.134/32,🚀Proxy,no-resolve
+    - IP-CIDR,54.93.124.31/32,🚀Proxy,no-resolve
+    - IP-CIDR,54.162.243.80/32,🚀Proxy,no-resolve
+    - IP-CIDR,54.173.34.141/32,🚀Proxy,no-resolve
+    - IP-CIDR,54.235.23.242/32,🚀Proxy,no-resolve
+    - IP-CIDR,169.45.248.118/32,🚀Proxy,no-resolve
     - DOMAIN-KEYWORD,google,🚀Proxy
     - DOMAIN-KEYWORD,gmail,🚀Proxy
     - DOMAIN-KEYWORD,youtube,🚀Proxy
@@ -908,22 +919,22 @@ mix-object:
     - DOMAIN-SUFFIX,apm3.music.163.com,DIRECT
     - DOMAIN-SUFFIX,man.netease.com,DIRECT
     - DOMAIN-SUFFIX,api.iplay.163.com,DIRECT
-    - IP-CIDR,59.111.181.60/32,DIRECT
-    - IP-CIDR,223.252.199.66/32,DIRECT
-    - IP-CIDR,223.252.199.67/32,DIRECT
-    - IP-CIDR,59.111.160.195/32,DIRECT
-    - IP-CIDR,59.111.160.197/32,DIRECT
-    - IP-CIDR,59.111.181.35/32,DIRECT
-    - IP-CIDR,59.111.181.38/32,DIRECT
-    - IP-CIDR,39.105.63.80/32,DIRECT
-    - IP-CIDR,47.100.127.239/32,DIRECT
-    - IP-CIDR,118.24.63.156/32,DIRECT
-    - IP-CIDR,193.112.159.225/32,DIRECT
-    - IP-CIDR,59.111.181.155/32,DIRECT
-    - IP-CIDR,115.236.118.33/32,DIRECT
-    - IP-CIDR,59.111.128.0/17,DIRECT
-    - IP-CIDR,115.236.112.0/20,DIRECT
-    - IP-CIDR,223.252.192.0/19,DIRECT
+    - IP-CIDR,59.111.181.60/32,DIRECT,no-resolve
+    - IP-CIDR,223.252.199.66/32,DIRECT,no-resolve
+    - IP-CIDR,223.252.199.67/32,DIRECT,no-resolve
+    - IP-CIDR,59.111.160.195/32,DIRECT,no-resolve
+    - IP-CIDR,59.111.160.197/32,DIRECT,no-resolve
+    - IP-CIDR,59.111.181.35/32,DIRECT,no-resolve
+    - IP-CIDR,59.111.181.38/32,DIRECT,no-resolve
+    - IP-CIDR,39.105.63.80/32,DIRECT,no-resolve
+    - IP-CIDR,47.100.127.239/32,DIRECT,no-resolve
+    - IP-CIDR,118.24.63.156/32,DIRECT,no-resolve
+    - IP-CIDR,193.112.159.225/32,DIRECT,no-resolve
+    - IP-CIDR,59.111.181.155/32,DIRECT,no-resolve
+    - IP-CIDR,115.236.118.33/32,DIRECT,no-resolve
+    - IP-CIDR,59.111.128.0/17,DIRECT,no-resolve
+    - IP-CIDR,115.236.112.0/20,DIRECT,no-resolve
+    - IP-CIDR,223.252.192.0/19,DIRECT,no-resolve
     - DOMAIN-SUFFIX,ac.dun.163yun.com,DIRECT
     - DOMAIN-SUFFIX,mr.da.netease.com,DIRECT
     - DOMAIN-SUFFIX,crash.163.com,DIRECT
@@ -1194,7 +1205,7 @@ mix-object:
     - DOMAIN,analytics.strava.com,DIRECT
     - DOMAIN-SUFFIX,me.com,🚀Proxy
     - DOMAIN-SUFFIX,mzstatic.com,🚀Proxy
-    - IP-CIDR,17.0.0.0/8,🚀Proxy
+    - IP-CIDR,17.0.0.0/8,🚀Proxy,no-resolve
     - RULE-SET,direct,DIRECT
     - RULE-SET,google,🚀Proxy
     - RULE-SET,apple,🚀Proxy
@@ -1278,3 +1289,27 @@ mix-rule-providers:
     path: ./MyRules/Custom_Rules_Direct.yaml
     url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/Custom_Rules_Direct.yaml
     interval: 86400
+  UPlay:
+    type: http
+    behavior: classical
+    path: ./MyRules/UPlay.yaml
+    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/Uplay.yaml
+    interval: 864000
+  GeforceExperience:
+    type: http
+    behavior: classical
+    path: ./MyRules/Geforce_Experience.yaml
+    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/Geforce_Experience.yaml
+    interval: 864000
+  Git:
+    type: http
+    behavior: classical
+    path: ./MyRules/Git.yaml
+    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/Git.yaml
+    interval: 864000
+  EpicGames:
+    type: http
+    behavior: classical
+    path: ./MyRules/EpicGames.yaml
+    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/EpicGames.yaml
+    interval: 864000

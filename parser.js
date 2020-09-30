@@ -1,5 +1,5 @@
 module.exports.parse = (raw, { yaml, notify }) => {
-  var doc = yaml.parse(raw);
+  const doc = yaml.parse(raw);
   
   //兼容性
   if (doc['proxies'] === undefined) {
@@ -50,16 +50,16 @@ module.exports.parse = (raw, { yaml, notify }) => {
   // 手动节点组，深拷贝
   var proxies_munual = JSON.parse(JSON.stringify(proxies));
   //添加自定义节点名
-  proxies_munual = proxies_munual.concat(['']);
+  //proxies_munual = proxies_munual.concat(['🇭🇰 Azure 亚洲','🇺🇸 IBM 达拉斯']);
   
   //规则组🚀⚙️🔓👋
   doc['proxy-groups'] = [
-    {'name': '👋Manual','type':'select', 'proxies':proxies_munual},
+    {'name':'👋Manual', 'type':'select', 'proxies':proxies_munual},
     {'name':'⚙️Auto', 'type':'url-test', 'url':'http://www.gstatic.com/generate_204', 'interval':600, 'proxies':proxies},
     {'name':'⛔️屏蔽广告', 'type':'select', 'proxies':['REJECT', '🐟漏网之鱼']},
     {'name':'🐟漏网之鱼', 'type':'select', 'proxies':['🚀Proxy', 'DIRECT']},
     {'name':'🚀Proxy', 'type':'select', 'proxies':['⚙️Auto', '👋Manual']},
-    {'name':'🔓解锁网易云灰色歌曲', 'type':'select', 'proxies':['DIRECT']}
+    {'name':'🔓解锁网易云灰色歌曲', 'type':'select', 'proxies':['DIRECT'/*,'🇨🇳 UNM_Network','🇯🇵 UNM-JP-PC','🇯🇵 UNM-CN-HHHT-PC'*/]}
   ];
   
   //清理无用字典
@@ -81,7 +81,8 @@ module.exports.parse = (raw, { yaml, notify }) => {
   delete doc['Rule'];
   delete doc['Proxy Group'];
   delete doc['Proxy'];
-
+  
+  doc['rules'] = ['MATCH,DIRECT'];
   notify("profile has been updated", "Personal rules has been updated.", true);
   return yaml.stringify(doc);
 }

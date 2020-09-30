@@ -702,3 +702,6 @@ shortcutSystemProxy: ""
 shortcutMixin: ""
 connMode: true
 showNewVersionIcon: true
+systemProxyType: 2
+showProxyFilter: true
+systemProxyPac: file:\\\C:\Users\name\.config\clash\pac.txt
