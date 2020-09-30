@@ -35,7 +35,6 @@ module.exports.parse = (raw, { yaml, notify }) => {
       else if(doc['proxies'][i]['name'].indexOf(prefix[key]) != -1) {
         shouldAdd = true;
         key_str = key;
-        break;
       }
     }
     if(shouldAdd){

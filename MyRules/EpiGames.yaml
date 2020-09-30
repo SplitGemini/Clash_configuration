@@ -1,0 +1,7 @@
+payload:
+  - PROCESS-NAME,EpicGamesLauncher
+  - PROCESS-NAME,EOSOverlayRenderer-Win64-Shipping
+  - PROCESS-NAME,EOSOverlayRenderer-Win32-Shipping
+  - PROCESS-NAME,UnrealEngineLauncher
+  - PROCESS-NAME,CrashReportClient
+  - PROCESS-NAME,UnrealCEFSubProcess
