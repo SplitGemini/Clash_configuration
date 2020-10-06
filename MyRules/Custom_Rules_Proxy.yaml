@@ -2,7 +2,7 @@ payload:
   - DOMAIN-KEYWORD,v2ray
   - DOMAIN-KEYWORD,ssr
   - DOMAIN-KEYWORD,yandex
-  - DOMAIN-SUFFIX,dlsite.com
+  - DOMAIN-KEYWORD,dlsite
   - DOMAIN-SUFFIX,pytorch.org
   - DOMAIN-SUFFIX,appveyor.com
   - DOMAIN-SUFFIX,redd.it
