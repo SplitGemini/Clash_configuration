@@ -19,24 +19,25 @@
 
 ! Tip: 在最终生成的PAC文件中，用户定义规则先于gfwlist规则被处理
 !      因此可以在这里添加一些常用网址规则，或能减少在访问这些网址进行查询的时间
-!      如:
+! 域名DOMAIN：||，后缀DOMAIN-SUFFIX: .
+
 ! 下面的直连
-@@geforce.com
-@@epicgames.com
+@@.geforce.com
+@@.epicgames.com
 @@.xboxlive.com
 @@.s-microsoft.com
 @@.office.com
 @@.live.com
 @@.microsoft.net
 @@.microsoft.com
-@@aka.ms
+@@||aka.ms
 @@.msftauth.net
 @@.msft*.com
 @@.msauth.net
 @@.xbox.com
 @@.onestore.ms
-!@@.azureedge.net
-!@@.akamized.com
+! @@.azureedge.net
+! @@.akamized.com
 @@.windows.net
 @@.windows.com
 @@.windowsupdate.com
@@ -46,16 +47,25 @@
 @@.msecnd.net
 @@.visualstudio.com
 @@.microsoftonline.com
-! 下面是代理
-||.github*.com
-||ubi.com
-||ubisoft.com
+@@.pinyuncloud.com
+
+! 下面的代理
+.github*.com
+.ubi.com
+.ubisoft.com
 ||update.googleapis.com
-||uplay.com
-||usertrust.com
-||wemod.com
-||wikimedia.org
-||wixmp.com
-||steam-chat.com
-||steamcommunity.com
-||steamcontent.com
+.uplay.com
+.usertrust.com
+.wemod.com
+.wikimedia.org
+.wixmp.com
+.steam-chat.com
+.steamcommunity.com
+.steamcontent.com
+.daumcdn.net
+.dropbox.com
+||filezilla-project.org
+.github.io
+||dl.google.com
+||translate.googleapis.com
+.yandex*

@@ -1,14 +1,16 @@
 /**
  * genpac 2.1.0 https://github.com/JinnLynn/genpac
- * Generated: Tue, 06 Oct 2020 14:39:24 +0800
+ * Generated: Tue, 06 Oct 2020 16:10:31 +0800
  * GFWList Last-Modified: 2020-10-02 14:41:40.617946288 +0000 UTC m=+0.041913077
- * GFWList From: online[https://github.com/v2fly/domain-list-community/releases/latest/download/gfwlist.txt]
+ * GFWList From: online[https://raw.githubusercontent.com/v2fly/domain-list-community/release/gfwlist.txt]
  */
 
 var proxy = 'SOCKS5 127.0.0.1:2222; PROXY 127.0.0.1:2222; DIRECT';
 var rules = [
     [
-        [],
+        [
+            "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?aka\\.ms"
+        ],
         [
             "*.geforce.com*",
             "*.epicgames.com*",
@@ -18,7 +20,6 @@ var rules = [
             "*.live.com*",
             "*.microsoft.net*",
             "*.microsoft.com*",
-            "*aka.ms*",
             "*.msftauth.net*",
             "*.msft*.com*",
             "*.msauth.net*",
@@ -32,30 +33,32 @@ var rules = [
             "*.msecnd.com*",
             "*.msecnd.net*",
             "*.visualstudio.com*",
-            "*.microsoftonline.com*"
+            "*.microsoftonline.com*",
+            "*.pinyuncloud.com*"
         ],
         [
-            "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?\\.github.*\\.com",
-            "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?ubi\\.com",
-            "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?ubisoft\\.com",
             "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?update\\.googleapis\\.com",
-            "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?uplay\\.com",
-            "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?usertrust\\.com",
-            "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?wemod\\.com",
-            "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?wikimedia\\.org",
-            "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?wixmp\\.com",
-            "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?steam-chat\\.com",
-            "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?steamcommunity\\.com",
-            "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?steamcontent\\.com",
-            "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?daumcdn\\.net",
-            "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?dropbox\\.com",
             "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?filezilla-project\\.org",
-            "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?github\\.io",
             "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?dl\\.google\\.com",
-            "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?translate\\.googleapis\\.com",
-            "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?yandex.*"
+            "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?translate\\.googleapis\\.com"
         ],
-        []
+        [
+            "*.github*.com*",
+            "*.ubi.com*",
+            "*.ubisoft.com*",
+            "*.uplay.com*",
+            "*.usertrust.com*",
+            "*.wemod.com*",
+            "*.wikimedia.org*",
+            "*.wixmp.com*",
+            "*.steam-chat.com*",
+            "*.steamcommunity.com*",
+            "*.steamcontent.com*",
+            "*.daumcdn.net*",
+            "*.dropbox.com*",
+            "*.github.io*",
+            "*.yandex*"
+        ]
     ],
     [
         [],
