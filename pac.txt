@@ -1,8 +1,8 @@
 /**
  * genpac 2.1.0 https://github.com/JinnLynn/genpac
- * Generated: Tue, 06 Oct 2020 16:10:31 +0800
+ * Generated: Tue, 06 Oct 2020 17:57:23 +0800
  * GFWList Last-Modified: 2020-10-02 14:41:40.617946288 +0000 UTC m=+0.041913077
- * GFWList From: online[https://raw.githubusercontent.com/v2fly/domain-list-community/release/gfwlist.txt]
+ * GFWList From: local[C:\Users\GH\.config\clash\gfwlist-local]
  */
 
 var proxy = 'SOCKS5 127.0.0.1:2222; PROXY 127.0.0.1:2222; DIRECT';
@@ -25,6 +25,8 @@ var rules = [
             "*.msauth.net*",
             "*.xbox.com*",
             "*.onestore.ms*",
+            "*.azureedge.*",
+            "*.office365.com*",
             "*.windows.net*",
             "*.windows.com*",
             "*.windowsupdate.com*",

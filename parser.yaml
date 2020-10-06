@@ -9,10 +9,10 @@
 #mix-object            对象  对象合并至原配置最外层中
 
 append-proxies: # 自定义节点
-  - name: example
+  - name: 
     type: http
-    server: 0.0.0.0
-    port: 1234
+    server: 
+    port: 
 mix-object:
   rules:
     # 应用程序
@@ -39,6 +39,7 @@ mix-object:
     #others
     - DOMAIN-SUFFIX,msn.com,DIRECT
     - DOMAIN,config.edge.skype.com,DIRECT
+    - DOMAIN,edge.activity.windows.com,DIRECT
     - DOMAIN-SUFFIX,iqiyi.com,DIRECT
     - DOMAIN-SUFFIX,71.am,DIRECT
     - DOMAIN-SUFFIX,bilibili.com,DIRECT
@@ -1293,7 +1294,7 @@ mix-rule-providers:
     type: http
     behavior: classical
     path: ./MyRules/UPlay.yaml
-    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/Uplay.yaml
+    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/UPlay.yaml
     interval: 864000
   GeforceExperience:
     type: http
