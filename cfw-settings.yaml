@@ -17,6 +17,8 @@ bypassText: |
     - "*.laomo.me"
     - "*.mpyit.com"
     # 微软
+    - "*.azureedge.*"
+    - "*.office365.com"
     - "*.xboxlive.com"
     - "*.s-microsoft.com"
     - "*.office.com"
@@ -29,7 +31,6 @@ bypassText: |
     - "*.msauth.net"
     - "*.xbox.com"
     - "*.onestore.ms"
-    #- "*.azureedge.net"
     #- "*.akamized.com"
     - "*.windows.net"
     - "*.windows.com"
@@ -694,7 +695,7 @@ mixinText: |-
 profileParsersText: >
   parsers: # array
     - reg: .*
-      #file: 'C:\Users\name\.config\clash\parser.js'
+      #file: 'C:\Users\YOURNAME\.config\clash\parser.js'
       code: |
         module.exports.parse = (raw, { yaml, notify }) => {
           const doc = yaml.parse(raw)
@@ -707,35 +708,6 @@ profileParsersText: >
             doc['rules'] = doc['Rule']
             delete doc['Rule']
           }
-          // 删除订阅本身包含的解锁节点
-          var i = doc['proxies'].length
-          while (i--) {
-            if(doc['proxies'][i]['name'].indexOf("NeteaseUnblock") != -1){
-              doc['proxies'].splice(i,1)
-            }
-          }
-          // 添加常用前缀
-          var prefix = {'🇭🇰':'香港', '🇨🇳':'大陆','🇸🇬':'新加坡', '🇯🇵':'日本', 
-                        '🇺🇸':'美国', '🇷🇺':'俄罗斯', '🇰🇷':'韩国', '🇦🇺':'澳大利亚',
-                        '🇩🇪':'德国', '🇬🇧':'英国', '🇻🇳':'越南', '🇹🇼':'台湾',
-                        '🇹🇭':'泰国', '🇮🇹':'意大利', '🇮🇳':'印度', '🇫🇷':'法国'}
-          for(i = 0;i < doc['proxies'].length;i ++) {
-            var shouldAdd = false
-            var key_str = ''
-            for(var key in prefix){
-              if(doc['proxies'][i]['name'].indexOf(key) != -1){
-                shouldAdd = false
-                break
-              }
-              else if(doc['proxies'][i]['name'].indexOf(prefix[key]) != -1) {
-                shouldAdd = true
-                key_str = key
-              }
-            }
-            if(shouldAdd){
-                doc['proxies'][i]['name'] = key_str + ' ' + doc['proxies'][i]['name']
-            }
-          }
           //自动节点组，不包含解锁网易云音乐节点和自定义节点
           var proxies = []
           doc['proxies'].forEach((v, i) => { 
@@ -744,7 +716,7 @@ profileParsersText: >
           // 手动节点组，深拷贝
           var proxies_munual = JSON.parse(JSON.stringify(proxies))
           //添加自定义节点名
-          proxies_munual = proxies_munual.concat([])
+          proxies_munual = proxies_munual.concat(['🇭🇰 Azure 亚洲','🇺🇸 IBM 达拉斯'])
           //规则组🚀⚙️🔓👋
           doc['proxy-groups'] = [
             {'name':'👋Manual', 'type':'select', 'proxies':proxies_munual},
@@ -752,7 +724,7 @@ profileParsersText: >
             {'name':'⛔️屏蔽广告', 'type':'select', 'proxies':['REJECT', '🐟漏网之鱼']},
             {'name':'🐟漏网之鱼', 'type':'select', 'proxies':['🚀Proxy', 'DIRECT']},
             {'name':'🚀Proxy', 'type':'select', 'proxies':['⚙️Auto', '👋Manual']},
-            {'name':'🔓解锁网易云灰色歌曲', 'type':'select', 'proxies':['DIRECT']}
+            {'name':'🔓解锁网易云灰色歌曲', 'type':'select', 'proxies':['DIRECT','🇨🇳 UNM_Network','🇯🇵 UNM-JP-PC','🇯🇵 UNM-CN-HHHT-PC']}
           ]
           //清理无用字典
           delete doc['rules']
@@ -777,7 +749,7 @@ profileParsersText: >
           return yaml.stringify(doc)
         }
     - reg: .*
-      file: 'C:\Users\name\.config\clash\parser.yaml'
+      file: 'C:\Users\YOURNAME\.config\clash\parser.yaml'
 connProfile: true
 shortcutSystemProxy: ""
 shortcutMixin: ""
@@ -785,4 +757,20 @@ connMode: true
 showNewVersionIcon: true
 systemProxyType: 2
 showProxyFilter: true
-systemProxyPac: file:\\\C:\Users\name\.config\clash\pac.txt
+systemProxyPac: http://127.0.0.1:8000/pac.txt
+childProcessText: |+
+  processes: # array
+    - command: "python" # run.cmd 程序名称
+      args:
+        - "-m" # 运行参数1
+        - "http.server" # 运行参数2
+      options:
+        cwd: C:/Users/YOURNAME/.config/clash # 子进程工作目录
+        windowsHide: true # 隐藏子进程的控制台窗口
+    - command: "C:/Users/YOURNAME/.config/clash/subconverter/subconverter.exe"
+      args:
+        - "-cfw" # 运行参数1
+      options:
+        cwd: C:/Users/YOURNAME/.config/clash/subconverter # 子进程工作目录
+        windowsHide: true # 隐藏子进程的控制台窗口
+

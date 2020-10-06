@@ -9,6 +9,7 @@ module.exports.parse = (raw, { yaml, notify }) => {
     doc['rules'] = doc['Rule']
     delete doc['Rule']
   }
+  /* 使用subconvertor转换
   // 删除订阅本身包含的解锁节点
   var i = doc['proxies'].length
   while (i--) {
@@ -38,6 +39,7 @@ module.exports.parse = (raw, { yaml, notify }) => {
         doc['proxies'][i]['name'] = key_str + ' ' + doc['proxies'][i]['name']
     }
   }
+  */
   //自动节点组，不包含解锁网易云音乐节点和自定义节点
   var proxies = []
   doc['proxies'].forEach((v, i) => { 
@@ -46,7 +48,7 @@ module.exports.parse = (raw, { yaml, notify }) => {
   // 手动节点组，深拷贝
   var proxies_munual = JSON.parse(JSON.stringify(proxies))
   //添加自定义节点名
-  proxies_munual = proxies_munual.concat([])
+  proxies_munual = proxies_munual.concat(['🇭🇰 Azure 亚洲','🇺🇸 IBM 达拉斯'])
   //规则组🚀⚙️🔓👋
   doc['proxy-groups'] = [
     {'name':'👋Manual', 'type':'select', 'proxies':proxies_munual},
@@ -54,7 +56,7 @@ module.exports.parse = (raw, { yaml, notify }) => {
     {'name':'⛔️屏蔽广告', 'type':'select', 'proxies':['REJECT', '🐟漏网之鱼']},
     {'name':'🐟漏网之鱼', 'type':'select', 'proxies':['🚀Proxy', 'DIRECT']},
     {'name':'🚀Proxy', 'type':'select', 'proxies':['⚙️Auto', '👋Manual']},
-    {'name':'🔓解锁网易云灰色歌曲', 'type':'select', 'proxies':['DIRECT']}
+    {'name':'🔓解锁网易云灰色歌曲', 'type':'select', 'proxies':['DIRECT','🇨🇳 UNM_Network','🇯🇵 UNM-JP-PC','🇯🇵 UNM-CN-HHHT-PC']}
   ]
   //清理无用字典
   delete doc['rules']
