@@ -48,14 +48,14 @@
 @@.microsoftonline.com
 ! 下面是代理
 ||.github*.com
-||ubi.com,
-||ubisoft.com,
-||update.googleapis.com,
-||uplay.com,
-||usertrust.com,
-||wemod.com,
-||wikimedia.org,
-||wixmp.com,
-||steam-chat.com,
-||steamcommunity.com,
-||steamcontent.com,
+||ubi.com
+||ubisoft.com
+||update.googleapis.com
+||uplay.com
+||usertrust.com
+||wemod.com
+||wikimedia.org
+||wixmp.com
+||steam-chat.com
+||steamcommunity.com
+||steamcontent.com
