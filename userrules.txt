@@ -36,7 +36,8 @@
 @@.msauth.net
 @@.xbox.com
 @@.onestore.ms
-! @@.azureedge.net
+@@.azureedge.*
+@@.office365.com
 ! @@.akamized.com
 @@.windows.net
 @@.windows.com
