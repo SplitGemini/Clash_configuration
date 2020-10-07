@@ -695,7 +695,6 @@ mixinText: |-
 profileParsersText: >
   parsers: # array
     - reg: .*
-      #file: 'C:\Users\YOURNAME\.config\clash\parser.js'
       code: |
         module.exports.parse = (raw, { yaml, notify }) => {
           const doc = yaml.parse(raw)
@@ -708,24 +707,18 @@ profileParsersText: >
             doc['rules'] = doc['Rule']
             delete doc['Rule']
           }
-          //自动节点组，不包含解锁网易云音乐节点和自定义节点
-          var proxies = []
-          doc['proxies'].forEach((v, i) => { 
-            proxies.push(v['name'])
-          })
-          // 手动节点组，深拷贝
-          var proxies_munual = JSON.parse(JSON.stringify(proxies))
-          //添加自定义节点名
-          proxies_munual = proxies_munual.concat(['🇭🇰 Azure 亚洲','🇺🇸 IBM 达拉斯'])
           //规则组🚀⚙️🔓👋
-          doc['proxy-groups'] = [
-            {'name':'👋Manual', 'type':'select', 'proxies':proxies_munual},
-            {'name':'⚙️Auto', 'type':'url-test', 'url':'http://www.gstatic.com/generate_204', 'interval':600, 'proxies':proxies},
-            {'name':'⛔️屏蔽广告', 'type':'select', 'proxies':['REJECT', '🐟漏网之鱼']},
-            {'name':'🐟漏网之鱼', 'type':'select', 'proxies':['🚀Proxy', 'DIRECT']},
-            {'name':'🚀Proxy', 'type':'select', 'proxies':['⚙️Auto', '👋Manual']},
-            {'name':'🔓解锁网易云灰色歌曲', 'type':'select', 'proxies':['DIRECT','🇨🇳 UNM_Network','🇯🇵 UNM-JP-PC','🇯🇵 UNM-CN-HHHT-PC']}
-          ]
+          for(var i = 0;i < doc['proxy-groups'].length;i++){
+            if(doc['proxy-groups'][i]['name'] == '🔓解锁网易云灰色歌曲'){
+              doc['proxy-groups'][i]['proxies'].push('🇨🇳 UNM_Network')
+              doc['proxy-groups'][i]['proxies'].push('🇯🇵 UNM-JP-PC')
+              doc['proxy-groups'][i]['proxies'].push('🇯🇵 UNM-CN-HHHT-PC')
+            }
+            if(doc['proxy-groups'][i]['name'] == '👋Manual'){
+              doc['proxy-groups'][i]['proxies'].push('🇭🇰 Azure 亚洲')
+              doc['proxy-groups'][i]['proxies'].push('🇺🇸 IBM 达拉斯')
+            }    
+          }
           //清理无用字典
           delete doc['rules']
           delete doc['port']
@@ -749,27 +742,22 @@ profileParsersText: >
           return yaml.stringify(doc)
         }
     - reg: .*
-      file: 'C:\Users\YOURNAME\.config\clash\parser.yaml'
+      file: 'C:/Users/YOURNAME/.config/clash/parser.yaml'
 connProfile: true
 shortcutSystemProxy: ""
 shortcutMixin: ""
 connMode: true
 showNewVersionIcon: true
-systemProxyType: 2
+systemProxyType: 0
 showProxyFilter: true
-systemProxyPac: http://127.0.0.1:8000/pac.txt
+systemProxyPac: https://cdn.jsdelivr.net/gh/v2fly/domain-list-community@release/gfwlist.txt
 childProcessText: |+
   processes: # array
-    - command: "python" # run.cmd 程序名称
-      args:
-        - "-m" # 运行参数1
-        - "http.server" # 运行参数2
-      options:
-        cwd: C:/Users/YOURNAME/.config/clash # 子进程工作目录
-        windowsHide: true # 隐藏子进程的控制台窗口
     - command: "C:/Users/YOURNAME/.config/clash/subconverter/subconverter.exe"
       args:
         - "-cfw" # 运行参数1
+        - "-f" # 运行参数2
+        - "pref-new.yml" # 运行参数3
       options:
         cwd: C:/Users/YOURNAME/.config/clash/subconverter # 子进程工作目录
         windowsHide: true # 隐藏子进程的控制台窗口
