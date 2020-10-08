@@ -10,14 +10,14 @@
 
 append-proxies: # 自定义节点
   - name: 
-    type: http
+    type: 
     server: 
     port: 
 mix-object:
   rules:
     # 应用程序
     - RULE-SET,EpicGames,DIRECT
-    - RULE-SET,Git,DIRECT
+    #- RULE-SET,Git,DIRECT
     - RULE-SET,GeforceExperience,DIRECT
     - RULE-SET,UPlay,DIRECT
     #Ibit
@@ -1270,25 +1270,25 @@ mix-rule-providers:
     type: http
     behavior: ipcidr
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt"
-    path: ./ruleset/lancidr.yaml
+    path: ./RuleSet/lancidr.yaml
     interval: 86400
   UNMProxy:
     type: http
     behavior: classical
-    path: ./MyRules/UNM_proxy.yaml
-    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/UNM_proxy.yaml
+    path: ./MyRules/UNMProxy.yaml
+    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/UNMProxy.yaml
     interval: 86400
   CustomRulesProxy:
     type: http
     behavior: classical
-    path: ./MyRules/Custom_Rules_Proxy.yaml
-    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/Custom_Rules_Proxy.yaml
+    path: ./MyRules/CustomRulesProxy.yaml
+    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/CustomRulesProxy.yaml
     interval: 86400
   CustomRulesDirect:
     type: http
     behavior: classical
-    path: ./MyRules/Custom_Rules_Direct.yaml
-    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/Custom_Rules_Direct.yaml
+    path: ./MyRules/CustomRulesDirect.yaml
+    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/CustomRulesDirect.yaml
     interval: 86400
   UPlay:
     type: http
@@ -1299,8 +1299,8 @@ mix-rule-providers:
   GeforceExperience:
     type: http
     behavior: classical
-    path: ./MyRules/Geforce_Experience.yaml
-    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/Geforce_Experience.yaml
+    path: ./MyRules/GeforceExperience.yaml
+    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/GeforceExperience.yaml
     interval: 864000
   Git:
     type: http
