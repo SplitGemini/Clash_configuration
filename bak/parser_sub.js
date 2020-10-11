@@ -1,26 +1,16 @@
 module.exports.parse = (raw, { yaml, notify }) => {
   const doc = yaml.parse(raw)
-  //兼容性
-  if (doc['proxies'] === undefined) {
-    doc['proxies'] = doc['Proxy']
-    delete doc['Proxy']
-    doc['proxy-groups'] = doc['Proxy Group']
-    delete doc['Proxy Group']
-    doc['rules'] = doc['Rule']
-    delete doc['Rule']
-  }
-  //规则组🚀⚙️🔓👋
-  for(var i = 0;i < doc['proxy-groups'].length;i++){
-    if(doc['proxy-groups'][i]['name'] == '🔓解锁网易云灰色歌曲'){
-      doc['proxy-groups'][i]['proxies'].push('🇨🇳 UNM_Network')
-      doc['proxy-groups'][i]['proxies'].push('🇯🇵 UNM-JP-PC')
-      doc['proxy-groups'][i]['proxies'].push('🇯🇵 UNM-CN-HHHT-PC')
+  //规则组🚀⚙️🔓👋，往Manual里添加新增的非UNM节点，UNM添加到解锁组
+  doc['proxies'].forEach((v, i) => { 
+    if(doc['proxy-groups'][0]['proxies'].findIndex(name => name == v['name']) == -1){
+      if(v['name'].indexOf('UNM') == -1){
+        doc['proxy-groups'][0]['proxies'].push(v['name'])
+      }
+      else{
+        doc['proxy-groups'][5]['proxies'].push(v['name'])
+      }
     }
-    if(doc['proxy-groups'][i]['name'] == '👋Manual'){
-      doc['proxy-groups'][i]['proxies'].push('🇭🇰 Azure 亚洲')
-      doc['proxy-groups'][i]['proxies'].push('🇺🇸 IBM 达拉斯')
-    }
-  }
+  })
   //清理无用字典
   delete doc['rules']
   delete doc['port']

@@ -9,11 +9,12 @@
 #mix-object            对象  对象合并至原配置最外层中
 
 append-proxies: # 自定义节点
-  - name: 
-    type: 
-    server: 
-    port: 
+  - name: 🎵 UNM-local
+    type: http
+    server: 127.0.0.1
+    port: 80
 mix-object:
+  # 自定义覆盖规则
   rules:
     # 应用程序
     - RULE-SET,EpicGames,DIRECT

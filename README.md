@@ -7,7 +7,9 @@ parser将将订阅结构完全统一化，订阅自带的规则组和规则完�
 
 ~~genpac_script需要python环境和genpac插件，配置cfw-settings会用python3开个子进程（HTTP server），用来映射本地pac，同时开启本地subconvertor转换~~
 
-基本使用subconvertor，放弃pac(兼容性不好)，parser.js只用来往节点组添加节点
+基本使用 [subconvertor](https://github.com/tindy2013/subconverter) (子程序)，放弃pac(兼容性不好)，parser.js只用来往节点组添加节点
+
+子程序添加 [UnblockNeteaseMusic.exe](https://github.com/cnsilvan/UnblockNeteaseMusic) 用于本地解锁网易云音乐灰色歌曲
 
 参照
 
