@@ -9,7 +9,7 @@
 #mix-object            对象  对象合并至原配置最外层中
 
 append-proxies: # 自定义节点
-  - name: 🎵 UNM-local
+  - name: 🎵 UNM丨Local
     type: http
     server: 127.0.0.1
     port: 80

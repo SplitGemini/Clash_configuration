@@ -21,7 +21,7 @@ common:
   sssub_rule_base: base/all_base.tpl
   proxy_config: SYSTEM
   proxy_ruleset: SYSTEM
-  proxy_subscription: NONE
+  proxy_subscription: SYSTEM
   append_proxy_type: false
 
 userinfo:
@@ -45,7 +45,7 @@ node_pref:
   sort_flag: false
   sort_script: ""
   filter_deprecated_nodes: false
-  append_sub_userinfo: true
+  append_sub_userinfo: false
   clash_use_new_field_name: true
   clash_proxies_style: flow
   rename_node:
@@ -76,7 +76,7 @@ emojis:
 
 rulesets:
   enabled: true
-  overwrite_original_rules: false
+  overwrite_original_rules: true
   update_ruleset_on_request: false
   rulesets:
 #  - {rule: "GEOIP,CN", group: "DIRECT"}
