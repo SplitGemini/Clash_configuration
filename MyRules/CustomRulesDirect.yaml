@@ -2,9 +2,7 @@ payload:
   - DOMAIN-SUFFIX,appcenter.ms
   - DOMAIN-KEYWORD,suying
   - DOMAIN-SUFFIX,supanx.com
-  - DOMAIN-SUFFIX,firefox.com
   - DOMAIN-SUFFIX,lauchdarkly.com
-  - DOMAIN-SUFFIX,mozilla.org
   - DOMAIN-SUFFIX,publicsuffix.org
   - DOMAIN-SUFFIX,bandi.so
   - DOMAIN-SUFFIX,freedownloadmanager.org
@@ -13,6 +11,7 @@ payload:
   - DOMAIN,api.wcc.best
   - DOMAIN-SUFFIX,ibit6.com
   - DOMAIN,api.nuget.org
+  - DOMAIN-SUFFIX,123345.xyz
   # DNS
   - IP-CIDR,8.8.8.8/32  #谷歌
   - IP-CIDR,8.8.4.4/32
