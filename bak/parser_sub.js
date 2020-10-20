@@ -12,7 +12,6 @@ module.exports.parse = (raw, { yaml, notify }) => {
     }
   })
   //清理无用字典
-  delete doc['rules']
   delete doc['port']
   delete doc['socks-port']
   delete doc['mixed-port']
