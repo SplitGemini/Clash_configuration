@@ -1,13 +1,13 @@
 module.exports.parse = (raw, { yaml, notify }) => {
   const doc = yaml.parse(raw)
-  //规则组🚀⚙️🔓👋，往Manual里添加新增的非UNM节点，UNM添加到解锁组
+  //规则组，往Manual里添加新增的非UNM节点，UNM添加到解锁组
   doc['proxies'].forEach((v, i) => { 
     if(doc['proxy-groups'][0]['proxies'].findIndex(name => name == v['name']) == -1){
       if(v['name'].indexOf('UNM') == -1){
         doc['proxy-groups'][0]['proxies'].push(v['name'])
       }
       else{
-        doc['proxy-groups'][5]['proxies'].push(v['name'])
+        doc['proxy-groups'][6]['proxies'].push(v['name'])
       }
     }
   })

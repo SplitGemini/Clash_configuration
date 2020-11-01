@@ -1213,6 +1213,8 @@ mix-object:
     - RULE-SET,apple,🚀Proxy
     - RULE-SET,icloud,🚀Proxy
     - RULE-SET,proxy,🚀Proxy
+    - RULE-SET,gfw,🚀Proxy
+    - RULE-SET,greatfire,🚀Proxy
     - DOMAIN-SUFFIX,akamaized.net,✅Direct
     - DOMAIN-SUFFIX,akamaihd.net,✅Direct
     #local hosts
@@ -1220,8 +1222,8 @@ mix-object:
     - IP-CIDR,119.28.28.28/32,✅Direct
     - IP-CIDR,119.28.28.28/32,✅Direct
     - IP-CIDR,182.254.116.0/24,✅Direct
-    - RULE-SET,lancidr,✅Direct,no-resolve
-    - RULE-SET,cncidr,✅Direct,no-resolve
+    - RULE-SET,lancidr,✅Direct
+    - RULE-SET,cncidr,✅Direct
     #- GEOIP,CN,✅Direct
     - MATCH,🐟漏网之鱼
 mix-rule-providers:
@@ -1272,6 +1274,18 @@ mix-rule-providers:
     behavior: ipcidr
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt"
     path: ./RuleSet/lancidr.yaml
+    interval: 86400
+  gfw:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
+    path: ./RuleSet/gfw.yaml
+    interval: 86400
+  greatfire:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/greatfire.txt"
+    path: ./RuleSet/greatfire.yaml
     interval: 86400
   UNMProxy:
     type: http

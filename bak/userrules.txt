@@ -56,8 +56,9 @@
 @@||client.wns.windows.com
 @@||config.edge.skype.com
 @@unpkg.com
+@@steampowered.com
 
-! 下面的代理
+! 下面的走代理
 .github*.com
 .ubi.com
 .ubisoft.com
@@ -79,3 +80,4 @@
 ||dl.google.com
 ||translate.googleapis.com
 .yandex*
+.beijingyongjiu.com
