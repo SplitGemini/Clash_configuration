@@ -7,6 +7,8 @@ fontFamily: 思源黑体
 bypassText: |
   bypass:
     # 其他
+    - "*.mihoyo.com"
+    - "*.bejingyongjiu.com"
     - "*.geforce.com"
     - "*.nvidia.com"
     - "*.launchdarkly.com"
@@ -31,6 +33,8 @@ bypassText: |
     - "*.msauth.net"
     - "*.xbox.com"
     - "*.onestore.ms"
+    - "*.msn.com"
+    - "config.edge.skype.com"
     #- "*.akamized.com"
     - "*.windows.net"
     - "*.windows.com"
@@ -747,7 +751,6 @@ connMode: true
 showNewVersionIcon: true
 systemProxyType: 0
 showProxyFilter: true
-systemProxyPac: http://127.0.0.1:8000/pac
 childProcessText: >
   processes: # array
     # subconvertor
