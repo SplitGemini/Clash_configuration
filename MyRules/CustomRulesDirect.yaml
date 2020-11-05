@@ -13,6 +13,7 @@ payload:
   - DOMAIN,api.nuget.org
   - DOMAIN-SUFFIX,123345.xyz
   - DOMAIN-SUFFIX,bejingyongjiu.com
+  - DOMAIN-SUFFIX,sy168.site
   # DNS
   - IP-CIDR,8.8.8.8/32  #谷歌
   - IP-CIDR,8.8.4.4/32
