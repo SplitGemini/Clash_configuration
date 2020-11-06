@@ -13,12 +13,16 @@ parser将将订阅结构完全统一化，订阅自带的规则组和规则完�
 
 parser.js中添加根据profiles名称关键词自动上传私密 gist 功能（需要cfw 0.13.1版本以上），可以用于 Clash For Android / Surge 等进行远程订阅，注意gist id 链接不可泄露
 parser.js 中的'token'修改为 `Personal Access Token`（[在此创建](https://github.com/settings/tokens/new?scopes=gist&description=Subconverter)），注意token获取后如没有保存将不再可见
+
 手动创建好gist，填好关键词，gist id和filename，每次更新自动上传
 
 参照
 
 [https://github.com/Fndroid/clash_for_windows_pkg/issues/1092](https://github.com/Fndroid/clash_for_windows_pkg/issues/1092)
 [https://docs.cfw.lbyczf.com/contents/parser.html](https://docs.cfw.lbyczf.com/contents/parser.html)
+
 [genpac](https://github.com/JinnLynn/genpac)
+
 [clash_rules](https://github.com/Loyalsoldier/clash-rules)
+
 [subconverter](https://github.com/tindy2013/subconverter)
