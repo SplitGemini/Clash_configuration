@@ -1,4 +1,4 @@
-module.exports.parse = async (raw, { axios, yaml, notify }, { name, url, interval, selected }) => {
+module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url, interval, selected }) => {
   const doc = yaml.parse(raw)
   //规则组，往Manual里添加新增的非UNM节点，UNM添加到解锁组
   doc['proxies'].forEach((v, i) => { 
@@ -30,31 +30,35 @@ module.exports.parse = async (raw, { axios, yaml, notify }, { name, url, interva
   delete doc['Proxy Group']
   delete doc['Proxy']
   const ret = yaml.stringify(doc)
-  // {关键词:[gist id, filename]}
-  const gists = {"v2ray":["0000000000","clash"]}
-  var gistId = ""
-  var fileName = ""
-  for(var key in gists){
-    if(name.indexOf(key) != -1){
-      gistId = gists[key][0]
-      fileName = gists[key][1]
-      break
+  if(name != undefined){
+    // {关键词:[gist id, filename]}
+    const gists = {"v2ray":["0000000","clash"]}
+    var gistId = ""
+    var fileName = ""
+    for(var key in gists){
+      if(name.indexOf(key) != -1){
+        gistId = gists[key][0]
+        fileName = gists[key][1]
+        break
+      }
+    }
+    if(gistId != ""){
+      var files = {}
+      files[fileName] = {"content":ret}
+      // gitub api 获取的token, 需要勾选gist权限
+      const token = ""
+      axios.patch(
+        'https://api.github.com/gists/' + gistId,
+        {"public":false,"description":"cfw scripts auto upload","files":files},
+        {headers:{"Content-Type":"application/json;charset='utf-8'","Authorization": "token "+token}})
+      .then(() => notify("Profile has been updated", "profile " + name +" has been updated. And successfully uploaded to gist:" + fileName, true)) 
+      .catch(err => notify("Profile has been updated", "profile " + name +" has been updated. But fail to upload to gist:" + fileName + ", because "+ err, true));
+    }else {
+      notify("Profile has been updated", "profile " + name + " has been updated.", true)
     }
   }
-  if(gistId != ""){
-    var files = {}
-    files[fileName] = {"content":ret}
-    // gitub api 获取的token, 需要勾选gist权限
-    const token = ""
-    axios.patch(
-      'https://api.github.com/gists/' + gistId,
-      {"public":false,"description":"cfw scripts auto upload","files":files},
-      {headers:{"Content-Type":"application/json;charset='utf-8'","Authorization": "token "+token}})
-    .then(() => notify("Profile has been updated", "profile " + name +" has been updated. And successfully uploaded to gist:" + fileName, true)) 
-    .catch(err => notify("Profile has been updated", "profile " + name +" has been updated. But fail to upload to gist:" + fileName + ", because "+ err, true));
-  }
   else {
-    notify("Profile has been updated", "profile " + name + " has been updated.", true)
+    notify("Profile has been updated", "profile has been updated.", true)
   }
   return ret
 }
