@@ -34,7 +34,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
   var message = ""
   if(name != undefined){
     // {关键词:文件名,关键词:文件名}
-    const fileNames = {"v2ray":"clash","ssr":"clashssr"}
+    const fileNames = {"v2ray":"clash","ssr":"clashssr","leak":"clashleak"}
     var fileName = ""
     for(var key in fileNames){
       if(name.indexOf(key) != -1){
@@ -50,6 +50,8 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
       var gistId = ""
       // gitub api 获取的token, 需要勾选gist权限
       const token = ""
+      // your github user name
+      const githubUserName = ""
       axios.patch(
         'https://api.github.com/gists/' + gistId,
         {"public":false,"description":"cfw scripts auto upload","files":files},
@@ -57,6 +59,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
       .then((res) => {
         message = "profile \""+name+"\" has been updated. And successfully uploaded to gist:\""
                   +fileName+"\": file links is:"+res["data"]["files"][fileName]["raw_url"]
+                  +"latest link should be: "+"https://gist.githubusercontent.com/"+githubUserName+"/raw/"+fileName
         console.log(myDate.toLocaleString(),": ",message)
         notify("Profile has been updated", message, true)
       })
