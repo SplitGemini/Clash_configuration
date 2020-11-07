@@ -30,35 +30,72 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
   delete doc['Proxy Group']
   delete doc['Proxy']
   const ret = yaml.stringify(doc)
+  var myDate = new Date()
+  var message = ""
   if(name != undefined){
-    // {关键词:[gist id, filename]}
-    const gists = {"v2ray":["0000000","clash"]}
-    var gistId = ""
+    // {关键词:文件名,关键词:文件名}
+    const fileNames = {"v2ray":"clash","ssr":"clashssr"}
     var fileName = ""
-    for(var key in gists){
+    for(var key in fileNames){
       if(name.indexOf(key) != -1){
-        gistId = gists[key][0]
-        fileName = gists[key][1]
+        fileName = fileNames[key]
         break
       }
     }
-    if(gistId != ""){
+    // 上传gist
+    if(fileName != ""){
       var files = {}
       files[fileName] = {"content":ret}
+      // gist id
+      var gistId = ""
       // gitub api 获取的token, 需要勾选gist权限
       const token = ""
       axios.patch(
         'https://api.github.com/gists/' + gistId,
         {"public":false,"description":"cfw scripts auto upload","files":files},
         {headers:{"Content-Type":"application/json;charset='utf-8'","Authorization": "token "+token}})
-      .then(() => notify("Profile has been updated", "profile " + name +" has been updated. And successfully uploaded to gist:" + fileName, true)) 
-      .catch(err => notify("Profile has been updated", "profile " + name +" has been updated. But fail to upload to gist:" + fileName + ", because "+ err, true));
-    }else {
-      notify("Profile has been updated", "profile " + name + " has been updated.", true)
+      .then((res) => {
+        message = "profile \""+name+"\" has been updated. And successfully uploaded to gist:\""
+                  +fileName+"\": file links is:"+res["data"]["files"][fileName]["raw_url"]
+        console.log(myDate.toLocaleString(),": ",message)
+        notify("Profile has been updated", message, true)
+      })
+      .catch(err => {
+        if (err.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          message = "profile \""+name+"\" has been updated. But fail to upload to gist:\""
+                  +fileName+"\", because status: "+err.response.status+" data: "+err.response.data
+                  +" headers: "+err.response.headers
+          notify("Profile has been updated", message, true)
+        } else if (err.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          message = "profile \""+name+"\" has been updated. But fail to upload to gist:\""
+                  +fileName+"\", because "+err.request
+          notify("Profile has been updated", message, true)
+        } else {
+         // Something happened in setting up the request that triggered an Error
+          message = "Something happened: "+err.message
+          notify("Profile updated fail", message, true)
+        }
+        console.log(myDate.toLocaleString(),": ",message)
+        console.log(myDate.toLocaleString(),": ",err.config)
+      })
+    }
+    // 不上传gist
+    else {
+      message = "profile \""+name+"\" has been updated."
+      console.log(myDate.toLocaleString()+": "+message)
+      notify("Profile has been updated", message, true)
     }
   }
+  // 配置是新建的
   else {
-    notify("Profile has been updated", "profile has been updated.", true)
+    message = "A new profile has been added."
+    console.log(myDate.toLocaleString()+": "+message)
+    notify("A new profile has been added", message, true)
   }
   return ret
 }

@@ -7,14 +7,14 @@ parser将将订阅结构完全统一化，订阅自带的规则组和规则完�
 
 ~~genpac_script需要python环境和genpac插件，配置cfw-settings会用python3开个子进程（HTTP server），用来映射本地pac，同时开启本地subconvertor转换~~
 
-基本使用 [subconvertor](https://github.com/tindy2013/subconverter) (子程序)，放弃pac(兼容性不好)，parser.js只用来往节点组添加节点
+基本使用 [subconvertor](https://github.com/tindy2013/subconverter) (子程序)，放弃pac(兼容性不好) ~~parser.js只用来往节点组添加节点~~
 
 子程序添加 [UnblockNeteaseMusic.exe](https://github.com/cnsilvan/UnblockNeteaseMusic) 用于本地解锁网易云音乐灰色歌曲
 
-parser.js中添加根据profiles名称关键词自动上传私密 gist 功能（需要cfw 0.13.1版本以上），可以用于 Clash For Android / Surge 等进行远程订阅，注意gist id 链接不可泄露
-parser.js 中的'token'修改为 `Personal Access Token`（[在此创建](https://github.com/settings/tokens/new?scopes=gist&description=Subconverter)），注意token获取后如没有保存将不再可见
+parser.js中添加根据profiles名称关键词自动上传私密 gist 功能（需要cfw 0.13.1版本以上），可以用于 Clash For Android / Surge 等进行远程订阅，注意gist id链接不可泄露
+parser.js 中gistId修改为已创建好的gist的id，'token'修改为 `Personal Access Token`（[在此创建](https://github.com/settings/tokens/new?scopes=gist&description=Subconverter)），注意token获取后如没有保存将不再可见
 
-手动创建好gist，填好关键词，gist id和filename，每次更新自动上传
+手动创建好gist，在代码中修改好关键词，gist id和token，每次更新自动上传，可以通过log查看订阅链接
 
 参照
 
