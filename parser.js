@@ -34,7 +34,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
   var message = ""
   if(name != undefined){
     // {关键词:文件名,关键词:文件名}
-    const fileNames = {"v2ray":"clash","ssr":"clashssr","leak":"clashleak"}
+    const fileNames = {"v2ray":"clash","ssr":"clashssr"}
     var fileName = ""
     for(var key in fileNames){
       if(name.indexOf(key) != -1){
@@ -50,16 +50,15 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
       var gistId = ""
       // gitub api 获取的token, 需要勾选gist权限
       const token = ""
-      // your github user name
-      const githubUserName = ""
       axios.patch(
         'https://api.github.com/gists/' + gistId,
-        {"public":false,"description":"cfw scripts auto upload","files":files},
+        {"public":false,"files":files},
         {headers:{"Content-Type":"application/json;charset='utf-8'","Authorization": "token "+token}})
       .then((res) => {
+        // 正则删除链接中的文件commit码
+        var link = res["data"]["files"][fileName]["raw_url"].replace(/[a-z0-9]{40}\//i,"")
         message = "profile \""+name+"\" has been updated. And successfully uploaded to gist:\""
-                  +fileName+"\": file links is:"+res["data"]["files"][fileName]["raw_url"]
-                  +"latest link should be: "+"https://gist.githubusercontent.com/"+githubUserName+"/raw/"+fileName
+                  +fileName+"\": file links is:"+link
         console.log(myDate.toLocaleString(),": ",message)
         notify("Profile has been updated", message, true)
       })
@@ -68,19 +67,21 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
           message = "profile \""+name+"\" has been updated. But fail to upload to gist:\""
-                  +fileName+"\", because status: "+err.response.status+" data: "+err.response.data
-                  +" headers: "+err.response.headers
-          notify("Profile has been updated", message, true)
-        } else if (err.request) {
+                    +fileName+"\", because status: "+err.response.status+" data: "
+                    +err.response.data+" headers: "+err.response.headers
+          notify("Profile has been updated", 
+                 "profile \""+name+"\" has been updated. But fail to upload to gist:\""
+                 +fileName+"\", see log for more details", true)
+        }
+        else if (err.request) {
           // The request was made but no response was received
-          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-          // http.ClientRequest in node.js
           message = "profile \""+name+"\" has been updated. But fail to upload to gist:\""
                   +fileName+"\", because "+err.request
           notify("Profile has been updated", message, true)
-        } else {
+        }
+        else {
          // Something happened in setting up the request that triggered an Error
-          message = "Something happened: "+err.message
+          message = "Something happened: "+err.message+"， see log for more details"
           notify("Profile updated fail", message, true)
         }
         console.log(myDate.toLocaleString(),": ",message)
