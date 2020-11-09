@@ -1,9 +1,8 @@
 payload:
-  - PROCESS-NAME,UbisoftGameLauncher
-  - PROCESS-NAME,UbisoftGameLauncher64
-  - PROCESS-NAME,upc
-  - PROCESS-NAME,Uplay
-  - PROCESS-NAME,UplayCrashReporter
-  - PROCESS-NAME,UplayService
-  - PROCESS-NAME,UplayWebCore
-  
+  - PROCESS-NAME,UbisoftGameLauncher.exe
+  - PROCESS-NAME,UbisoftGameLauncher64.exe
+  - PROCESS-NAME,upc.exe
+  - PROCESS-NAME,Uplay.exe
+  - PROCESS-NAME,UplayCrashReporter.exe
+  - PROCESS-NAME,UplayService.exe
+  - PROCESS-NAME,UplayWebCore.exe

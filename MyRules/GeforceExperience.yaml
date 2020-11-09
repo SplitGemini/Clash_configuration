@@ -1,5 +1,5 @@
 payload:
-  - PROCESS-NAME,courgette
-  - PROCESS-NAME,NVIDIA GeForce Experience
-  - PROCESS-NAME,NVIDIA Notification
-  - PROCESS-NAME,NVIDIA Share
+  - PROCESS-NAME,courgette.exe
+  - PROCESS-NAME,NVIDIA GeForce Experience.exe
+  - PROCESS-NAME,NVIDIA Notification.exe
+  - PROCESS-NAME,NVIDIA Share.exe
