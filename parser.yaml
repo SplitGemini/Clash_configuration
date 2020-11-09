@@ -22,10 +22,10 @@ mix-object:
     - RULE-SET,GeforceExperience,✅Direct
     - RULE-SET,UPlay,✅Direct
     #Ibit
-    - PROCESS-NAME,Ibit6,✅Direct
+    - PROCESS-NAME,Ibit6.exe,✅Direct
     #迅雷
-    - PROCESS-NAME,DownloadSDKServer,✅Direct
-    - PROCESS-NAME,Thunder,✅Direct
+    - PROCESS-NAME,DownloadSDKServer.exe,✅Direct
+    - PROCESS-NAME,Thunder.exe,✅Direct
     #自定义规则
     - RULE-SET,CustomRulesDirect,✅Direct
     - RULE-SET,CustomRulesProxy,🚀Proxy
