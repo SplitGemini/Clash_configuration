@@ -58,8 +58,8 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
         // 正则删除链接中的文件commit码
         var link = res["data"]["files"][fileName]["raw_url"].replace(/[a-z0-9]{40}\//i,"")
         message = "profile \""+name+"\" has been updated. And successfully uploaded to gist:\""
-                  +fileName+"\": file links is:"+link
-        console.log(myDate.toLocaleString(),": ",message)
+                  +fileName+"\"， file links is:"+link
+        console.log(myDate.toLocaleString(),":",message)
         notify("Profile has been updated", message, true)
       })
       .catch(err => {
@@ -84,21 +84,21 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
           message = "Something happened: "+err.message+"， see log for more details"
           notify("Profile updated fail", message, true)
         }
-        console.log(myDate.toLocaleString(),": ",message)
-        console.log(myDate.toLocaleString(),": ",err.config)
+        console.log(myDate.toLocaleString(),":",message)
+        console.log(myDate.toLocaleString(),":",err.config)
       })
     }
     // 不上传gist
     else {
       message = "profile \""+name+"\" has been updated."
-      console.log(myDate.toLocaleString()+": "+message)
+      console.log(myDate.toLocaleString()+":"+message)
       notify("Profile has been updated", message, true)
     }
   }
   // 配置是新建的
   else {
     message = "A new profile has been added."
-    console.log(myDate.toLocaleString()+": "+message)
+    console.log(myDate.toLocaleString()+":"+message)
     notify("A new profile has been added", message, true)
   }
   return ret

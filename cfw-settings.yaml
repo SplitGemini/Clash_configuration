@@ -1,12 +1,12 @@
-proxyOrder: 0
+proxyOrder: 2
 systemTheme: true
 showNotifications: true
 selectAfterUpdated: false
 interfaceName: ""
-fontFamily: 思源黑体
 bypassText: |
   bypass:
     # 其他
+    - "*.helanzuida.com"
     - "*.ksyna.com"
     - "*.pinyuncloud.com"
     - "*.mihoyo.com"
@@ -678,29 +678,37 @@ mixinText: |-
         #- 223.6.6.6
         #- 202.96.128.86 #电信dns
         #- 202.96.134.33
+        # 仅保留doh 且尽量使用ip域名
         - https://doh.opendns.com  #opendns
-        - tls://dns.google:853 #谷歌
-        - https://dns.google/dns-query
-        - tls://1.1.1.1:853 #cloudflare
-        - https://cloudflare-dns.com/dns-query
-        - tls://dns.rubyfish.cn:853  #红鱼
+        #- tls://dns.google:853 #谷歌
+        #- https://dns.google/dns-query
+        - https://8.8.8.8/dns-query
+        #- tls://1.1.1.1:853 #cloudflare
+        #- https://cloudflare-dns.com/dns-query
+        - https://1.1.1.1/dns-query
+        #- tls://dns.rubyfish.cn:853  #红鱼
         - https://dns.rubyfish.cn/dns-query
-        - tls://223.5.5.5:853 #alidns
+        #- tls://223.5.5.5:853 #alidns
         - https://223.5.5.5/dns-query
-        - tls://dns.quad9.net:853 #qurd9
-        - https://dns.quad9.net/dns-query
+        #- tls://dns.quad9.net:853 #qurd9
+        #- https://dns.quad9.net/dns-query
+        - https://9.9.9.9/dns-query
       fallback:
+        # 仅保留doh 且尽量使用ip域名
         - https://doh.opendns.com  #opendns
-        - tls://dns.google:853 #谷歌
-        - https://dns.google/dns-query
-        - tls://1.1.1.1:853 #cloudflare
-        - https://cloudflare-dns.com/dns-query
-        - tls://dns.rubyfish.cn:853  #红鱼
+        #- tls://dns.google:853 #谷歌
+        #- https://dns.google/dns-query
+        - https://8.8.8.8/dns-query
+        #- tls://1.1.1.1:853 #cloudflare
+        #- https://cloudflare-dns.com/dns-query
+        - https://1.1.1.1/dns-query
+        #- tls://dns.rubyfish.cn:853  #红鱼
         - https://dns.rubyfish.cn/dns-query
-        - tls://223.5.5.5:853 #alidns
+        #- tls://223.5.5.5:853 #alidns
         - https://223.5.5.5/dns-query
-        - tls://dns.quad9.net:853 #qurd9
-        - https://dns.quad9.net/dns-query
+        #- tls://dns.quad9.net:853 #qurd9
+        #- https://dns.quad9.net/dns-query
+        - https://9.9.9.9/dns-query
       fallback-filter:
         geoip: true # 默认
         ipcidr: # 在这个网段内的 IP 地址会被考虑为被污染的 IP
