@@ -3,6 +3,7 @@ systemTheme: true
 showNotifications: true
 selectAfterUpdated: false
 interfaceName: ""
+fontFamily: 思源黑体
 bypassText: |
   bypass:
     # 其他
@@ -732,8 +733,10 @@ childProcessText: >
     - command: "C:\\Users\\YOURNAME\\.config\\clash\\subconverter\\subconverter.exe"
       args:
         - "-cfw" # cfw
-        - "-f" # 默认配置文件。可被url覆盖
-        - "pref-new.yml" # 文件路径
+        #- "-f" # 默认配置文件。可被url覆盖
+        #- "pref-new.yml" # 文件路径
+        - "-l"
+        - "log.log"
       options:
         cwd: C:\Users\YOURNAME\.config\clash\subconverter # 子进程工作目录
         windowsHide: true # 隐藏子进程的控制台窗口
