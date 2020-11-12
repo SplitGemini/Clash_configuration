@@ -7,7 +7,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
         doc['proxy-groups'][0]['proxies'].push(v['name'])
       }
       else{
-        doc['proxy-groups'][6]['proxies'].push(v['name'])
+        doc['proxy-groups'][7]['proxies'].push(v['name'])
       }
     }
   })
@@ -29,12 +29,14 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
   delete doc['Rule']
   delete doc['Proxy Group']
   delete doc['Proxy']
+  delete doc['proxy-providers']
   const ret = yaml.stringify(doc)
   var myDate = new Date()
   var message = ""
+  // 配置在更新订阅
   if(name != undefined){
     // {关键词:文件名,关键词:文件名}
-    const fileNames = {"v2ray":"clash","ssr":"clashssr"}
+    const fileNames = {"":""}
     var fileName = ""
     for(var key in fileNames){
       if(name.indexOf(key) != -1){
@@ -47,7 +49,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
       var files = {}
       files[fileName] = {"content":ret}
       // gist id
-      var gistId = ""
+      const gistId = ""
       // gitub api 获取的token, 需要勾选gist权限
       const token = ""
       axios.patch(
@@ -59,7 +61,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
         var link = res["data"]["files"][fileName]["raw_url"].replace(/[a-z0-9]{40}\//i,"")
         message = "profile \""+name+"\" has been updated. And successfully uploaded to gist:\""
                   +fileName+"\"， file links is:"+link
-        console.log(myDate.toLocaleString(),":",message)
+        console.log(myDate.toLocaleString(),": ",message)
         notify("Profile has been updated", message, true)
       })
       .catch(err => {
@@ -76,7 +78,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
         else if (err.request) {
           // The request was made but no response was received
           message = "profile \""+name+"\" has been updated. But fail to upload to gist:\""
-                  +fileName+"\", because "+err.request
+                    +fileName+"\", because "+err.request
           notify("Profile has been updated", message, true)
         }
         else {
@@ -84,21 +86,21 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
           message = "Something happened: "+err.message+"， see log for more details"
           notify("Profile updated fail", message, true)
         }
-        console.log(myDate.toLocaleString(),":",message)
-        console.log(myDate.toLocaleString(),":",err.config)
+        console.log(myDate.toLocaleString(),": ",message)
+        console.log(myDate.toLocaleString(),": ",err.config)
       })
     }
     // 不上传gist
     else {
       message = "profile \""+name+"\" has been updated."
-      console.log(myDate.toLocaleString()+":"+message)
+      console.log(myDate.toLocaleString()+": "+message)
       notify("Profile has been updated", message, true)
     }
   }
   // 配置是新建的
   else {
     message = "A new profile has been added."
-    console.log(myDate.toLocaleString()+":"+message)
+    console.log(myDate.toLocaleString()+": "+message)
     notify("A new profile has been added", message, true)
   }
   return ret
