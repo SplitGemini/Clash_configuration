@@ -1207,7 +1207,6 @@ mix-object:
     - RULE-SET,icloud,🚀Proxy
     - RULE-SET,proxy,🚀Proxy
     - RULE-SET,gfw,🚀Proxy
-    - RULE-SET,greatfire,🚀Proxy
     #local hosts
     - DOMAIN-SUFFIX,local,✔️Direct
     - RULE-SET,lancidr,✔️Direct
@@ -1269,12 +1268,6 @@ mix-rule-providers:
     behavior: domain
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
     path: ./RuleSet/gfw.yaml
-    interval: 86400
-  greatfire:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/greatfire.txt"
-    path: ./RuleSet/greatfire.yaml
     interval: 86400
   UNMProxy:
     type: http
