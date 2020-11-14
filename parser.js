@@ -1,4 +1,4 @@
-module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url, interval, selected }) => {
+module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url, interval, selected, mode }) => {
   const doc = yaml.parse(raw)
   //规则组，往Manual里添加新增的非UNM节点，UNM添加到解锁组
   doc['proxies'].forEach((v, i) => { 
@@ -36,7 +36,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
   // 配置在更新订阅
   if(name != undefined){
     // {关键词:文件名,关键词:文件名}
-    const fileNames = {"":""}
+    const fileNames = {"v2ray":"clash"}
     var fileName = ""
     for(var key in fileNames){
       if(name.indexOf(key) != -1){

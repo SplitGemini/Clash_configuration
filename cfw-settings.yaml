@@ -682,8 +682,8 @@ mixinText: |-
         # 仅保留doh 且尽量使用ip域名
         - https://doh.opendns.com  #opendns
         #- tls://dns.google:853 #谷歌
-        #- https://dns.google/dns-query
-        - https://8.8.8.8/dns-query
+        - https://dns.google/dns-query
+        #- https://8.8.8.8/dns-query #貌似不行
         #- tls://1.1.1.1:853 #cloudflare
         #- https://cloudflare-dns.com/dns-query
         - https://1.1.1.1/dns-query
@@ -698,8 +698,8 @@ mixinText: |-
         # 仅保留doh 且尽量使用ip域名
         - https://doh.opendns.com  #opendns
         #- tls://dns.google:853 #谷歌
-        #- https://dns.google/dns-query
-        - https://8.8.8.8/dns-query
+        - https://dns.google/dns-query
+        #- https://8.8.8.8/dns-query
         #- tls://1.1.1.1:853 #cloudflare
         #- https://cloudflare-dns.com/dns-query
         - https://1.1.1.1/dns-query
