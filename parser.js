@@ -11,6 +11,17 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
       }
     }
   })
+  // 如果有proxy-providers则添加所含节点，否则删除
+  if (doc['proxy-providers'] == undefined || JSON.stringify(doc['proxy-providers']) === "{}") {
+    delete doc['proxy-providers']
+  }
+  else {
+    doc['proxy-providers'].forEach((v, i) => { 
+      doc['proxy-groups'][0]['use'].push(v['name'])
+      doc['proxy-groups'][1]['use'].push(v['name'])
+      doc['proxy-groups'][2]['use'].push(v['name'])
+    })
+  }
   //清理无用字典
   delete doc['port']
   delete doc['socks-port']
@@ -29,10 +40,17 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
   delete doc['Rule']
   delete doc['Proxy Group']
   delete doc['Proxy']
-  delete doc['proxy-providers']
+
   const ret = yaml.stringify(doc)
   var myDate = new Date()
   var message = ""
+  const fs = require('fs')
+  var log = function (text){
+    var filename = "C:\\Users\\YOURNAME\\.config\\clash\\logs\\cfw-parser.log"
+    fs.appendFile(filename, myDate.toLocaleString()+": "+text+"\n", function (err) {
+      if (err) throw err
+    })
+  }
   // 配置在更新订阅
   if(name != undefined){
     // {关键词:文件名,关键词:文件名}
@@ -61,7 +79,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
         var link = res["data"]["files"][fileName]["raw_url"].replace(/[a-z0-9]{40}\//i,"")
         message = "profile \""+name+"\" has been updated. And successfully uploaded to gist:\""
                   +fileName+"\"， file links is:"+link
-        console.log(myDate.toLocaleString(),": ",message)
+        log(message)
         notify("Profile has been updated", message, true)
       })
       .catch(err => {
@@ -86,21 +104,21 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
           message = "Something happened: "+err.message+"， see log for more details"
           notify("Profile updated fail", message, true)
         }
-        console.log(myDate.toLocaleString(),": ",message)
-        console.log(myDate.toLocaleString(),": ",err.config)
+        log(message)
+        log(err.config)
       })
     }
     // 不上传gist
     else {
       message = "profile \""+name+"\" has been updated."
-      console.log(myDate.toLocaleString()+": "+message)
+      log(message)
       notify("Profile has been updated", message, true)
     }
   }
   // 配置是新建的
   else {
     message = "A new profile has been added."
-    console.log(myDate.toLocaleString()+": "+message)
+    log(message)
     notify("A new profile has been added", message, true)
   }
   return ret

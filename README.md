@@ -13,7 +13,7 @@ mixin功能大概只能用来替换dns，虽然也可以替换规则，但是无
 
 1. [subconvertor](https://github.com/tindy2013/subconverter) ，作为子程序，放在cfw配置目录。
 1. [UnblockNeteaseMusic](https://github.com/cnsilvan/UnblockNeteaseMusic) ，作为子程序，放在cfw配置目录，用于本地解锁网易云音乐灰色歌曲
-1. 手动创建好一个gist，parser.js 中gistId修改为已创建好的gist的id；'token'修改为 `Personal Access Token`（[在此创建](https://github.com/settings/tokens/new?scopes=gist&description=Subconverter)），注意token获取后如没有保存将不再可见。
+1. 手动创建好一个gist，parser.js 中设置log filename路径，gistId修改为已创建好的gist的id；'token'修改为 `Personal Access Token`（[在此创建](https://github.com/settings/tokens/new?scopes=gist&description=Subconverter)），注意token获取后如没有保存将不再可见。
 1. 修改关键词字典，配置名包含关键词则将其以对应关键词字典值为文件名上传到gist
 1. cfw-settings.yaml替换全部`YOURNAME`为你电脑用户名，或者将带该标记的目录修改为cfw配置目录
 1. 复制parser.js、parser.yaml、cfw-settings.yaml、subconverter文件夹到cfw配置目录，安装版为“C:/Users/YOURNAME/.config/clash”
