@@ -1,0 +1,31 @@
+proxies:
+  - name: expire
+    server: 213.183.60.57
+    port: 9024
+    type: ss
+    cipher: aes-256-cfb
+    password: BejrQvtu9sqUeNuZ
+  - name: eXpire
+    server: 213.183.60.57
+    port: 9094
+    type: ss
+    cipher: aes-256-cfb
+    password: rpgbNnU9rDDU4aWZ
+  - name: Indiafsss
+    server: 213.183.60.57
+    port: 9097
+    type: ss
+    cipher: aes-256-cfb
+    password: Sn5B7jTqr76aCJT8
+  - name: KOR
+    server: 213.183.60.57
+    port: 9097
+    type: ss
+    cipher: aes-256-cfb
+    password: Sn5B7jTqr76aCJT8
+  - name: philippines
+    server: 213.183.60.57
+    port: 9097
+    type: ss
+    cipher: aes-256-cfb
+    password: Sn5B7jTqr76aCJT8
