@@ -716,9 +716,9 @@ mixinText: |-
           - 240.0.0.0/4
 profileParsersText: |
   parsers: # array
-    - reg: .*
+    - reg: ^http://(localhost|127.0.0.1):25500/.+$
       file: 'C:/Users/YOURNAME/.config/clash/parser.yaml'
-    - reg: .*
+    - reg: ^http://(localhost|127.0.0.1):25500/.+$
       file: 'C:/Users/YOURNAME/.config/clash/parser.js'
 connProfile: true
 shortcutSystemProxy: ""
