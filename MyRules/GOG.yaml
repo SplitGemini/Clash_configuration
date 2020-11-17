@@ -1,0 +1,5 @@
+payload:
+  - PROCESS-NAME,GalaxyClient Helper.exe
+  - PROCESS-NAME,GalaxyClient.exe
+  - PROCESS-NAME,GalaxyClientService.exe
+  - PROCESS-NAME,GOG Galaxy Notifications Renderer.exe
