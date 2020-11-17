@@ -45,14 +45,19 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
   var myDate = new Date()
   var message = ""
   const fs = require('fs')
+  // 写log
   var log = function (text){
-    var filename = "C:\\Users\\YOURNAME\\.config\\clash\\logs\\cfw-parser.log"
-    fs.appendFile(filename, myDate.toLocaleString()+": "+text+"\n", function (err) {
-      if (err) throw err
+    // log file路径
+    var logFile = "C:\\Users\\YOURNAME\\.config\\clash\\logs\\cfw-parser.log"
+    fs.appendFile(logFile, myDate.toLocaleString()+": "+text+"\n", function (err) {
+      if (err) {
+        console.log("error: ",err," ",myDate.toLocaleString(),",",text)
+        throw err
+      }
     })
   }
   // 配置在更新订阅
-  if(name != undefined){
+  if(name){
     // {关键词:文件名,关键词:文件名}
     const fileNames = {"v2ray":"clash"}
     var fileName = ""
@@ -63,7 +68,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
       }
     }
     // 上传gist
-    if(fileName != ""){
+    if(fileName){
       var files = {}
       files[fileName] = {"content":ret}
       // gist id
@@ -77,7 +82,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
       .then((res) => {
         // 正则删除链接中的文件commit码
         var link = res["data"]["files"][fileName]["raw_url"].replace(/[a-z0-9]{40}\//i,"")
-        message = "profile \""+name+"\" has been updated. And successfully uploaded to gist:\""
+        message = "Profile \""+name+"\" has been updated. And successfully uploaded to gist:\""
                   +fileName+"\"， file links is:"+link
         log(message)
         notify("Profile has been updated", message, true)
@@ -86,31 +91,34 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
         if (err.response) {
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
-          message = "profile \""+name+"\" has been updated. But fail to upload to gist:\""
-                    +fileName+"\", because status: "+err.response.status+" data: "
-                    +err.response.data+" headers: "+err.response.headers
+          message = "Profile \""+name+"\" has been updated. But fail to upload to gist:\""
+                    +fileName+"\", the request was made and the server responded with a fail status code,"
+                    +" because "+JSON.stringify(err)
           notify("Profile has been updated", 
                  "profile \""+name+"\" has been updated. But fail to upload to gist:\""
                  +fileName+"\", see log for more details", true)
         }
         else if (err.request) {
           // The request was made but no response was received
-          message = "profile \""+name+"\" has been updated. But fail to upload to gist:\""
-                    +fileName+"\", because "+err.request
-          notify("Profile has been updated", message, true)
+          message = "Profile \""+name+"\" has been updated. And maybe successfully uploaded to gist:\""
+                    +fileName+"\", the request was made but no response was received, because "
+                    +JSON.stringify(err)
+          notify("Profile has been updated", 
+                 "profile \""+name+"\" has been updated. And maybe successfully uploaded to gist:\""
+                 +fileName+"\", see log for more details", true)
         }
         else {
          // Something happened in setting up the request that triggered an Error
           message = "Something happened: "+err.message+"， see log for more details"
           notify("Profile updated fail", message, true)
+          throw err
         }
         log(message)
-        log(err.config)
       })
     }
     // 不上传gist
     else {
-      message = "profile \""+name+"\" has been updated."
+      message = "Profile \""+name+"\" has been updated."
       log(message)
       notify("Profile has been updated", message, true)
     }
