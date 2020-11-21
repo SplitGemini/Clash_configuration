@@ -1,54 +1,9 @@
 module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url, interval, selected, mode }) => {
-  const doc = yaml.parse(raw)
-  //规则组，往Manual里添加新增的非UNM节点，UNM添加到解锁组
-  doc['proxies'].forEach((v, i) => { 
-    if(doc['proxy-groups'][0]['proxies'].findIndex(x => x == v['name']) == -1){
-      if(v['name'].indexOf('UNM') == -1){
-        doc['proxy-groups'][0]['proxies'].push(v['name'])
-      }
-      else{
-        doc['proxy-groups'][7]['proxies'].push(v['name'])
-      }
-    }
-  })
-  // 如果有proxy-providers则添加所含节点，否则删除
-  if (doc['proxy-providers'] == undefined || JSON.stringify(doc['proxy-providers']) === "{}") {
-    delete doc['proxy-providers']
-  }
-  else {
-    doc['proxy-providers'].forEach((v, i) => { 
-      doc['proxy-groups'][0]['use'].push(v['name'])
-      doc['proxy-groups'][1]['use'].push(v['name'])
-      doc['proxy-groups'][2]['use'].push(v['name'])
-    })
-  }
-  //清理无用字典
-  delete doc['port']
-  delete doc['socks-port']
-  delete doc['mixed-port']
-  delete doc['redir-port']
-  delete doc['allow-lan']
-  delete doc['mode']
-  delete doc['log-level']
-  delete doc['external-controller']
-  delete doc['secret']
-  delete doc['cfw-bypass']
-  delete doc['cfw-latency-url']
-  delete doc['cfw-conn-break-strategy']
-  delete doc['cfw-child-process']
-  delete doc['cfw-latency-timeout']
-  delete doc['Rule']
-  delete doc['Proxy Group']
-  delete doc['Proxy']
-
-  const ret = yaml.stringify(doc)
-  var myDate = new Date()
-  var message = ""
-  const fs = require('fs')
   // 写log
-  var log = function (text){
+  const fs = require('fs')
+  const log = function (text){
     // log file路径
-    var logFile = "C:\\Users\\YOURNAME\\.config\\clash\\logs\\cfw-parser.log"
+    let logFile = "C:\\Users\\GH\\.config\\clash\\logs\\cfw-parser.log"
     fs.appendFile(logFile, myDate.toLocaleString()+": "+text+"\n", function (err) {
       if (err) {
         console.log("error: ",err," ",myDate.toLocaleString(),",",text)
@@ -56,20 +11,70 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
       }
     })
   }
+  
+  const rawObj = yaml.parse(raw)
+  //规则组，往Manual里添加新增的非UNM节点，UNM添加到解锁组
+  rawObj['proxies'].forEach((v, i) => { 
+    if(rawObj['proxy-groups'][0]['proxies'].findIndex(x => x === v['name']) === -1){
+      if(v['name'].indexOf('UNM') === -1){
+        rawObj['proxy-groups'][0]['proxies'].push(v['name'])
+      }
+      else{
+        rawObj['proxy-groups'][7]['proxies'].push(v['name'])
+      }
+    }
+  })
+  /* //不支持proxy-providers ，subconverter会给删掉
+  // 如果有proxy-providers则添加所含节点，否则删除
+  if (rawObj['proxy-providers'] == undefined || JSON.stringify(rawObj['proxy-providers']) === "{}") {
+    delete rawObj['proxy-providers']
+  }
+  else {
+    log("Found proxy-providers")
+    rawObj['proxy-providers'].forEach((v, i) => {
+      rawObj['proxy-groups'][0]['use'].push(v['name'])
+      rawObj['proxy-groups'][1]['use'].push(v['name'])
+      rawObj['proxy-groups'][2]['use'].push(v['name'])
+    })
+  }
+  */
+  delete rawObj['proxy-providers']
+  //清理无用字典
+  delete rawObj['port']
+  delete rawObj['socks-port']
+  delete rawObj['mixed-port']
+  delete rawObj['redir-port']
+  delete rawObj['allow-lan']
+  delete rawObj['mode']
+  delete rawObj['log-level']
+  delete rawObj['external-controller']
+  delete rawObj['secret']
+  delete rawObj['cfw-bypass']
+  delete rawObj['cfw-latency-url']
+  delete rawObj['cfw-conn-break-strategy']
+  delete rawObj['cfw-child-process']
+  delete rawObj['cfw-latency-timeout']
+  delete rawObj['Rule']
+  delete rawObj['Proxy Group']
+  delete rawObj['Proxy']
+
+  const ret = yaml.stringify(rawObj)
+  const myDate = new Date()
+  var message = ""
   // 配置在更新订阅
   if(name){
     // {关键词:文件名,关键词:文件名}
     const fileNames = {"v2ray":"clash"}
-    var fileName = ""
-    for(var key in fileNames){
-      if(name.indexOf(key) != -1){
+    let fileName = ""
+    for(let key in fileNames){
+      if(name.indexOf(key) !== -1){
         fileName = fileNames[key]
         break
       }
     }
     // 上传gist
     if(fileName){
-      var files = {}
+      let files = {}
       files[fileName] = {"content":ret}
       // gist id
       const gistId = ""
@@ -102,7 +107,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
           // The request was made but no response was received
           message = "Profile \""+name+"\" has been updated. And maybe successfully uploaded to gist:\""
                     +fileName+"\", the request was made but no response was received, because "
-                    +JSON.stringify(err)
+                    +JSON.stringify(err.request)
           notify("Profile has been updated", 
                  "profile \""+name+"\" has been updated. And maybe successfully uploaded to gist:\""
                  +fileName+"\", see log for more details", true)
