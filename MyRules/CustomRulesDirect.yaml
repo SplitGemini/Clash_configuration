@@ -15,6 +15,7 @@ payload:
   - DOMAIN-SUFFIX,bejingyongjiu.com
   - DOMAIN-SUFFIX,sy168.site
   - DOMAIN,rss.cnrss.xyz
+  - DOMAIN,subcon.dlj.tf
   # DNS
   - IP-CIDR,8.8.8.8/32  #谷歌
   - IP-CIDR,8.8.4.4/32
