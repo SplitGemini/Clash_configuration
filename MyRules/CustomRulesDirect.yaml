@@ -1,21 +1,25 @@
 payload:
   - DOMAIN-SUFFIX,appcenter.ms
-  - DOMAIN-KEYWORD,suying
   - DOMAIN-SUFFIX,supanx.com
   - DOMAIN-SUFFIX,lauchdarkly.com
   - DOMAIN-SUFFIX,publicsuffix.org
   - DOMAIN-SUFFIX,bandi.so
   - DOMAIN-SUFFIX,freedownloadmanager.org
   - DOMAIN-SUFFIX,xboxlive.com
-  - DOMAIN,api.ikuuu.science
-  - DOMAIN,api.wcc.best
   - DOMAIN-SUFFIX,ibit6.com
   - DOMAIN,api.nuget.org
   - DOMAIN-SUFFIX,123345.xyz
   - DOMAIN-SUFFIX,bejingyongjiu.com
+  # 机场、订阅
+  - DOMAIN-KEYWORD,suying
   - DOMAIN-SUFFIX,sy168.site
+  - DOMAIN,api.ikuuu.science
+  - DOMAIN,api.wcc.best
   - DOMAIN,rss.cnrss.xyz
   - DOMAIN,subcon.dlj.tf
+  - DOMAIN,subconverter-web.now.sh
+  - DOMAIN,subconverter.herokuapp.com
+  - DOMAIN,api.dler.io
   # DNS
   - IP-CIDR,8.8.8.8/32  #谷歌
   - IP-CIDR,8.8.4.4/32
@@ -32,3 +36,4 @@ payload:
   - IP-CIDR,202.96.134.33/32
   - IP-CIDR,208.67.222.222/32  #opendns
   - IP-CIDR,208.67.220.220/32
+  - IP-CIDR,9.9.9.9/32  #qurd9
