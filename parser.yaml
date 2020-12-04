@@ -7,8 +7,12 @@
 #mix-proxy-providers   对象  对象合并至原配置 proxy-providers 中
 #mix-rule-providers    对象  对象合并至原配置 rule-providers 中
 #mix-object            对象  对象合并至原配置最外层中
+#commands              数组  在上面操作完成后执行简单命令操作配置文件
+#每个命令可以被分为三个部分，分别是：定位+操作+设定值
+#定位：定位中每个层级以.分割
+#操作：=：覆盖，+：插入，-：删除
 
-append-proxies: # 自定义节点
+append-proxies: # 自定义节点，带关键词UNM的添加到解锁组，不带的添加到手动组
   - name: 🎵 UNM丨Local
     type: http
     server: 127.0.0.1
@@ -18,6 +22,7 @@ mix-object:
   rules:
     # 应用程序
     - RULE-SET,EpicGames,✔️Direct
+    - RULE-SET,GOG,✔️Direct
     #- RULE-SET,Git,✔️Direct
     - RULE-SET,GeforceExperience,✔️Direct
     - RULE-SET,UPlay,✔️Direct
@@ -400,6 +405,7 @@ mix-object:
     - IP-CIDR,31.13.64.0/18,🚀Proxy,no-resolve
     - IP-CIDR,35.157.215.84/32,🚀Proxy,no-resolve
     - IP-CIDR,35.157.217.255/32,🚀Proxy,no-resolve
+    - IP-CIDR,35.186.224.47/32,🚀Proxy,no-resolve
     - IP-CIDR,35.190.247.0/24,🚀Proxy,no-resolve
     - IP-CIDR,37.77.184.0/21,🚀Proxy,no-resolve
     - IP-CIDR,45.57.0.0/17,🚀Proxy,no-resolve
@@ -1199,7 +1205,6 @@ mix-object:
     - DOMAIN,oneclient.sfx.ms,🚀Proxy
     - DOMAIN,testflight.apple.com,🚀Proxy
     - DOMAIN,youtubei.googleapis.com,🚀Proxy
-    - IP-CIDR,35.186.224.47/32,🚀Proxy,no-resolve
     # Rule providers set
     - RULE-SET,direct,✔️Direct
     - RULE-SET,google,🚀Proxy
@@ -1310,4 +1315,10 @@ mix-rule-providers:
     behavior: classical
     path: ./MyRules/EpicGames.yaml
     url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/EpicGames.yaml
+    interval: 0
+  GOG:
+    type: http
+    behavior: classical
+    path: ./MyRules/GOG.yaml
+    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/GOG.yaml
     interval: 0

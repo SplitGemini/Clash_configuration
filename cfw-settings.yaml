@@ -1,4 +1,4 @@
-proxyOrder: 2
+proxyOrder: 1
 systemTheme: true
 showNotifications: true
 selectAfterUpdated: false
@@ -23,6 +23,7 @@ bypassText: |
     - "*.mpyit.com"
     # 微软
     - "*.azureedge.*"
+    - "*.azurefd.*"
     - "*.office365.com"
     - "*.xboxlive.com"
     - "*.s-microsoft.com"
@@ -112,6 +113,7 @@ bypassText: |
     - "*.mmstat.com"
     - "*.mxhichina.com"
     - "*.soku.com"
+    - "*.teambition.*"
     - "*.taobao.com"
     - "*.taobaocdn.com"
     - "*.tbcache.com"
@@ -663,8 +665,9 @@ mixinText: |-
   mixin: # object
     dns:
       enable: true
-      ipv6: true
-      enhanced-mode: redir-host
+      ipv6: false
+      #enhanced-mode: redir-host
+      enhanced-mode: normal
       #listen: 0.0.0.0:53
       nameserver:
         # 大部分走的都是需要代理的，全部DoH, DoT算了
@@ -679,46 +682,48 @@ mixinText: |-
         #- 223.6.6.6
         #- 202.96.128.86 #电信dns
         #- 202.96.134.33
-        # 仅保留doh 且尽量使用ip域名
-        - https://doh.opendns.com  #opendns
+        # 仅保留4个doh 且尽量使用ip域名
+        #- https://doh.opendns.com/dns-query  #opendns
         #- tls://dns.google:853 #谷歌
         - https://dns.google/dns-query
         #- https://8.8.8.8/dns-query #貌似不行
         #- tls://1.1.1.1:853 #cloudflare
+        #- https://dns.cloudflare.com/dns-query
         #- https://cloudflare-dns.com/dns-query
         - https://1.1.1.1/dns-query
         #- tls://dns.rubyfish.cn:853  #红鱼
-        - https://dns.rubyfish.cn/dns-query
+        #- https://dns.rubyfish.cn
         #- tls://223.5.5.5:853 #alidns
         - https://223.5.5.5/dns-query
         #- tls://dns.quad9.net:853 #qurd9
         #- https://dns.quad9.net/dns-query
         - https://9.9.9.9/dns-query
-      fallback:
-        # 仅保留doh 且尽量使用ip域名
-        - https://doh.opendns.com  #opendns
+      #fallback:
+        # 仅保留4个doh 且尽量使用ip域名
+        #- https://doh.opendns.com/dns-query  #opendns
         #- tls://dns.google:853 #谷歌
-        - https://dns.google/dns-query
+        #- https://dns.google/dns-query
         #- https://8.8.8.8/dns-query
         #- tls://1.1.1.1:853 #cloudflare
+        #- https://dns.cloudflare.com/dns-query
         #- https://cloudflare-dns.com/dns-query
-        - https://1.1.1.1/dns-query
+        #- https://1.1.1.1/dns-query
         #- tls://dns.rubyfish.cn:853  #红鱼
-        - https://dns.rubyfish.cn/dns-query
+        #- https://dns.rubyfish.cn
         #- tls://223.5.5.5:853 #alidns
-        - https://223.5.5.5/dns-query
+        #- https://223.5.5.5/dns-query
         #- tls://dns.quad9.net:853 #qurd9
         #- https://dns.quad9.net/dns-query
-        - https://9.9.9.9/dns-query
-      fallback-filter:
-        geoip: true # 默认
-        ipcidr: # 在这个网段内的 IP 地址会被考虑为被污染的 IP
-          - 240.0.0.0/4
+        #- https://9.9.9.9/dns-query
+      #fallback-filter:
+        #geoip: true # 默认
+        #ipcidr: # 在这个网段内的 IP 地址会被考虑为被污染的 IP
+          #- 240.0.0.0/4
 profileParsersText: |
   parsers: # array
-    - reg: ^http://(localhost|127.0.0.1):25500/.+$
+    - reg: ^http://(localhost|127\.0\.0\.1):25500/.+$
       file: 'C:/Users/YOURNAME/.config/clash/parser.yaml'
-    - reg: ^http://(localhost|127.0.0.1):25500/.+$
+    - reg: ^http://(localhost|127\.0\.0\.1):25500/.+$
       file: 'C:/Users/YOURNAME/.config/clash/parser.js'
 connProfile: true
 shortcutSystemProxy: ""
@@ -761,3 +766,6 @@ systemProxyTypeIndex: 0
 pacContentText: ""
 editor: 0
 latencyTimeout: 5000
+hideAfterStartup: true
+mixinType: 0
+randomControllerPort: true
