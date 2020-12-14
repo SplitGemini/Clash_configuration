@@ -18,7 +18,7 @@
 (([^A-Z]|^)EU([^A-Z]|$)|(?i:Europe)|欧洲?),🇪🇺
 (([^A-Z]|^)FI([^A-Z]|$)|(?i:Finland)|芬兰|赫尔辛基),🇫🇮
 (([^A-Z]|^)FR([^A-Z]|$)|(?i:France)|法国|巴黎),🇫🇷
-(([^A-Z]|^)HK([^A-Z]|$)|(?i:Hong\s?Kong)|HKT|HKBN|HGC|WTT|CMI|香港),🇭🇰
+(([^A-Z]|^)HK([^A-Z]|$)|(?i:Hong\s?Kong)|HKT|HKBN|HGC|WTT|CMI|\S港\s|港区),🇭🇰
 (([^A-Z]|^)HR([^A-Z]|$)|克罗地亚),🇭🇷
 (([^A-Z]|^)HU([^A-Z]|$)|匈牙利),🇭🇺
 (([^A-Z]|^)ID([^A-Z]|$)|(?i:Indonesia)|印尼|印度尼西亚|雅加达),🇮🇩
@@ -55,7 +55,7 @@
 (([^A-Z]|^)TR([^A-Z]|$)|(?i:Turkey)|土耳其|伊斯坦布尔),🇹🇷
 (([^A-Z]|^)TW([^A-Z]|$)|(?i:Taiwan)|新北|彰化|CHT|台湾|HINET),🇹🇼
 (([^A-Z]|^)UA([^A-Z]|$)|乌克兰),🇺🇦
-(([^A-Z]|^)UK([^A-Z]|$)|(?i:England)|(?i:United\s?Kingdom)|GB|英国|伦敦),🇬🇧
+(([^A-Z]|^)UK([^A-Z]|$)|([^A-Z]|^)GB([^A-Z]|$)|(?i:England)|(?i:United\s?Kingdom)|英国|伦敦),🇬🇧
 (([^A-Z]|^)US([^A-Z]|$)|(?i:America)|(?i:United\s?States)|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥),🇺🇸
 (([^A-Z]|^)VN([^A-Z]|$)|越南),🇻🇳
 (([^A-Z]|^)ZA([^A-Z]|$)|南非),🇿🇦
