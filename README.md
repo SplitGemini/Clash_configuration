@@ -9,6 +9,8 @@ mixin功能大概只能用来替换dns，虽然也可以替换规则，但是无
 
 添加根据profiles名称关键词自动上传私密gist，每次更新自动上传，可以通过log查看订阅链接或调试信息，可以用于 Clash For Android / Surge 等进行远程订阅，注意gist id链接不可泄露
 
+上传gist中添加dns设置以配合Adgurad
+
 ## 部署
 
 1. [subconvertor](https://github.com/tindy2013/subconverter) ，作为子程序，放在cfw配置目录。

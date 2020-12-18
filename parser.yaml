@@ -35,7 +35,6 @@ mix-object:
     - RULE-SET,CustomRulesDirect,✔️Direct
     - RULE-SET,CustomRulesProxy,🚀Proxy
     - RULE-SET,UNMProxy,🔓解锁网易云灰色歌曲
-    - RULE-SET,reject,⛔️屏蔽广告
     # Direct ips
     - IP-CIDR,101.71.154.241/32,✔️Direct,no-resolve
     - IP-CIDR,115.236.112.0/20,✔️Direct,no-resolve
@@ -1237,12 +1236,6 @@ mix-rule-providers:
     behavior: domain
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
     path: ./RuleSet/direct.yaml
-    interval: 86400
-  reject:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
-    path: ./RuleSet/reject.yaml
     interval: 86400
   icloud:
     type: http

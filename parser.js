@@ -3,7 +3,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
   const fs = require('fs')
   const log = function (text){
     // log file路径
-    let logFile = "C:\\Users\\YOURNAME\\.config\\clash\\logs\\cfw-parser.log"
+    let logFile = "C:\\Users\\\\.config\\clash\\logs\\cfw-parser.log"
     fs.appendFile(logFile, myDate.toLocaleString()+": "+text+"\n", function (err) {
       if (err) {
         console.log("error: ",err," ",myDate.toLocaleString(),",",text)
@@ -20,7 +20,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
         rawObj['proxy-groups'][0]['proxies'].push(v['name'])
       }
       else{
-        rawObj['proxy-groups'][7]['proxies'].push(v['name'])
+        rawObj['proxy-groups'][6]['proxies'].push(v['name'])
       }
     }
   })
@@ -74,11 +74,11 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
     }
     // 上传gist
     if(fileName){
-      rawObj['dns'] = {'enable':'true','ipv6':'true','enhanced-mode':'redir-host',
+      rawObj['dns'] = {'enable':true,'ipv6':true,'enhanced-mode':'redir-host',
                        'listen':'0.0.0.0:5450','nameserver':['8.8.8.8','223.5.5.5'],
                        'fallback':['https://dns.google/dns-query','https://1.1.1.1/dns-query',
                                    'https://223.5.5.5/dns-query','https://9.9.9.9/dns-query'],
-                       'fallback-filter':{'geoip':'true','ipcidr':['240.0.0.0/4']}}
+                       'fallback-filter':{'geoip':true,'ipcidr':['240.0.0.0/4']}}
       const upload = yaml.stringify(rawObj)
       let files = {}
       files[fileName] = {"content":upload}

@@ -18,7 +18,7 @@
 (([^A-Z]|^)EU([^A-Z]|$)|(?i:Europe)|欧洲?),🇪🇺
 (([^A-Z]|^)FI([^A-Z]|$)|(?i:Finland)|芬兰|赫尔辛基),🇫🇮
 (([^A-Z]|^)FR([^A-Z]|$)|(?i:France)|法国|巴黎),🇫🇷
-(([^A-Z]|^)HK([^A-Z]|$)|(?i:Hong\s?Kong)|HKT|HKBN|HGC|WTT|CMI|\S港\s|港区),🇭🇰
+(([^A-Z]|^)HK([^A-Z]|$)|(?i:Hong\s?Kong)|HKT|HKBN|HGC|WTT|CMI|香港|港\S|港区),🇭🇰
 (([^A-Z]|^)HR([^A-Z]|$)|克罗地亚),🇭🇷
 (([^A-Z]|^)HU([^A-Z]|$)|匈牙利),🇭🇺
 (([^A-Z]|^)ID([^A-Z]|$)|(?i:Indonesia)|印尼|印度尼西亚|雅加达),🇮🇩
