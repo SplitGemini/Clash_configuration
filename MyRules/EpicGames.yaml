@@ -5,3 +5,5 @@ payload:
   - PROCESS-NAME,UnrealEngineLauncher.exe
   - PROCESS-NAME,CrashReportClient.exe
   - PROCESS-NAME,UnrealCEFSubProcess.exe
+  - PROCESS-NAME,EpicWebHelper.exe
+  - PROCESS-NAME,UnrealVersionSelector.exe
