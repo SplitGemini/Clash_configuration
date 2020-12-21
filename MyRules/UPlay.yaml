@@ -3,6 +3,9 @@ payload:
   - PROCESS-NAME,UbisoftGameLauncher64.exe
   - PROCESS-NAME,upc.exe
   - PROCESS-NAME,Uplay.exe
+  - PROCESS-NAME,UbisoftConnect.exe
   - PROCESS-NAME,UplayCrashReporter.exe
+  - PROCESS-NAME,UplayCrashHelper.exe
+  - PROCESS-NAME,UplayCrashHelper64.exe
   - PROCESS-NAME,UplayService.exe
   - PROCESS-NAME,UplayWebCore.exe
