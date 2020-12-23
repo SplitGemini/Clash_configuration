@@ -10,6 +10,7 @@ payload:
   - DOMAIN,api.nuget.org
   - DOMAIN-SUFFIX,123345.xyz
   - DOMAIN-SUFFIX,bejingyongjiu.com
+  - DOMAIN,office365-test.herokuapp.com
   # 机场、订阅
   - DOMAIN-KEYWORD,suying
   - DOMAIN-SUFFIX,sy168.site
