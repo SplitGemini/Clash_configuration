@@ -2,11 +2,12 @@ proxyOrder: 1
 systemTheme: true
 showNotifications: true
 selectAfterUpdated: false
-interfaceName: ""
+interfaceName: WLAN
 fontFamily: 思源黑体
 bypassText: |
   bypass:
     # 其他
+    - "*.gitee.com"
     - "*.115.com"
     - "*.helanzuida.com"
     - "*.ksyna.com"
@@ -725,6 +726,14 @@ mixinText: |-
         #geoip: true # 默认
         #ipcidr: # 在这个网段内的 IP 地址会被考虑为被污染的 IP
           #- 240.0.0.0/4
+    tun:
+      enable: false
+      #enable: true
+      stack: gvisor
+      dns-hijack:
+        - 198.18.0.2:53
+      macOS-auto-route: true
+      macOS-auto-detect-interface: true # 自动检测出口网卡
 profileParsersText: |
   parsers: # array
     - reg: ^http://(localhost|127\.0\.0\.1):25500/.+$
@@ -774,3 +783,4 @@ hideAfterStartup: true
 mixinType: 0
 randomControllerPort: false
 theme: 0
+proxyItemWidth: ""
