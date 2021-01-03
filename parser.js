@@ -1,9 +1,10 @@
 module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url, interval, selected, mode }) => {
   // 写log
   const fs = require('fs')
+  const myDate = new Date()
   const log = function (text){
     // log file路径
-    let logFile = "C:\\Users\\\\.config\\clash\\logs\\cfw-parser.log"
+    let logFile = "C:\\Users\\YOURNAME\\.config\\clash\\logs\\cfw-parser.log"
     fs.appendFile(logFile, myDate.toLocaleString()+": "+text+"\n", function (err) {
       if (err) {
         console.log("error: ",err," ",myDate.toLocaleString(),",",text)
@@ -59,7 +60,6 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
   delete rawObj['Proxy']
 
   const ret = yaml.stringify(rawObj)
-  const myDate = new Date()
   var message = ""
   // 配置在更新订阅
   if(name){

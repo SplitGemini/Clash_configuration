@@ -9,14 +9,43 @@
 #mix-object            对象  对象合并至原配置最外层中
 #commands              数组  在上面操作完成后执行简单命令操作配置文件
 #每个命令可以被分为三个部分，分别是：定位+操作+设定值
-#定位：定位中每个层级以.分割
+#定位：定位中每个层级以.分割，可以以name作为分割依据
 #操作：=：覆盖，+：插入，-：删除
+#支持[]proxyNames，[]groupNames和[]shuffledProxyNames，并支持使用正则过滤'|'其中节点
 
 append-proxies: # 自定义节点，带关键词UNM的添加到解锁组，不带的添加到手动组
   - name: 🎵 UNM丨Local
     type: http
     server: 127.0.0.1
     port: 2223
+  - name: 🎵 UNM丨Network
+    type: http
+    server: 106.52.127.72
+    port: 19951
+  - name: 🎵 UNM丨Desperadoj
+    type: ss
+    server: music.desperadoj.com
+    port: 30001
+    cipher: aes-128-gcm
+    password: desperadoj.com_free_proxy_emx2
+  - name: 🎵 UNM丨Lolico
+    type: http
+    server: music.lolico.me
+    port: 39000
+  - name: 🎵 UNM丨Taron
+    type: http
+    server: taron.top
+    port: 100
+  - name: 🎵 UNM丨Leedscloud.space
+    type: http
+    server: aimer.one
+    port: 2333
+  - name: 🎵 UNM丨CN-HHHT-PC
+    server: netease-hhht.wcc.best
+    port: 58080
+    type: ss
+    cipher: rc4-md5
+    password: T5ckndbLSXHQ
 mix-object:
   # 自定义覆盖规则
   rules:
