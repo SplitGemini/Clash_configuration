@@ -1,4 +1,4 @@
 Desensitization
-update
+call update
 git push
 pause
