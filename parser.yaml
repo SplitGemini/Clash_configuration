@@ -18,34 +18,6 @@ append-proxies: # 自定义节点，带关键词UNM的添加到解锁组，不�
     type: http
     server: 127.0.0.1
     port: 2223
-  - name: 🎵 UNM丨Network
-    type: http
-    server: 106.52.127.72
-    port: 19951
-  - name: 🎵 UNM丨Desperadoj
-    type: ss
-    server: music.desperadoj.com
-    port: 30001
-    cipher: aes-128-gcm
-    password: desperadoj.com_free_proxy_emx2
-  - name: 🎵 UNM丨Lolico
-    type: http
-    server: music.lolico.me
-    port: 39000
-  - name: 🎵 UNM丨Taron
-    type: http
-    server: taron.top
-    port: 100
-  - name: 🎵 UNM丨Leedscloud.space
-    type: http
-    server: aimer.one
-    port: 2333
-  - name: 🎵 UNM丨CN-HHHT-PC
-    server: netease-hhht.wcc.best
-    port: 58080
-    type: ss
-    cipher: rc4-md5
-    password: T5ckndbLSXHQ
 mix-object:
   # 自定义覆盖规则
   rules:

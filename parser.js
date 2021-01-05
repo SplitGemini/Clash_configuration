@@ -61,7 +61,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
 
   const ret = yaml.stringify(rawObj)
   var message = ""
-  // 配置在更新订阅
+  // 不是新建配置，而是在更新订阅
   if(name){
     // {关键词:文件名,关键词:文件名}
     const fileNames = {"v2ray":"clash"}
@@ -74,6 +74,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
     }
     // 上传gist
     if(fileName){
+      // 添加dns，配合安卓Adgurd
       rawObj['dns'] = {'enable':true,'ipv6':true,'enhanced-mode':'redir-host',
                        'listen':'0.0.0.0:5450','nameserver':['8.8.8.8','223.5.5.5'],
                        'fallback':['https://dns.google/dns-query','https://1.1.1.1/dns-query',
