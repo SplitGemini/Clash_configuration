@@ -1,2 +1,2 @@
 git add .
-git commit -m "update"
+git commit -m "move to github"

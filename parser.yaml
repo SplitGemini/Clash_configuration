@@ -27,11 +27,17 @@ mix-object:
     #- RULE-SET,Git,✔️Direct
     - RULE-SET,GeforceExperience,✔️Direct
     - RULE-SET,UPlay,✔️Direct
-    #Ibit
-    - PROCESS-NAME,Ibit6.exe,✔️Direct
     #迅雷
     - PROCESS-NAME,DownloadSDKServer.exe,✔️Direct
     - PROCESS-NAME,Thunder.exe,✔️Direct
+    # 下载
+    - PROCESS-NAME,Ibit6.exe,✔️Direct
+    - PROCESS-NAME,aria2c.exe,✔️Direct
+    - PROCESS-NAME,SpeedPanX.exe,✔️Direct
+    - PROCESS-NAME,KinhDown.exe,✔️Direct
+    - PROCESS-NAME,FlashDownloadDesktop.exe,✔️Direct
+    - PROCESS-NAME,XDown.exe,✔️Direct
+    - PROCESS-NAME,MiniThunderPlatform.exe,✔️Direct
     #自定义规则
     - RULE-SET,CustomRulesDirect,✔️Direct
     - RULE-SET,CustomRulesProxy,🚀Proxy
@@ -1272,47 +1278,47 @@ mix-rule-providers:
     type: http
     behavior: classical
     path: ./MyRules/UNMProxy.yaml
-    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/UNMProxy.yaml
+    url: https://cdn.jsdelivr.net/gh/SplitGemini/Clash_configuration@master/MyRules/UNMProxy.yaml
     interval: 0
   CustomRulesProxy:
     type: http
     behavior: classical
     path: ./MyRules/CustomRulesProxy.yaml
-    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/CustomRulesProxy.yaml
+    url: https://cdn.jsdelivr.net/gh/SplitGemini/Clash_configuration@master/MyRules/CustomRulesProxy.yaml
     interval: 86400
   CustomRulesDirect:
     type: http
     behavior: classical
     path: ./MyRules/CustomRulesDirect.yaml
-    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/CustomRulesDirect.yaml
+    url: https://cdn.jsdelivr.net/gh/SplitGemini/Clash_configuration@master/MyRules/CustomRulesDirect.yaml
     interval: 86400
   UPlay:
     type: http
     behavior: classical
     path: ./MyRules/UPlay.yaml
-    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/UPlay.yaml
+    url: https://cdn.jsdelivr.net/gh/SplitGemini/Clash_configuration@master/MyRules/UPlay.yaml
     interval: 0
   GeforceExperience:
     type: http
     behavior: classical
     path: ./MyRules/GeforceExperience.yaml
-    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/GeforceExperience.yaml
+    url: https://cdn.jsdelivr.net/gh/SplitGemini/Clash_configuration@master/MyRules/GeforceExperience.yaml
     interval: 0
   Git:
     type: http
     behavior: classical
     path: ./MyRules/Git.yaml
-    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/Git.yaml
+    url: https://cdn.jsdelivr.net/gh/SplitGemini/Clash_configuration@master/MyRules/Git.yaml
     interval: 0
   EpicGames:
     type: http
     behavior: classical
     path: ./MyRules/EpicGames.yaml
-    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/EpicGames.yaml
+    url: https://cdn.jsdelivr.net/gh/SplitGemini/Clash_configuration@master/MyRules/EpicGames.yaml
     interval: 0
   GOG:
     type: http
     behavior: classical
     path: ./MyRules/GOG.yaml
-    url: https://gitee.com/SplitGemini/Clash_configuration/raw/master/MyRules/GOG.yaml
+    url: https://cdn.jsdelivr.net/gh/SplitGemini/Clash_configuration@master/MyRules/GOG.yaml
     interval: 0
