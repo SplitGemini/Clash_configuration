@@ -1,0 +1,124 @@
+merge_nodes:
+  # 分类组，根据key为所有组分类
+  - name: 🇭🇰 香港
+    keys:
+      - 🇭🇰
+  - name: 🇸🇬 新加坡
+    keys:
+      - 🇸🇬
+  - name: 🇯🇵 日本
+    keys:
+      - 🇯🇵
+  - name: 🇰🇷 韩国
+    keys:
+      - 🇰🇷
+  - name: 🇺🇸 美国
+    keys:
+      - 🇺🇸
+  - name: 🇷🇺 俄罗斯
+    keys:
+      - 🇷🇺
+  - name: 🇦🇺 澳大利亚
+    keys:
+      - 🇦🇺
+  - name: 🇹🇼 台湾
+    keys:
+      - 🇹🇼
+  - name: 🇩🇪 德国
+    keys:
+      - 🇩🇪
+  - name: 🇹🇷 土耳其
+    keys:
+      - 🇹🇷
+  - name: 🇧🇭 巴林
+    keys:
+      - 🇧🇭
+  - name: 🇳🇱 荷兰
+    keys:
+      - 🇳🇱
+  - name: 🇮🇳 印度
+    keys:
+      - 🇮🇳
+  - name: 🇮🇹 意大利
+    keys:
+      - 🇮🇹
+  - name: 🇬🇧 英国
+    keys:
+      - 🇬🇧
+  - name: 🇨🇦 加拿大
+    keys:
+      - 🇨🇦
+  - name: 🇪🇪 爱沙尼亚
+    keys:
+      - 🇪🇪
+  - name: 🔓 解锁
+    keys:
+      - 解锁
+  - name: 🇪🇺 欧洲
+    keys:
+      - 🇪🇺
+      - 🇫🇷
+      - 🇪🇪
+      - 🇬🇧
+      - 🇮🇹
+      - 🇳🇱
+      - 🇷🇺
+  - name: 🇫🇷 法国
+    keys:
+      - 🇫🇷
+  - name: 🇲🇴 澳门
+    keys:
+      - 🇲🇴
+  - name: 🇨🇳 回国
+    keys:
+      - 🇨🇳
+  - name: 🎮 游戏
+    keys:
+      - 🎮
+# 上传gist配合adgurd的dns
+dns:
+  enable: true
+  ipv6: true
+  enhanced-mode: redir-host
+  listen: 0.0.0.0:5450
+  default-nameserver:
+    - 8.8.8.8
+    - 9.9.9.9
+    - 223.5.5.5
+    - 1.1.1.1
+  nameserver:
+    - 8.8.8.8
+    - 223.5.5.5
+  fallback:
+    - https://dns.google/dns-query
+    - https://1.1.1.1/dns-query
+    - https://223.5.5.5/dns-query
+    - https://9.9.9.9/dns-query
+  fallback-filter:
+    geoip: true # 默认
+    ipcidr: # 在这个网段内的 IP 地址会被考虑为被污染的 IP
+      - 240.0.0.0/4
+# 自动签到参数
+auto_check_in:
+  - name: ''
+    domain: ''
+    keep: ''
+    email: ''
+    pwd: ''
+  - name: ''
+    domain: ''
+    keep: ''
+    email: ''
+    pwd: ''
+# gist id
+gistId: 
+# github access token
+token: 
+# 上传gist组配置，配置包含key值则以name为名上传gist
+update_group:
+  - name: 
+    key: 
+  - name: 
+    key: 
+  - name: 
+    key: 
