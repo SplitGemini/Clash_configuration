@@ -1,5 +1,6 @@
 import re
 import os
+import shutil
 """
 数据脱敏
 """
@@ -9,7 +10,6 @@ path = "../"
 # files name
 yaml = "parser.yaml"
 setting = "cfw-settings.yaml"
-
 
 # patterns
 user = (r"(C:(\\\\|\\|/)Users(\\\\|\\|/))[^\\/]*(?=(\\\\|\\|/)\.config)",r"\1YOURNAME")
@@ -29,4 +29,14 @@ with open(os.path.join(path, setting), "r", encoding="utf-8") as f:
 with open(setting, "w", encoding="utf-8") as f:
     f.write(result)
 
+# for copy
+copy = ["subconverter/pref.yml", "subconverter/snippets/emoji.txt",
+        "subconverter/snippets/groups_clash.txt", "parser.js",
+        "auto-check-in.js"]
+try:
+    for file in copy:
+        shutil.copyfile(os.path.join(path, file), file)
+except e:
+    print("copy failed: " + e)
+    
 print("Desensitization finished...")
