@@ -18,28 +18,27 @@ const homeDirectory = join(homedir(), '.config/clash')
 const logFile = join(homeDirectory, 'logs/cfw-autocheckin.log')
 
 let log = function (text) {
-    if (debug == false && text.search('[debug]') !== -1){
+    if (!debug && text.includes('[debug]')){
       return
     }
-    appendFileSync(logFile, myDate.toLocaleString()+": "+text+"\n", 'utf-8')
+    appendFileSync(logFile, myDate.toLocaleString()+text+"\n", 'utf-8')
 }
 
-let check_in = async (raw, { yaml, axios, notify }, variable ) => {
+let check_in = async (raw, { yaml, axios, notify, console }, variable ) => {
   try {
-    var today = new Date().toISOString().slice(0, 10)
+    console.log(logFile)
+    var today = myDate.toISOString().slice(0, 10)
     var rawObj = yaml.parse(raw)
     var check = false
     var sign = false
     var _time = myDate.toISOString()
-    
-    if (variable['checkinDate'] && variable['checkinDate'].slice(0, 10) === today) {
-      log(`[info]: ${variable['domain']} has been already check in`)
-      notify(`You has been already check in in "${variable['domain']}"`)
-      return [yaml.stringify(rawObj), variable]
-    } else{
-      variable['checkinDate'] = ''
-      variable['checkinMessage'] = ''
-    }
+    if(variable['history'] && variable['history'].length > 0){
+      if (variable['history'][0]['checkinDate'].slice(0, 10) === today) {
+        log(`[info]: ${variable['domain']} has been already check in`)
+        notify(`You has been already check in in "${variable['domain']}"`)
+        return [yaml.stringify(rawObj), variable]
+      }
+    } else variable['history'] = []
     
     log(`[info]: start check in "${variable['domain']}"`)
     log(`[info]: today is: ${today}`)
@@ -47,7 +46,7 @@ let check_in = async (raw, { yaml, axios, notify }, variable ) => {
     if (!check && !sign) {
       try {
         log(`[info]: try check sign with "${variable['name']}"`)
-        let resp = await axios.get(`https://${variable['domain']}/user`)
+        let resp = await axios.get(`https://${variable['domain'].replace(/^https?:\/\//,'')}/user`)
         //log(`[debug]: response of https://${variable['domain']}/user`)
         //log(`[debug]: ${JSON.stringify(resp.data, null, 2)}`)
         sign = /用户中心/.test(resp.data)
@@ -62,7 +61,7 @@ let check_in = async (raw, { yaml, axios, notify }, variable ) => {
     if (!check && !sign) {
       try {
         log(`[info]: try sign in "${variable['name']}"`)
-        let resp = await axios.post(`https://${variable['domain']}/auth/login`, {
+        let resp = await axios.post(`https://${variable['domain'].replace(/^https?:\/\//,'')}/auth/login`, {
           email: variable['email'],
           passwd: variable['pwd'],
           remember_me: variable['keep']
@@ -81,14 +80,16 @@ let check_in = async (raw, { yaml, axios, notify }, variable ) => {
     if (!check && sign) {
       try {
         log(`[info]: try check in "${variable['name']}"`)
-        let resp = await axios.post(`https://${variable['domain']}/user/checkin`)
+        let resp = await axios.post(`https://${variable['domain'].replace(/^https?:\/\//,'')}/user/checkin`)
         log(`[debug]: response of https://${variable['domain']}/user/checkin`)
         log(`[debug]: ${JSON.stringify(resp.data, null, 2)}`)
-        if (!variable['checkinMessage'] || !/您似乎已经签到过了/.test(resp.data.msg)) {
+        if (variable['history'].length === 0 || !/您似乎已经签到过了/.test(resp.data.msg)) {
           log(`[info]: "${variable['name']}" checkinDate: ${_time}`)
           log(`[info]: "${variable['name']}" checkinMessage: ${resp.data.msg}`)
-          variable['checkinDate'] = _time
-          variable['checkinMessage'] = resp.data.msg
+          let nowData = {}
+          nowData['checkinDate'] = _time
+          nowData['checkinMessage'] = resp.data.msg
+          variable['history'].unshift(nowData)
         } else {
           log(`[info]: "${variable['name']}" has been already check in`)
         }
@@ -99,16 +100,20 @@ let check_in = async (raw, { yaml, axios, notify }, variable ) => {
         notify(`check in "${variable['name']}" failed`, e.message)
       }
     } else log(`[warning]: "${variable['name']}" need to sign in`)
+    // 保留5天记录
+    while (variable['history'].length > 5){
+      variable['history'].pop()
+    }
     if (check){
       rawObj['proxies'].push(
         {
-          name: `⏰ ["${variable['name']}"]签到时间：${variable['checkinDate']}`,
+          name: `⏰ ["${variable['name']}"]签到时间：${variable['history'][0]['checkinDate']}`,
           server: 'server',
           type: 'http',
           port: 443
         },
         {
-          name: `🎁 ["${variable['name']}"]签到消息：${variable['checkinMessage']}`,
+          name: `🎁 ["${variable['name']}"]签到消息：${variable['history'][0]['checkinMessage']}`,
           server: 'server',
           type: 'http',
           port: 443
@@ -117,15 +122,16 @@ let check_in = async (raw, { yaml, axios, notify }, variable ) => {
       if (
         rawObj['proxy-groups'].length === 0 ||
         rawObj['proxy-groups'][rawObj['proxy-groups'].length - 1]['name'] != '🤚 CHECK-INFO'
-      )
+      ){
         rawObj['proxy-groups'].push({
           name: '🤚 CHECK-INFO',
           type: 'select',
           proxies: []
         })
+      }
       rawObj['proxy-groups'][rawObj['proxy-groups'].length - 1]['proxies'].push(
-        `⏰ ["${variable['name']}"]签到时间：${variable['checkinDate']}`,
-        `🎁 ["${variable['name']}"]签到消息：${variable['checkinMessage']}`
+        rawObj['proxies'][rawObj['proxies'].length -2]['name'],
+        rawObj['proxies'][rawObj['proxies'].length -1]['name']
       )
       log(`[debug]: rawObj['proxies']:`)
       log(`[debug]: ${JSON.stringify(rawObj['proxies'])}`)
