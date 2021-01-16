@@ -696,12 +696,14 @@ mixinText: |-
         - 198.18.0.2:53
       macOS-auto-route: true
       macOS-auto-detect-interface: true # 自动检测出口网卡
-profileParsersText: |
+profileParsersText: >
   parsers: # array
     - reg: ^http://(localhost|127\.0\.0\.1):25500/.+$
       file: 'C:/Users/YOURNAME/.config/clash/parser.yaml'
     - reg: ^http://(localhost|127\.0\.0\.1):25500/.+$
       file: 'C:/Users/YOURNAME/.config/clash/parser.js'
+    - url: https://cdn.jsdelivr.net/gh/SplitGemini/Clash_configuration@master/test.yaml
+      file: 'C:/Users/YOURNAME/.config/clash/auto-check-in.js'
 connProfile: true
 connMode: true
 showNewVersionIcon: true

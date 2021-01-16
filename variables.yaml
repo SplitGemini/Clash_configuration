@@ -1,3 +1,4 @@
+## 自动登录会修改该文件，注释会丢失，需要请备份
 merge_nodes:
   # 分类组，根据key为所有组分类
   - name: 🇭🇰 香港
@@ -98,18 +99,18 @@ dns:
     geoip: true # 默认
     ipcidr: # 在这个网段内的 IP 地址会被考虑为被污染的 IP
       - 240.0.0.0/4
-# 自动签到参数
+# 自动签到参数，name：名字标记；domain：顶级域名；keep：保持登录；email：邮箱账号；pwd：密码
 auto_check_in:
-  - name: ''
-    domain: ''
-    keep: ''
-    email: ''
-    pwd: ''
-  - name: ''
-    domain: ''
-    keep: ''
-    email: ''
-    pwd: ''
+  - name: 
+    domain: 
+    keep: 
+    email: 
+    pwd: 
+  - name: 
+    domain: 
+    keep: 
+    email: 
+    pwd: 
 # gist id
 gistId: 
 # github access token

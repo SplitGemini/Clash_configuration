@@ -5,10 +5,10 @@ const variable_path = resolve(__dirname, './variables.yaml')
 const myDate = new Date()
 let debug = false
 const homeDirectory = join(homedir(), '.config/clash')
+// log file路径
 const logFile = join(homeDirectory, 'logs/cfw-parser.log')
 
 let log = function (text) {
-    // log file路径
     if (debug == false && text.search('[debug]') !== -1){
       return
     }

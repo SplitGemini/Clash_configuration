@@ -1,12 +1,4 @@
 proxies:
-  - name: 🇭🇰
-    server: https://qq.com
-    port: 443
-    type: http
 proxy-groups:
-  - name: 👋Manual
-    type: select
-    proxies:
-      - 🇭🇰
 rules:
-  - MATCH,🐟漏网之鱼
+  - MATCH,DIRECT
