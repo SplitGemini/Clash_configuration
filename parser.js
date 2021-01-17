@@ -7,17 +7,21 @@ let debug = false
 const homeDirectory = join(homedir(), '.config/clash')
 // log file路径
 const logFile = join(homeDirectory, 'logs/cfw-parser.log')
-
+let newParse = true
 let log = function (text) {
     if (!debug && text.includes('[debug]')){
       return
+    }
+    if (newParse) {
+      appendFileSync(logFile, "\n", 'utf-8')
+      newParse = false
     }
     appendFileSync(logFile, myDate.toLocaleString()+text+"\n", 'utf-8')
 }
 
 module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url, interval, selected, mode }) => {
   try {
-  console.log(logFile)
+    console.log(`see log in ${logFile}`)
     // check yaml
     try {
       var rawObj = yaml.parse(raw)
@@ -36,8 +40,8 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
     
     //check variables.yml
     if (!existsSync(variable_path)) {
-      log('[warning]: no found ./variables.yml')
-      throw 'no found ./variables.yml'
+      log('[warning]: no found ./variables.yaml')
+      throw 'no found ./variables.yaml'
     } else {
       var _variables = yaml.parse(readFileSync(variable_path, 'utf-8'))
       log(`[debug] variables: \n${yaml.stringify(_variables)}`)
@@ -103,6 +107,15 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
 
       log(`[debug]: _other[${_other.length}]:`)
       let _other_filter = _other.filter(item => item['proxies'].length != 0)
+      //从后面开始删除内容重复的组
+      for (let i = _other_filter.length - 1; i > 0; i --){
+        for (let k = i - 1; k >= 0; k --){
+          if (yaml.stringify(_other_filter[i]['proxies']) === yaml.stringify(_other_filter[k]['proxies'])){
+            _other_filter.splice(i,1)
+            break
+          }
+        }
+      }
       log(`[debug]: _other_filter[${_other_filter.length}]:`)
 
       rawObj['proxy-groups'][0]['proxies'] = yaml.parse(
