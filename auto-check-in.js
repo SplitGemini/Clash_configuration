@@ -40,8 +40,8 @@ let check_in = async (raw, { yaml, axios, notify, console }, variable ) => {
     if(variable['history'] && variable['history'].length > 0){
       if (variable['history'][0]['checkinDate'].slice(0, 10) === today) {
         log(`[info]: ${variable['domain']} has been already check in`)
-        notify(`You has been already check in in "${variable['domain']}"`, '')
-        return [yaml.stringify(rawObj), variable, false.toString()]
+        notify("Already check in", `You has been already check in in "${variable['domain']}"`, true)
+        check = true
       }
     } else variable['history'] = []
     
@@ -77,11 +77,11 @@ let check_in = async (raw, { yaml, axios, notify, console }, variable ) => {
         //log(`[debug]: ${JSON.stringify(resp.data, null, 2)}`)
         if (/登[录陆]成功/.test(resp.data.msg)) sign = true
         log(`[info]: signed?: ${sign}`)
-        if (!sign) notify(`sign in "${variable['name']}" failed`, "")
+        if (!sign) notify(`sign in "${variable['name']}" failed`, "", true)
       } catch (e) {
         check = true
         log(`[error]: sign in "${variable['name']}" failed: ${e}`)
-        notify(`sign in "${variable['name']}" failed`, e.message)
+        notify(`sign in "${variable['name']}" failed`, e.message, true)
       }
     }
 
@@ -101,15 +101,15 @@ let check_in = async (raw, { yaml, axios, notify, console }, variable ) => {
           nowData['checkinMessage'] = resp.data.msg
           variable['history'].unshift(nowData)
           check = true
-          notify(`check in "${variable['name']}" successful`,resp.data.msg)
+          notify(`check in "${variable['name']}" successful`,resp.data.msg, true)
         } else {
           check = false
           log(`[info]: "${variable['name']}" has been already check in`)
-          notify(`You have checked in "${variable['name']}" today.`,resp.data.msg)
+          notify(`You have checked in "${variable['name']}" today.`,resp.data.msg, true)
         }
       } catch (e) {
         log(`[error]: check in "${variable['name']}" failed: ${e}`)
-        notify(`check in "${variable['name']}" failed`, e.message)
+        notify(`check in "${variable['name']}" failed`, e.message, true)
       }
     } else log(`[warning]: "${variable['name']}" need to sign in`)
     
@@ -157,7 +157,7 @@ let check_in = async (raw, { yaml, axios, notify, console }, variable ) => {
     return [yaml.stringify(rawObj), variable, check.toString()]
   } catch (e) {
     log(`[error]: "${variable['name']}" something happened: ${e}`)
-    notify(`"${variable['name']}" something happened`, e.message)
+    notify(`"${variable['name']}" something happened`, e.message, true)
     throw e
   }
 }
@@ -187,7 +187,7 @@ let auto_check_in = async (raw, { yaml, axios, console, notify }, { url }) => {
   var _variables = yaml.parse(readFileSync(variable_path, 'utf-8'))
   if (!_variables['auto_check_in']) {
     log('[warning]: no found auto_check_in variables')
-    notify(`auto-check-in failed`, 'no found auto_check_in variables')
+    notify(`auto-check-in failed`, 'no found auto_check_in variables', true)
     return yaml.stringify(rawObj)
   } else var variables = _variables['auto_check_in']
   

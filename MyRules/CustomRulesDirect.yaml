@@ -1,5 +1,4 @@
 payload:
-  - DOMAIN-SUFFIX,appcenter.ms
   - DOMAIN-SUFFIX,supanx.com
   - DOMAIN-SUFFIX,lauchdarkly.com
   - DOMAIN-SUFFIX,publicsuffix.org

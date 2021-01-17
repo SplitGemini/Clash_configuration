@@ -198,7 +198,8 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
         if (!_variables['gistId']) {
           message = `[warning]: no found gistId variables, but profile "${name}" has been updated.`
           log(message)
-          notify(message.replace(/^\[[a-z]{4,8}\]: /g,''))
+          notify("Profile has been updated",
+                  message.replace(/^\[[a-z]{4,8}\]: /,''), true)
           return ret
         } else {
           var gistId = _variables['gistId']
@@ -208,7 +209,8 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
         if (!_variables['token']) {
           message = `[warning]: no found token variables, but profile "${name}" has been updated.`
           log(message)
-          notify(message.replace(/^\[[a-z]{4,8}\]: /g,''))
+          notify("Profile has been updated",
+                  message.replace(/^\[[a-z]{4,8}\]: /,''), true)
           return ret
         } else {
           var token = _variables['token']
@@ -273,7 +275,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
     return ret
   } catch (e) {
     log(`[error]: update profile failed: ${e}`)
-    notify(`Update profile failed`, e.message)
+    notify(`Update profile failed`, e.message, true)
     throw e
   }
 }

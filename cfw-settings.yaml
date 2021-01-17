@@ -6,6 +6,11 @@ interfaceName: WLAN
 fontFamily: 思源黑体
 bypassText: |
   bypass:
+    # 其他
+    - "*.gitee.com"
+    - "*.115.com"
+    - "*.pinyuncloud.com"
+    - "*.mihoyo.com"
     # 微软
     - "*.azureedge.*"
     - "*.azurefd.*"
@@ -34,6 +39,7 @@ bypassText: |
     - "*.msecnd.net"
     - "*.visualstudio.com"
     - "*.microsoftonline.com"
+    - "*.hotmail.com"
     # CN域名直连
     - "*.cn"
     - "*.中国"
