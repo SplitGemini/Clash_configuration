@@ -14,7 +14,7 @@ setting = "cfw-settings.yaml"
 # patterns
 user = (r"(C:(\\\\|\\|/)Users(\\\\|\\|/))[^\\/]*(?=(\\\\|\\|/)\.config)",r"\1YOURNAME")
 # 删除被'##delete start'和'##end'包围的内容
-delete = (r"\s*##\s?delete\s?start[\s\S]*?##\s?(delete\s?)?end","")
+delete = (r"\s*##\s?delete\s?start((?!##\s?(delete\s?)?end)[\s\S])*?##\s?(delete\s?)?end","")
 
 # parser.yaml
 with open(os.path.join(path, yaml), "r", encoding="utf-8") as f:

@@ -1,6 +1,8 @@
+############
 ## 自动登录会修改该文件，注释会丢失，需要请备份
+############
 merge_nodes:
-  # 分类组，根据key为所有组分类
+## 分类组，根据key为所有组分类，该分类基于subconvertor的添加emoji结果，subconvertor通过正则添加结果更加精确
   - name: 🇭🇰 香港
     keys:
       - 🇭🇰
@@ -164,7 +166,7 @@ merge_nodes:
   - name: 🎮 游戏
     keys:
       - 🎮
-# 上传gist配合adgurd的dns
+## 上传gist配合adgurd的dns
 dns:
   enable: true
   ipv6: true
@@ -187,7 +189,13 @@ dns:
     geoip: true # 默认
     ipcidr: # 在这个网段内的 IP 地址会被考虑为被污染的 IP
       - 240.0.0.0/4
-# 自动签到参数，name：名字标记；domain：顶级域名；keep：保持登录；email：邮箱账号；pwd：密码
+## 自动签到参数，name：名字标记；domain：顶级域名；keep：保持登录；email：邮箱账号；pwd：密码
+#auto_check_in:
+#  - name: 我是名字
+#    domain: 我是域名.com
+#    keep: true 或者 false
+#    email: 我是邮箱@邮箱.com
+#    pwd: 我是密码
 auto_check_in:
   - name: 
     domain: 
@@ -199,11 +207,16 @@ auto_check_in:
     keep: 
     email: 
     pwd: 
-# gist id
+## gist id，长度为36，来自 https://gist.github.com/UserName/[0-9a-z]{36}
 gistId: 
-# github access token
+## github access token，长度为40的密钥
 token: 
-# 上传gist组配置，配置包含key值则以name为名上传gist
+## 上传gist组配置，配置包含key值则以name为名上传gist
+## 例如：配置名为'sub'，设置key为'sub'，name为'upload'，
+## 那么更新订阅时将以'upload'为名上传配置名包含'sub'的第一个配置到gist，'name'重复会被覆盖
+# update_group:
+#  - name: upload
+#    key: sub
 update_group:
   - name: 
     key: 

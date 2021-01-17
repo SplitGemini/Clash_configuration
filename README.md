@@ -8,7 +8,7 @@ mixin功能大概只能用来替换dns，虽然也可以替换规则，但是无
 - 将订阅结构完全统一化，订阅自带的规则组和规则完全丢弃而使用自己收集的（MyRules），自定义节点和规则在parser.yaml中添加 
 - 添加根据profiles名称关键词自动上传私密gist，每次更新自动上传，可以通过log查看订阅链接或调试信息，可以用于 Clash For Android 等进行远程订阅，注意gist id链接不可泄露
 - 上传gist中添加dns设置以配合Adgurad
-- 自动分组和自动签到功能，by [yi-Xu-0100/cfw-scripts](https://github.com/yi-Xu-0100/cfw-scripts)
+- 自动分组和自动签到功能，by [yi-Xu-0100/cfw-scripts](https://github.com/yi-Xu-0100/cfw-scripts)，进行了一些修改
 
 ## 部署
 

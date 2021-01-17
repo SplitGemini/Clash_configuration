@@ -41,7 +41,7 @@ let check_in = async (raw, { yaml, axios, notify, console }, variable ) => {
       if (variable['history'][0]['checkinDate'].slice(0, 10) === today) {
         log(`[info]: ${variable['domain']} has been already check in`)
         notify(`You has been already check in in "${variable['domain']}"`, '')
-        return [yaml.stringify(rawObj), variable, false]
+        return [yaml.stringify(rawObj), variable, false.toString()]
       }
     } else variable['history'] = []
     
