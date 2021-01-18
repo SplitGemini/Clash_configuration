@@ -10,7 +10,7 @@ const logFile = join(homeDirectory, 'logs/cfw-parser.log')
 let newParse = true
 let log = function (text) {
     if (newParse) {
-      appendFileSync(logFile, `\n     --------------${myDate.toLocaleString()}--------------     \n`, 'utf-8')
+      appendFileSync(logFile, `\n     --------------${myDate.toLocaleString()}--------------\n`, 'utf-8')
       newParse = false
     }
     appendFileSync(logFile, text + "\n", 'utf-8')

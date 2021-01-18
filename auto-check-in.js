@@ -20,7 +20,7 @@ let newParse = true
 
 let log = function (text) {
     if (newParse) {
-      appendFileSync(logFile, `\n     --------------${myDate.toLocaleString()}--------------     \n`, 'utf-8')
+      appendFileSync(logFile, `\n     --------------${myDate.toLocaleString()}--------------\n`, 'utf-8')
       newParse = false
     }
     appendFileSync(logFile, text+"\n", 'utf-8')
@@ -121,7 +121,7 @@ let check_in = async (raw, { yaml, axios, notify, console }, variable ) => {
       variable['history'].pop()
     }
     //不管成没成功，添加信息到配置
-    if ((variable['history'].length > 0){
+    if (variable['history'].length > 0){
       if (!rawObj['proxies']) rawObj['proxies'] = []
       rawObj['proxies'].push(
         {
