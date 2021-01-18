@@ -9,19 +9,16 @@ const homeDirectory = join(homedir(), '.config/clash')
 const logFile = join(homeDirectory, 'logs/cfw-parser.log')
 let newParse = true
 let log = function (text) {
-    if (!debug && text.includes('[debug]')){
-      return
-    }
     if (newParse) {
-      appendFileSync(logFile, "\n", 'utf-8')
+      appendFileSync(logFile, `\n     --------------${myDate.toLocaleString()}--------------     \n`, 'utf-8')
       newParse = false
     }
-    appendFileSync(logFile, myDate.toLocaleString()+text+"\n", 'utf-8')
+    appendFileSync(logFile, text + "\n", 'utf-8')
 }
 
 module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url, interval, selected, mode }) => {
   try {
-    console.log(`see log in ${logFile}`)
+    console.log(`see log in ${logFile}.`)
     // check yaml
     try {
       var rawObj = yaml.parse(raw)
@@ -30,24 +27,24 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
         e.message === 'Implicit map keys need to be on a single line' &&
         !new RegExp('^((?!www.example.com).)*$').test(url)
       ) {
-        log('[warning]: raw is not yaml: '+e)
+        log(`[warning]: raw is not yaml: ${e}.`)
         throw e
       } else {
-        log('[error]: check yaml fail: '+e)
+        log(`[error]: check yaml fail: ${e}.`)
         throw e
       }
     }
     
     //check variables.yml
     if (!existsSync(variable_path)) {
-      log('[warning]: no found ./variables.yaml')
-      throw 'no found ./variables.yaml'
+      log('[warning]: no found "./variables.yaml".')
+      throw 'no found "./variables.yaml"'
     } else {
       var _variables = yaml.parse(readFileSync(variable_path, 'utf-8'))
-      log(`[debug] variables: \n${yaml.stringify(_variables)}`)
+      if (debug) log(`[debug]: variables: \n${yaml.stringify(_variables)}`)
     }
     if (!_variables['merge_nodes']) {
-      log('[warning]: no found merge_nodes variables')
+      log('[warning]: no found merge_nodes variables.')
       node_groups = []
     } else var node_groups = _variables['merge_nodes']
     
@@ -62,11 +59,10 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
       }
     })
     
-    if (name) log(`[info]: start merge nodes in "${name}"`)
-    else log(`[info]: start merge nodes in new profile`)
-
     if (node_groups.length != 0) {
-      log('[debug]: merge_nodes variables:')
+      if (name) log(`[info]: start merge nodes in "${name}".`)
+      else log(`[info]: start merge nodes in new profile.`)
+      if (debug) log('[debug]: merge_nodes variables:')
       let _other = []
       for (let i = 0; i < node_groups.length; i++) {
         _other.push({
@@ -90,7 +86,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
         for (let i = 0; i < node_groups.length; i++) {
           node_groups[i]['keys'].forEach(key => {
             if (proxy['name'].search(key) != -1) {
-              log(`[debug]: add "${proxy['name']}" into "${node_groups[i]['name']}"`)
+              if (debug) log(`[debug]: add "${proxy['name']}" into "${node_groups[i]['name']}".`)
               _other[i]['proxies'].push(proxy['name'])
               check = true
             }
@@ -99,13 +95,13 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
           if (i === node_groups.length - 1 && check === false &&
               proxy['name'].search('UNM') === -1) 
           {
-            log(`[debug]: add "${proxy['name']}" into "${_other[_other.length - 1]['name']}"`)
+            if (debug) log(`[debug]: add "${proxy['name']}" into "${_other[_other.length - 1]['name']}".`)
             _other[_other.length - 1]['proxies'].push(proxy['name'])
           }
         }
       })
 
-      log(`[debug]: _other[${_other.length}]:`)
+      if (debug) log(`[debug]: _other[${_other.length}].`)
       let _other_filter = _other.filter(item => item['proxies'].length != 0)
       //从后面开始删除内容重复的组
       for (let i = _other_filter.length - 1; i > 0; i --){
@@ -116,7 +112,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
           }
         }
       }
-      log(`[debug]: _other_filter[${_other_filter.length}]:`)
+      if (debug) log(`[debug]: _other_filter[${_other_filter.length}].`)
 
       rawObj['proxy-groups'][0]['proxies'] = yaml.parse(
           yaml.stringify(rawObj['proxy-groups'][0]['proxies'].concat(_other_filter.map(
@@ -124,8 +120,8 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
       rawObj['proxy-groups'] = yaml.parse(
           yaml.stringify(rawObj['proxy-groups'].concat(_other_filter)))
 
-      if (name) log(`[info]: "${name}" merge nodes completely`)
-      else log(`[info]: new profile merge nodes completely`)
+      if (name) log(`[info]: "${name}" merge nodes completely.`)
+      else log(`[info]: new profile merge nodes completely.`)
     } else {
       log('[warning]: keys need to set.')
     }
@@ -169,15 +165,15 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
     // 不是新建配置，而是在更新订阅
     if(name){
       if (!_variables['upload_group']) {
-        log('[warning]: no found upload_group variables')
+        log('[warning]: no found upload_group variables.')
         var upload_group = {}
       } else {
         var upload_group = _variables['upload_group']
-        log(`[debug]: \nupload_group:${yaml.stringify(upload_group)}`)
+        if (debug) log(`[debug]: upload_group:\n${yaml.stringify(upload_group, null, 2)}`)
       }
       let fileName = ""
       for(let i = 0; i < upload_group.length; i++){
-        log(`[debug]: group: key, name: "${upload_group[i]['key']}", "${upload_group[i]['name']}"`)
+        if (debug) log(`[debug]: [group] key: "${upload_group[i]['key']}", name: "${upload_group[i]['name']}".`)
         if(name.indexOf(upload_group[i]['key']) !== -1){
           fileName = upload_group[i]['name']
           break
@@ -187,7 +183,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
       if(fileName){
         // 添加dns，配合安卓Adgurd
         if (!_variables['dns']) {
-          log('[warning]: no found dns variables')
+          log('[warning]: no found dns variables.')
         } else {
           rawObj['dns'] = _variables['dns']
         }
@@ -199,22 +195,22 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
           message = `[warning]: no found gistId variables, but profile "${name}" has been updated.`
           log(message)
           notify("Profile has been updated",
-                  message.replace(/^\[[a-z]{4,8}\]: /,''), true)
+                 message.replace(/^\[[a-z]{4,8}\]: /,''), true)
           return ret
         } else {
           var gistId = _variables['gistId']
-          log(`[debug]: gistId: ${gistId}`)
+          if (debug) log(`[debug]: gistId: ${gistId}`)
         }
         // gitub api 获取的token, 需要勾选gist权限
         if (!_variables['token']) {
           message = `[warning]: no found token variables, but profile "${name}" has been updated.`
           log(message)
           notify("Profile has been updated",
-                  message.replace(/^\[[a-z]{4,8}\]: /,''), true)
+                 message.replace(/^\[[a-z]{4,8}\]: /,''), true)
           return ret
         } else {
           var token = _variables['token']
-          log(`[debug]: token: ${token}`)
+          if (debug) log(`[debug]: token: ${token}`)
         }
         axios.patch(
           'https://api.github.com/gists/' + gistId,
@@ -223,8 +219,8 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
         .then((res) => {
           // 正则删除链接中的文件commit码
           var link = res["data"]["files"][fileName]["raw_url"].replace(/[a-z0-9]{40}\//i,"")
-          message = "[info]: Profile \""+name+"\" has been updated. And successfully uploaded to gist:\""
-                    +fileName+"\", file links is:"+link
+          message = `[info]: Profile "${name}" has been updated. `+
+                    `And successfully uploaded to gist:"${fileName}", file links is:${link}.`
           log(message)
           notify("Profile has been updated", message.replace(/^\[[a-z]{4,8}\]: /,''), true)
         })
@@ -232,28 +228,30 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
           if (err.response) {
             // The request was made and the server responded with a status code
             // that falls out of the range of 2xx
-            message = "[error]: Profile \""+name+"\" has been updated. But fail to upload to gist:\""
-                      +fileName+"\", the request was made and the server responded with a fail status code,"
-                      +" because "+JSON.stringify(err)
+            message = `[error]: Profile "${name}" has been updated. `+
+                      `But fail to upload to gist: ${fileName}, `+
+                      `the request was made and the server responded with a fail status code,`+
+                      ` because ${JSON.stringify(err)}.`
             notify("Profile has been updated", 
-                   "profile \""+name+"\" has been updated. But fail to upload to gist:\""
-                   +fileName+"\", see log for more details", true)
+                   `profile "${name}" has been updated. `+
+                   "But fail to upload to gist, see log for more details", true)
             log(message)
           }
           else if (err.request) {
             // The request was made but no response was received
-            message = "[error]: Profile \""+name+"\" has been updated. And maybe successfully uploaded to gist:\""
-                      +fileName+"\", the request was made but no response was received, because "
-                      +JSON.stringify(err.request)
+            message = `[error]: Profile "${name}" has been updated.`+
+                      ` And maybe successfully uploaded to gist:"${fileName}", `+
+                      `the request was made but no response was received, because `+
+                      JSON.stringify(err.request)
             notify("Profile has been updated", 
-                   "profile \""+name+"\" has been updated. And maybe successfully uploaded to gist:\""
-                   +fileName+"\", see log for more details", true)
+                   `profile "${name}" has been updated.`+
+                   ` And maybe successfully uploaded to gist, see log for more details.`, true)
             log(message)
           }
           else {
            // Something happened in setting up the request that triggered an Error
-            message = "[error]: Something happened: "+err.message+"， see log for more details"
-            notify("Profile updated fail", "[error]: Something happened， see log for more details", true)
+            message = `[error]: Something happened: ${err.message}.`
+            notify("Profile updated fail", "Something happened， see log for more details.", true)
             log(message)
             throw err
           }
@@ -261,7 +259,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
       }
       // 不上传gist
       else {
-        message = "[info]: Profile \""+name+"\" has been updated."
+        message = `[info]: Profile "${name}" has been updated.`
         log(message)
         notify("Profile has been updated", message.replace(/^\[[a-z]{4,8}\]: /,''), true)
       }
@@ -274,7 +272,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
     }
     return ret
   } catch (e) {
-    log(`[error]: update profile failed: ${e}`)
+    log(`[error]: update profile failed: ${e}.`)
     notify(`Update profile failed`, e.message, true)
     throw e
   }
