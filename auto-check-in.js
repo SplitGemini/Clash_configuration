@@ -20,7 +20,7 @@ let newParse = true
 
 let log = function (text) {
     if (newParse) {
-      appendFileSync(logFile, `\n     --------------${myDate.toLocaleString()}--------------\n`, 'utf-8')
+      appendFileSync(logFile, `\n    --------------${myDate.toLocaleString()}--------------\n`, 'utf-8')
       newParse = false
     }
     appendFileSync(logFile, text+"\n", 'utf-8')
@@ -29,23 +29,25 @@ let log = function (text) {
 let check_in = async (raw, { yaml, axios, notify, console }, variable ) => {
   try {
     console.log(`see log in ${logFile}.`)
-    var today = myDate.toISOString().slice(0, 10)
+    // iso 时区+8
+    var _time = new Date(+myDate + 8 * 3600 * 1000).toISOString().replace('Z','+08:00')
+    var today = _time.slice(0, 10)
     var rawObj = yaml.parse(raw)
     var check = false
     var sign = false
     var should_modify = false
-    var _time = myDate.toISOString()
+    log(`[info]: start check in "${variable['domain']}".`)
     //检查历史，是否有今天签到记录
     if(variable['history'] && variable['history'].length > 0){
       if (variable['history'][0]['checkinDate'].slice(0, 10) === today) {
         log(`[info]: ${variable['domain']} has been already check in.`)
         notify("Already check in", `You has been already check in in "${variable['domain']}"`, true)
+        //跳过登陆和签到
         check = true
+        sign = true
       }
     } else variable['history'] = []
     
-    log(`[info]: start check in "${variable['domain']}".`)
-    log(`[info]: today is: ${today}.`)
     // check sign
     if (!check && !sign) {
       try {
@@ -59,7 +61,7 @@ let check_in = async (raw, { yaml, axios, notify, console }, variable ) => {
         sign = /用户中心|节点列表|我的账号|退出登录|邀请注册|剩余流量|(?:复制((?!订阅链接).)*?)?订阅链接/.test(resp.data)
         log(`[info]: signed?: ${sign}.`)
       } catch (e) {
-        // 检查失败，跳过登陆和签到签到
+        // 检查失败，跳过登陆和签到
         check = true
         log(`[error]: check sign "${variable['name']}" failed: ${e}.`)
       }
@@ -110,6 +112,7 @@ let check_in = async (raw, { yaml, axios, notify, console }, variable ) => {
         nowData['checkinMessage'] = resp.data.msg
         variable['history'].unshift(nowData)
         should_modify = true
+        log(`[info]: "${variable['name']}" check in completely.`)
       } catch (e) {
         log(`[error]: check in "${variable['name']}" failed: ${e}.`)
         notify(`check in "${variable['name']}" failed`, e.message, true)
@@ -158,7 +161,6 @@ let check_in = async (raw, { yaml, axios, notify, console }, variable ) => {
         log(`[debug]: rawObj['proxy-groups']:`)
         log(`${JSON.stringify(rawObj['proxy-groups'], null, 2)}`)
       }
-      log(`[info]: "${variable['name']}" check in completely.`)
     }
     return [yaml.stringify(rawObj), variable, should_modify.toString()]
   } catch (e) {
