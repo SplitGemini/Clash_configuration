@@ -26,9 +26,8 @@ let log = function (text) {
     appendFileSync(logFile, text+"\n", 'utf-8')
 }
 
-let check_in = async (raw, { yaml, axios, notify, console }, variable ) => {
+let check_in = async (raw, { yaml, axios, notify }, variable ) => {
   try {
-    console.log(`see log in ${logFile}.`)
     // iso 时区+8
     var _time = new Date(+myDate + 8 * 3600 * 1000).toISOString().replace('Z','+08:00')
     var today = _time.slice(0, 10)
@@ -174,6 +173,7 @@ let check_in = async (raw, { yaml, axios, notify, console }, variable ) => {
 let auto_check_in = async (raw, { yaml, axios, console, notify }, { url }) => {
   // check yaml
   try {
+    console.log(`see log in ${logFile}.`)
     var rawObj = yaml.parse(raw)
   } catch (e) {
     if (
@@ -210,7 +210,7 @@ let auto_check_in = async (raw, { yaml, axios, console, notify }, { url }) => {
     let check_list = [...Array(variables.length)].map(_=>'false')
     for (let i = 0; i < variables.length; i++) {
       [raw, variables[i], check_list[i]] = await check_in(
-        raw, { yaml, axios, notify, console }, variables[i]
+        raw, { yaml, axios, notify }, variables[i]
       )
     }
     if (check_list.includes('true')){
