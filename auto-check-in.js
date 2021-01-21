@@ -36,12 +36,12 @@ let check_in = async (raw, { yaml, axios, notify, console }, variable ) => {
     var check = false
     var sign = false
     var should_modify = false
-    log(`[info]: start check in "${variable['domain']}".`)
+    log(`[info]: start check in "${variable['name']}".`)
     //检查历史，是否有今天签到记录
     if(variable['history'] && variable['history'].length > 0){
       if (variable['history'][0]['checkinDate'].slice(0, 10) === today) {
-        log(`[info]: ${variable['domain']} has been already check in.`)
-        notify("Already check in", `You has been already check in in "${variable['domain']}"`, true)
+        log(`[info]: "${variable['name']}" has been already check in.`)
+        notify("Already check in", `You has been already check in in "${variable['name']}"`, true)
         //跳过登陆和签到
         check = true
         sign = true
@@ -58,12 +58,13 @@ let check_in = async (raw, { yaml, axios, notify, console }, variable ) => {
           log(`[debug]: response of https://${variable['domain'].replace(/^https?:\/\//,'')}/user:`)
           log(`${JSON.stringify(resp.data, null, 2)}`)
         }
-        sign = /用户中心|节点列表|我的账号|退出登录|邀请注册|剩余流量|(?:复制((?!订阅链接).)*?)?订阅链接/.test(resp.data)
+        sign = /用户中心|节点列表|我的账号|退出登录|邀请注册|剩余流量|(?:复制((?!订阅).)*?)?订阅/.test(resp.data)
         log(`[info]: signed?: ${sign}.`)
       } catch (e) {
         // 检查失败，跳过登陆和签到
         check = true
         log(`[error]: check sign "${variable['name']}" failed: ${e}.`)
+        notify(`check sign in "${variable['name']}" failed`, e.message, true)
       }
     }
 
