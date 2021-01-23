@@ -47,14 +47,15 @@ let check_in = async (raw, { yaml, axios, notify }, variable ) => {
       }
     } else variable['history'] = []
     
+    var domain = variable['domain'].replace(/^https?:\/\//,'')
     // check sign
     if (!check && !sign) {
       try {
         log(`[info]: try check sign with "${variable['name']}".`)
-        let resp = await axios.get(`https://${variable['domain'].replace(/^https?:\/\//,'')}/user`)
+        let resp = await axios.get(`https://${domain}/user`)
         //数据量很大
         if (debug){
-          log(`[debug]: response of https://${variable['domain'].replace(/^https?:\/\//,'')}/user:`)
+          log(`[debug]: response of https://${domain}/user:`)
           log(`${JSON.stringify(resp.data, null, 2)}`)
         }
         sign = /用户中心|节点列表|我的账号|退出登录|邀请注册|剩余流量|(?:复制((?!订阅).)*?)?订阅/.test(resp.data)
@@ -71,13 +72,13 @@ let check_in = async (raw, { yaml, axios, notify }, variable ) => {
     if (!check && !sign) {
       try {
         log(`[info]: try sign in "${variable['name']}".`)
-        let resp = await axios.post(`https://${variable['domain'].replace(/^https?:\/\//,'')}/auth/login`, {
+        let resp = await axios.post(`https://${domain}/auth/login`, {
           email: variable['email'],
           passwd: variable['pwd'],
           remember_me: variable['keep']
         })
         if (debug) {
-          log(`[debug]: response of https://${variable['domain'].replace(/^https?:\/\//,'')}/auth/login:`)
+          log(`[debug]: response of https://${domain}/auth/login:`)
           log(`${JSON.stringify(resp.data, null, 2)}`)
         }
         if (/登[录陆]成功/.test(resp.data.msg)) sign = true
@@ -93,9 +94,9 @@ let check_in = async (raw, { yaml, axios, notify }, variable ) => {
     if (!check && sign) {
       try {
         log(`[info]: try check in "${variable['name']}".`)
-        let resp = await axios.post(`https://${variable['domain'].replace(/^https?:\/\//,'')}/user/checkin`)
+        let resp = await axios.post(`https://${domain}/user/checkin`)
         if (debug) {
-          log(`[debug]: response of https://${variable['domain'].replace(/^https?:\/\//,'')}/user/checkin:`)
+          log(`[debug]: response of https://${domain}/user/checkin:`)
           log(`${JSON.stringify(resp.data, null, 2)}`)
         }
         if (!/[您你](?:似乎)?已经签到过了/.test(resp.data.msg)) {

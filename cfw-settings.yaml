@@ -660,11 +660,6 @@ mixinText: |-
       #enhanced-mode: redir-host
       enhanced-mode: normal
       #listen: 0.0.0.0:53
-      default-nameserver:
-        - 8.8.8.8
-        - 9.9.9.9
-        - 223.5.5.5
-        - 1.1.1.1
       nameserver:
         # 大部分走的都是需要代理的，全部DoH, DoT算了
         #- 8.8.8.8 #谷歌
