@@ -11,7 +11,6 @@ payload:
   - DOMAIN-SUFFIX,bejingyongjiu.com
   - DOMAIN,office365-test.herokuapp.com
   # 机场、订阅
-  - DOMAIN-KEYWORD,suying
   - DOMAIN-SUFFIX,sy168.site
   - DOMAIN,api.ikuuu.science
   - DOMAIN,api.wcc.best
