@@ -231,7 +231,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
             message = `[error]: Profile "${name}" has been updated. `+
                       `But fail to upload to gist: ${fileName}, `+
                       `the request was made and the server responded with a fail status code,`+
-                      ` because ${JSON.stringify(err)}.`
+                      ` because "${JSON.stringify(err.message)}".`
             notify("Profile has been updated", 
                    `profile "${name}" has been updated. `+
                    "But fail to upload to gist, see log for more details", true)

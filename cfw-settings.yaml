@@ -1,4 +1,4 @@
-proxyOrder: 0
+proxyOrder: 1
 systemTheme: true
 showNotifications: true
 selectAfterUpdated: false
@@ -7,38 +7,41 @@ fontFamily: 思源黑体
 bypassText: |
   bypass:
     # 其他
+    - "*.ctfile.com"
     - "*.gitee.com"
     - "*.115.com"
     - "*.pinyuncloud.com"
+    - "*.woozooo.com"
+    - "*.lanzou?.com"
     - "*.mihoyo.com"
     # 微软
-    - "*.azureedge.*"
+    #- "*.azureedge.*"
     - "*.azurefd.*"
-    - "*.office365.com"
+    #- "*.office365.com"
     - "*.xboxlive.com"
     - "*.s-microsoft.com"
-    - "*.office.com"
-    - "*.live.com"
-    - "*.microsoft.net"
-    - "*.microsoft.com"
+    #- "*.office.com"
+    #- "*.live.com"
+    #- "*.microsoft.net"
+    #- "*.microsoft.com"
     - "aka.ms"
-    - "*.msftauth.net"
-    - "*.msft*.com"
-    - "*.msauth.net"
+    #- "*.msftauth.net"
+    #- "*.msft*.com"
+    #- "*.msauth.net"
     - "*.xbox.com"
     - "*.onestore.ms"
     - "*.msn.com"
-    - "config.edge.skype.com"
+    #- "config.edge.skype.com"
     #- "*.akamized.com"
-    - "*.windows.net"
-    - "*.windows.com"
+    #- "*.windows.net"
+    #- "*.windows.com"
     - "*.windowsupdate.com"
     - "*.msedge.net"
     - "*.bing.com"
     - "*.msecnd.com"
     - "*.msecnd.net"
     - "*.visualstudio.com"
-    - "*.microsoftonline.com"
+    #- "*.microsoftonline.com"
     - "*.hotmail.com"
     # CN域名直连
     - "*.cn"
@@ -743,7 +746,7 @@ childProcessText: >
 systemProxyTypeIndex: 0
 pacContentText: ""
 editor: 0
-latencyTimeout: 5000
+latencyTimeout: 2000
 hideAfterStartup: true
 mixinType: 0
 randomControllerPort: false

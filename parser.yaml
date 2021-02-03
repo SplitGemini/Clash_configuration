@@ -215,7 +215,6 @@ mix-object:
     - DOMAIN-SUFFIX,meixincdn.com,✔️Direct
     - DOMAIN-SUFFIX,mgtv.com,✔️Direct
     - DOMAIN-SUFFIX,mi-img.com,✔️Direct
-    - DOMAIN-SUFFIX,microsoft.com,✔️Direct
     - DOMAIN-SUFFIX,miui.com,✔️Direct
     - DOMAIN-SUFFIX,miwifi.com,✔️Direct
     - DOMAIN-SUFFIX,mobike.com,✔️Direct
@@ -256,7 +255,6 @@ mix-object:
     - DOMAIN-SUFFIX,redacted.ch,✔️Direct
     - DOMAIN-SUFFIX,ronghub.com,✔️Direct
     - DOMAIN-SUFFIX,ruguoapp.com,✔️Direct
-    - DOMAIN-SUFFIX,s-microsoft.com,✔️Direct
     - DOMAIN-SUFFIX,s-reader.com,✔️Direct
     - DOMAIN-SUFFIX,sankuai.com,✔️Direct
     - DOMAIN-SUFFIX,scomper.me,✔️Direct
@@ -311,7 +309,6 @@ mix-object:
     - DOMAIN-SUFFIX,weico.cc,✔️Direct
     - DOMAIN-SUFFIX,weidian.com,✔️Direct
     - DOMAIN-SUFFIX,whatismyip.com,✔️Direct
-    - DOMAIN-SUFFIX,windows.com,✔️Direct
     - DOMAIN-SUFFIX,windowsupdate.com,✔️Direct
     - DOMAIN-SUFFIX,xiachufang.com,✔️Direct
     - DOMAIN-SUFFIX,xiami.com,✔️Direct
