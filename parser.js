@@ -239,7 +239,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
           }
           else if (err.request) {
             // The request was made but no response was received
-            message = `[error]: Profile "${name}" has been updated.`+
+            message = `[warning]: Profile "${name}" has been updated.`+
                       ` And maybe successfully uploaded to gist:"${fileName}", `+
                       `the request was made but no response was received, because `+
                       JSON.stringify(err.request)

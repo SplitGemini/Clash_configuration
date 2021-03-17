@@ -19,6 +19,8 @@ payload:
   - DOMAIN,subconverter-web.now.sh
   - DOMAIN,subconverter.herokuapp.com
   - DOMAIN,api.dler.io
+  - DOMAIN,clash.razord.top
+  
   # DNS
   - IP-CIDR,8.8.8.8/32  #谷歌
   - IP-CIDR,8.8.4.4/32
