@@ -24,7 +24,7 @@ bypassText: |
     #- "*.live.com"
     #- "*.microsoft.net"
     - "*.microsoft.com"
-    - "aka.ms"
+    #- "aka.ms"
     #- "*.msftauth.net"
     #- "*.msft*.com"
     #- "*.msauth.net"
@@ -33,7 +33,7 @@ bypassText: |
     - "*.msn.com"
     #- "config.edge.skype.com"
     #- "*.akamized.com"
-    #- "*.windows.net"
+    - "*.windows.net"
     - "*.windows.com"
     - "*.windowsupdate.com"
     - "*.msedge.net"
@@ -752,3 +752,4 @@ mixinType: 0
 randomControllerPort: false
 theme: 0
 proxyItemWidth: ""
+lightweightMode: false

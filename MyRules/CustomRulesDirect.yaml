@@ -20,6 +20,7 @@ payload:
   - DOMAIN,subconverter.herokuapp.com
   - DOMAIN,api.dler.io
   - DOMAIN,clash.razord.top
+  - DOMAIN,yacd.haishan.me
   
   # DNS
   - IP-CIDR,8.8.8.8/32  #谷歌
