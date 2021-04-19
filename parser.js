@@ -67,7 +67,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
       for (let i = 0; i < node_groups.length; i++) {
         _other.push({
           name: node_groups[i]['name'],
-          type: 'url-test',
+          type: 'load-balance',
           url: 'http://www.gstatic.com/generate_204',
           interval: 300,
           proxies: []
@@ -144,12 +144,12 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
     //清理无用字典
     delete rawObj['port']
     delete rawObj['socks-port']
-    delete rawObj['mixed-port']
+    //delete rawObj['mixed-port']
     delete rawObj['redir-port']
-    delete rawObj['allow-lan']
-    delete rawObj['mode']
-    delete rawObj['log-level']
-    delete rawObj['external-controller']
+    //delete rawObj['allow-lan']
+    //delete rawObj['mode']
+    //delete rawObj['log-level']
+    //delete rawObj['external-controller']
     delete rawObj['secret']
     delete rawObj['cfw-bypass']
     delete rawObj['cfw-latency-url']

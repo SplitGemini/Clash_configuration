@@ -35,8 +35,10 @@ copy = ["subconverter/pref.yml", "subconverter/snippets/emoji.txt",
         "parser.js", "auto-check-in.js"]
 try:
     for file in copy:
+        if not os.path.exists(file):
+            os.mkdir(dir)
         shutil.copyfile(os.path.join(path, file), file)
-except e:
-    print("copy failed: " + e)
+except IOError as e:
+    print("copy failed: ", file, " ", e)
     
 print("Desensitization finished...")
