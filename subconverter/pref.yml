@@ -104,7 +104,11 @@ template:
   #- {key: clash.http_port, value: 7890}
   #- {key: clash.socks_port, value: 7891}
   #- {key: clash.allow_lan, value: true}
-  #- {key: clash.log_level, value: info}
+  - {key: clash.log_level, value: info}
+  - {key: clash.mixed_port, value: 2222}
+  - {key: clash.external_controller, value: ':19090'}
+  - {key: clash.allow_lan, value: true}
+  - {key: clash.mode, value: Rule}
   
 aliases:
   - {uri: /v, target: /version}
