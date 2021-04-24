@@ -753,7 +753,7 @@ randomControllerPort: false
 theme: 0
 proxyItemWidth: ""
 lightweightMode: false
-iconSpeed: true
+iconSpeed: false
 trayText: ""
 trayScriptPath: C:\Users\YOURNAME\.config\clash\trayscript.js
 trayColorTransparent: true

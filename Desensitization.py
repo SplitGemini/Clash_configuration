@@ -35,9 +35,11 @@ copy = ["subconverter/pref.yml", "subconverter/snippets/emoji.txt",
         "parser.js", "auto-check-in.js"]
 try:
     for file in copy:
-        if not os.path.exists(file):
-            os.mkdir(dir)
-        shutil.copyfile(os.path.join(path, file), file)
+        filepath = os.path.join(os.getcwd(), file)
+        filedir = os.path.dirname(filepath)
+        if not os.path.exists(filepath) and os.path.normcase(filedir) != os.path.normcase(os.getcwd()):
+            os.mkdir(filedir)
+        shutil.copyfile(os.path.join(path, file), filepath)
 except IOError as e:
     print("copy failed: ", file, " ", e)
     
