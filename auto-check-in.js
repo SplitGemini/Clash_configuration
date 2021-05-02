@@ -12,18 +12,59 @@ const { resolve, join } = require('path')
 const { homedir } = require('os')
 const variable_path = resolve(__dirname, './variables.yaml')
 const myDate = new Date()
-let debug = false
+const debug = true
 const homeDirectory = join(homedir(), '.config/clash')
 // log file路径
 const logFile = join(homeDirectory, 'logs/cfw-autocheckin.log')
 let newParse = true
 
-let log = function (text) {
+const checkLog = function() {
+  if (!existsSync(logFile)) {
+        return
+  }
+  let count = 0
+  // value is 10
+  LINE_FEED = '\n'.charCodeAt(0)
+  fs.createReadStream(logFile)
+    .on('error', e => {
+       log(`[warn]: check log error: ${e}`)
+    })
+    .on('data', chunk => {
+        for (i=0; i < chunk.length; ++i) if (chunk[i] == LINE_FEED) 
+          count ++
+    })
+    .on('end', () => {
+      if(debug)
+        log(`[debug]: log line count is: ${count}`)
+    })
+  
+  if (count > 10000) {
+    log(`[info]: log line count is: ${count} large than 10000, cut it half`)
+  }
+}
+
+const log = function (text) {
     if (newParse) {
       appendFileSync(logFile, `\n    --------------${myDate.toLocaleString()}--------------\n`, 'utf-8')
       newParse = false
     }
     appendFileSync(logFile, text+"\n", 'utf-8')
+}
+
+const cal_data_used_fromlog = function (name) {
+    if (!existsSync(logFile)) {
+        return 0
+    }
+    let reg =  new RegExp("\"" + name + "\".*?\(d+)\s*MB流量", "g")
+    let matches = readFileSync(logFile, 'utf-8').matchAll(reg)
+    let total = 0
+    for (const match of matches) {
+        total += parseInt(match[1])
+        if(debug){
+            log(`[debug]: 迁移：match:${match[0]} num:${match[1]} start=${match.index} end=${match.index + match[0].length}.`)
+        }
+    }
+    return total
 }
 
 let check_in = async (raw, { yaml, axios, notify }, variable ) => {
@@ -107,13 +148,46 @@ let check_in = async (raw, { yaml, axios, notify }, variable ) => {
           log(`[info]: "${variable['name']}" has been already check in.`)
           notify(`You have checked in "${variable['name']}" today.`,resp.data.msg, true)
         }
+        
         // 前面检查过签到记录，说明没有今天的记录
+        // total data used
+        let total = 0.0
+        let total_text = variable['total']
+        if(!total_text){
+          //没有total属性，版本迁移，从日志中统计全部签到流量
+          total = cal_data_used_fromlog(variable['name'])
+        } 
+        else {
+          if(/G/i.test(total_text)){
+            total = parseFloat(/[\d.]+/.match(total_text)[0]) * 1024
+          }
+          else if(/T/i.test(total_text)) {
+            total = parseFloat(/[\d.]+/.match(total_text)[0]) * 1024 * 1024
+          }
+          else {
+            total = parseInt(/\d+/.match(total_text)[0])
+          }
+        }
+        total += parseInt(/\d+/.match(resp.data.msg)[0])
+        if(total > 1024 * 1024) {
+          total_text = (total /= 1024*1024).toFixed(4)+'T'
+        }
+        else if(total > 1024) {
+          total_text = (total /= 1024).toFixed(4)+'G'
+        }
+        else {
+          total_text = total.toString() + 'M'
+        }
+        variable['total'] = total_text
+        
+        // history
         let nowData = {}
         nowData['checkinDate'] = _time
         nowData['checkinMessage'] = resp.data.msg
         variable['history'].unshift(nowData)
         should_modify = true
         log(`[info]: "${variable['name']}" check in completely.`)
+        
       } catch (e) {
         log(`[error]: check in "${variable['name']}" failed: ${e}.`)
         notify(`check in "${variable['name']}" failed`, e.message, true)
@@ -124,6 +198,7 @@ let check_in = async (raw, { yaml, axios, notify }, variable ) => {
     while (variable['history'].length > 5){
       variable['history'].pop()
     }
+    
     //不管成没成功，添加信息到配置
     if (variable['history'].length > 0){
       if (!rawObj['proxies']) rawObj['proxies'] = []
@@ -163,7 +238,9 @@ let check_in = async (raw, { yaml, axios, notify }, variable ) => {
         log(`${JSON.stringify(rawObj['proxy-groups'], null, 2)}`)
       }
     }
-    return [yaml.stringify(rawObj), variable, should_modify.toString()]
+    
+    return [yaml.stringify(rawObj), variable, should_modify]
+    
   } catch (e) {
     log(`[error]: "${variable['name']}" something happened: ${e}.`)
     notify(`"${variable['name']}" something happened`, e.message, true)
@@ -188,7 +265,10 @@ let auto_check_in = async (raw, { yaml, axios, console, notify }, { url }) => {
       throw e
     }
   }
-
+  
+  // check log length
+  checkLog()
+  
   //check variables.yml
   if (!existsSync(variable_path)) {
     log('[warning]: no found "./variables.yaml".')
@@ -208,13 +288,13 @@ let auto_check_in = async (raw, { yaml, axios, console, notify }, { url }) => {
       log(`${JSON.stringify(variables, null, 2)}`)
     }
     raw = yaml.stringify(rawObj)
-    let check_list = [...Array(variables.length)].map(_=>'false')
+    let check_list = [...Array(variables.length)].map(_=>false)
     for (let i = 0; i < variables.length; i++) {
       [raw, variables[i], check_list[i]] = await check_in(
         raw, { yaml, axios, notify }, variables[i]
       )
     }
-    if (check_list.includes('true')){
+    if (check_list.some(v => v === true)){
       if (debug) log('[debug]: have modified variables.')
       delete _variables['auto_check_in']
       writeFileSync(
