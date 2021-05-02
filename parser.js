@@ -1,4 +1,4 @@
-const { readFileSync, existsSync, appendFileSync } = require('fs')
+const { readFileSync, existsSync, appendFileSync, writeFileSync } = require('fs')
 const { homedir } = require('os')
 const { join, resolve } = require('path')
 const variable_path = resolve(__dirname, './variables.yaml')
@@ -8,6 +8,29 @@ const homeDirectory = join(homedir(), '.config/clash')
 // log file路径
 const logFile = join(homeDirectory, 'logs/cfw-parser.log')
 let newParse = true
+const maxLogLine = 20000
+
+const checkLog = function() {
+  if (!existsSync(logFile)) {
+    log("[warn]: doesn't find log file: cfw-autocheckin.log, Automatically create it.")
+  }
+  const lines = readFileSync(logFile, 'utf-8').toString().split('\n')
+  if(lines.length > maxLogLine){
+    let start = Math.round(lines.length / 2)
+    while(!/-{2,}.*-{2,}/.test(lines[start])){
+      start ++
+    }
+    //backup old file
+    writeFileSync(logFile+'.bak', lines.join('\n'), 'utf-8')
+    //write new log
+    writeFileSync(logFile, lines.slice(start).join('\n'), 'utf-8')
+    log(`[info]: log line count is: ${lines.length} larger than ${maxLogLine}, cut it by half.`)
+  }
+  else if(debug){
+    log(`[debug]: log line count is: ${lines.length}`)
+  }
+}
+
 let log = function (text) {
     if (newParse) {
       appendFileSync(logFile, `\n  --------------${myDate.toLocaleString()}--------------\n`, 'utf-8')
@@ -34,6 +57,9 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
         throw e
       }
     }
+    
+    //check log lines
+    checkLog()
     
     //check variables.yml
     if (!existsSync(variable_path)) {
@@ -190,12 +216,13 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
         const upload = yaml.stringify(rawObj)
         let files = {}
         files[fileName] = {"content":upload}
+        let replace_reg = /^\[[a-z]{4,8}\]: /i
         // gist id
         if (!_variables['gistId']) {
           message = `[warning]: no found gistId variables, but profile "${name}" has been updated.`
           log(message)
           notify("Profile has been updated",
-                 message.replace(/^\[[a-z]{4,8}\]: /,''), true)
+                 message.replace(replace_reg,''), true)
           return ret
         } else {
           var gistId = _variables['gistId']
@@ -206,7 +233,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
           message = `[warning]: no found token variables, but profile "${name}" has been updated.`
           log(message)
           notify("Profile has been updated",
-                 message.replace(/^\[[a-z]{4,8}\]: /,''), true)
+                 message.replace(replace_reg,''), true)
           return ret
         } else {
           var token = _variables['token']
@@ -222,7 +249,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
           message = `[info]: Profile "${name}" has been updated. `+
                     `And successfully uploaded to gist:"${fileName}", file links is:${link}.`
           log(message)
-          notify("Profile has been updated", message.replace(/^\[[a-z]{4,8}\]: /,''), true)
+          notify("Profile has been updated", message.replace(replace_reg,''), true)
         })
         .catch(err => {
           if (err.response) {
@@ -261,14 +288,14 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
       else {
         message = `[info]: Profile "${name}" has been updated.`
         log(message)
-        notify("Profile has been updated", message.replace(/^\[[a-z]{4,8}\]: /,''), true)
+        notify("Profile has been updated", message.replace(replace_reg,''), true)
       }
     }
     // 配置是新建的
     else {
       message = "[info]: A new profile has been added."
       log(message)
-      notify("A new profile has been added", message.replace(/^\[[a-z]{4,8}\]: /,''), true)
+      notify("A new profile has been added", message.replace(replace_reg,''), true)
     }
     return ret
   } catch (e) {

@@ -7,39 +7,36 @@
  * @param {string[]} [pwd = []] - Value of pwd.
  */
 
-const { readFileSync, writeFileSync, existsSync, appendFileSync } = require('fs')
+const { readFileSync, writeFileSync, existsSync, appendFileSync, createReadStream , renameSync} = require('fs')
 const { resolve, join } = require('path')
 const { homedir } = require('os')
 const variable_path = resolve(__dirname, './variables.yaml')
 const myDate = new Date()
-const debug = true
+const debug = false
 const homeDirectory = join(homedir(), '.config/clash')
 // log file路径
 const logFile = join(homeDirectory, 'logs/cfw-autocheckin.log')
 let newParse = true
+const maxLogLine = 20000
 
 const checkLog = function() {
   if (!existsSync(logFile)) {
-        return
+    log("[warn]: doesn't find log file: cfw-autocheckin.log, Automatically create it.")
   }
-  let count = 0
-  // value is 10
-  LINE_FEED = '\n'.charCodeAt(0)
-  fs.createReadStream(logFile)
-    .on('error', e => {
-       log(`[warn]: check log error: ${e}`)
-    })
-    .on('data', chunk => {
-        for (i=0; i < chunk.length; ++i) if (chunk[i] == LINE_FEED) 
-          count ++
-    })
-    .on('end', () => {
-      if(debug)
-        log(`[debug]: log line count is: ${count}`)
-    })
-  
-  if (count > 10000) {
-    log(`[info]: log line count is: ${count} large than 10000, cut it half`)
+  const lines = readFileSync(logFile, 'utf-8').toString().split('\n')
+  if(lines.length > maxLogLine){
+    let start = Math.round(lines.length / 2)
+    while(!/-{2,}.*-{2,}/.test(lines[start])){
+      start ++
+    }
+    //backup old file
+    writeFileSync(logFile+'.bak', lines.join('\n'), 'utf-8')
+    //write new log
+    writeFileSync(logFile, lines.slice(start).join('\n'), 'utf-8')
+    log(`[info]: log line count is: ${lines.length} larger than ${maxLogLine}, cut it by half.`)
+  }
+  else if(debug){
+    log(`[debug]: log line count is: ${lines.length}`)
   }
 }
 
