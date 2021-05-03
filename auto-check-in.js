@@ -155,7 +155,7 @@ let check_in = async (raw, { yaml, axios, notify }, variable ) => {
             total = cal_data_used_fromlog(variable['name'])
           }
           else {
-              total = parseInt(/\d+(?=, i\.e\.)/.exec(total_text)[0])
+              total = parseInt(/\d+/.exec(total_text)[0])
           }
           total += parseInt(/\d+/.exec(resp.data.msg)[0])
 
