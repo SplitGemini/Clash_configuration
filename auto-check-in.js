@@ -19,6 +19,7 @@ const logFile = join(homeDirectory, 'logs/cfw-autocheckin.log')
 let newParse = true
 const maxLogLine = 20000
 
+// 检查日志行数，超过maxLogLine切半
 const checkLog = function() {
   if (!existsSync(logFile)) {
     log("[warn]: doesn't find log file: cfw-autocheckin.log, Automatically create it.")
@@ -26,7 +27,8 @@ const checkLog = function() {
   const lines = readFileSync(logFile, 'utf-8').toString().split('\n')
   if(lines.length > maxLogLine){
     let start = Math.round(lines.length / 2)
-    while(!/-{2,}.*-{2,}/.test(lines[start])){
+    //从有意义的日期开始切
+    while(!/-{2,}.*-{2,}/.test(lines[start]) && start < lines.length){
       start ++
     }
     //backup old file
@@ -41,33 +43,36 @@ const checkLog = function() {
 }
 
 const log = function (text) {
-    if (newParse) {
-      appendFileSync(logFile, `\n    --------------${myDate.toLocaleString()}--------------\n`, 'utf-8')
-      newParse = false
-    }
-    appendFileSync(logFile, text+"\n", 'utf-8')
+  if (newParse) {
+    appendFileSync(logFile, `\n    --------------${myDate.toLocaleString()}--------------\n`, 'utf-8')
+    newParse = false
+  }
+  appendFileSync(logFile, text+"\n", 'utf-8')
 }
 
+// 从日志获取历史流量，仅统计通过自动签到获取的流量
+// 同时因为会有日志大小监控，日志过长会被切断，因此数据可能不准确，日志限制数在上面
 const cal_data_used_fromlog = function (name) {
-    if (!existsSync(logFile)) {
-        return 0
+  if (!existsSync(logFile)) {
+    log("[warn]: doesn't find log file: cfw-autocheckin.log, Automatically create it.")
+    return 0
+  }
+  let reg =  new RegExp("\"" + name + "\".*?[你您]获得了\\s*(\\d+)\\s*MB流量", "gi")
+  let matches = readFileSync(logFile, 'utf-8').matchAll(reg)
+  let total = 0
+  for (const match of matches) {
+    total += parseInt(match[1])
+    if(debug){
+        log(`[debug]: 迁移：match:${match[0]} num:${match[1]} start=${match.index} end=${match.index + match[0].length}.`)
     }
-    let reg =  new RegExp("\"" + name + "\".*?\(d+)\s*MB流量", "g")
-    let matches = readFileSync(logFile, 'utf-8').matchAll(reg)
-    let total = 0
-    for (const match of matches) {
-        total += parseInt(match[1])
-        if(debug){
-            log(`[debug]: 迁移：match:${match[0]} num:${match[1]} start=${match.index} end=${match.index + match[0].length}.`)
-        }
-    }
-    return total
+  }
+  return total
 }
 
 let check_in = async (raw, { yaml, axios, notify }, variable ) => {
   try {
     // iso 时区+8
-    var _time = new Date(+myDate + 8 * 3600 * 1000).toISOString().replace('Z','+08:00')
+    var _time = new Date(+myDate + 8 * 3600 * 1000).toISOString().replace(/Z$/,'+08:00')
     var today = _time.slice(0, 10)
     var rawObj = yaml.parse(raw)
     var check = false
@@ -141,50 +146,41 @@ let check_in = async (raw, { yaml, axios, notify }, variable ) => {
           log(`[info]: "${variable['name']}" checkinDate: ${_time}.`)
           log(`[info]: "${variable['name']}" checkinMessage: ${resp.data.msg}.`)
           notify(`check in "${variable['name']}" successful`,resp.data.msg, true)
+
+          // total data used
+          let total = 0.0
+          let total_text = variable['total']
+          if(!total_text){
+            //没有total属性，版本迁移，从日志中统计全部签到流量
+            total = cal_data_used_fromlog(variable['name'])
+          }
+          else {
+              total = parseInt(/\d+(?=, i\.e\.)/.exec(total_text)[0])
+          }
+          total += parseInt(/\d+/.exec(resp.data.msg)[0])
+
+          total_text = total.toString()+'M'
+          if(total > 1024 * 1024) {
+            total_text += ', i.e., '+(total / (1024*1024)).toFixed(4)+'T'
+          }
+          else if(total > 1024) {
+            total_text = ', i.e., '+(total / 1024).toFixed(2)+'G'
+          }
+          variable['total'] = total_text
+          
+          // history
+          let nowData = {}
+          nowData['checkinDate'] = _time
+          nowData['checkinMessage'] = resp.data.msg
+          variable['history'].unshift(nowData)
+          should_modify = true
+          log(`[info]: "${variable['name']}" check in completely.`)
+        
         } else {
           log(`[info]: "${variable['name']}" has been already check in.`)
           notify(`You have checked in "${variable['name']}" today.`,resp.data.msg, true)
+          // 前面检查过签到记录，说明没有今天的记录，说明漏记录一次签到，可能是手动签到的，数据补不回来了
         }
-        
-        // 前面检查过签到记录，说明没有今天的记录
-        // total data used
-        let total = 0.0
-        let total_text = variable['total']
-        if(!total_text){
-          //没有total属性，版本迁移，从日志中统计全部签到流量
-          total = cal_data_used_fromlog(variable['name'])
-        } 
-        else {
-          if(/G/i.test(total_text)){
-            total = parseFloat(/[\d.]+/.match(total_text)[0]) * 1024
-          }
-          else if(/T/i.test(total_text)) {
-            total = parseFloat(/[\d.]+/.match(total_text)[0]) * 1024 * 1024
-          }
-          else {
-            total = parseInt(/\d+/.match(total_text)[0])
-          }
-        }
-        total += parseInt(/\d+/.match(resp.data.msg)[0])
-        if(total > 1024 * 1024) {
-          total_text = (total /= 1024*1024).toFixed(4)+'T'
-        }
-        else if(total > 1024) {
-          total_text = (total /= 1024).toFixed(4)+'G'
-        }
-        else {
-          total_text = total.toString() + 'M'
-        }
-        variable['total'] = total_text
-        
-        // history
-        let nowData = {}
-        nowData['checkinDate'] = _time
-        nowData['checkinMessage'] = resp.data.msg
-        variable['history'].unshift(nowData)
-        should_modify = true
-        log(`[info]: "${variable['name']}" check in completely.`)
-        
       } catch (e) {
         log(`[error]: check in "${variable['name']}" failed: ${e}.`)
         notify(`check in "${variable['name']}" failed`, e.message, true)
