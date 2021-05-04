@@ -7,7 +7,7 @@
  * @param {string[]} [pwd = []] - Value of pwd.
  */
 
-const { readFileSync, writeFileSync, existsSync, appendFileSync, createReadStream , renameSync} = require('fs')
+const { readFileSync, writeFileSync, existsSync, appendFileSync } = require('fs')
 const { resolve, join } = require('path')
 const { homedir } = require('os')
 const variable_path = resolve(__dirname, './variables.yaml')
@@ -60,13 +60,15 @@ const cal_data_used_fromlog = function (name) {
   let reg =  new RegExp("\"" + name + "\".*?[你您]获得了\\s*(\\d+)\\s*MB流量", "gi")
   let matches = readFileSync(logFile, 'utf-8').matchAll(reg)
   let total = 0
+  let count = 0
   for (const match of matches) {
     total += parseInt(match[1])
+    count ++
     if(debug){
         log(`[debug]: 迁移：match:${match[0]} num:${match[1]} start=${match.index} end=${match.index + match[0].length}.`)
     }
   }
-  return total
+  return [total, count]
 }
 
 let check_in = async (raw, { yaml, axios, notify }, variable ) => {
@@ -148,16 +150,20 @@ let check_in = async (raw, { yaml, axios, notify }, variable ) => {
           notify(`check in "${variable['name']}" successful`,resp.data.msg, true)
 
           // total data used
-          let total = 0.0
+          let total = 0
+          // checkin days
+          let days = 0
           let total_text = variable['total']
           if(!total_text){
             //没有total属性，版本迁移，从日志中统计全部签到流量
-            total = cal_data_used_fromlog(variable['name'])
+            [total, days] = cal_data_used_fromlog(variable['name'])
           }
           else {
               total = parseInt(/\d+/.exec(total_text)[0])
+              days = parseInt(/\d+/.exec(variable['days'])[0])
           }
           total += parseInt(/\d+/.exec(resp.data.msg)[0])
+          days ++
 
           total_text = total.toString()+'M'
           if(total > 1024 * 1024) {
@@ -167,6 +173,7 @@ let check_in = async (raw, { yaml, axios, notify }, variable ) => {
             total_text = ', i.e., '+(total / 1024).toFixed(2)+'G'
           }
           variable['total'] = total_text
+          variable['days'] = days
           
           // history
           let nowData = {}
