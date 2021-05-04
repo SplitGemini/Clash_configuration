@@ -758,5 +758,5 @@ trayText: ""
 trayScriptPath: C:\Users\YOURNAME\.config\clash\trayscript.js
 trayColorTransparent: true
 trayColorForeground: "#000000"
-trayScriptManualRunTime: 1618577847447
+trayScriptManualRunTime: 1620061846527
 trayScriptInterval: 0

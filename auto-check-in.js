@@ -170,7 +170,7 @@ let check_in = async (raw, { yaml, axios, notify }, variable ) => {
             total_text += ', i.e., '+(total / (1024*1024)).toFixed(4)+'T'
           }
           else if(total > 1024) {
-            total_text = ', i.e., '+(total / 1024).toFixed(2)+'G'
+            total_text += ', i.e., '+(total / 1024).toFixed(2)+'G'
           }
           variable['total'] = total_text
           variable['days'] = days
