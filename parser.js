@@ -17,7 +17,7 @@ const checkLog = function() {
   const lines = readFileSync(logFile, 'utf-8').toString().split('\n')
   if(lines.length > maxLogLine){
     let start = Math.round(lines.length / 2)
-    while(!/-{2,}.*-{2,}/.test(lines[start])){
+    while(!/-{2,}.*-{2,}/.test(lines[start]) && start < lines.length){
       start ++
     }
     //backup old file

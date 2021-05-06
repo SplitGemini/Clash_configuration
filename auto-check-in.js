@@ -145,16 +145,12 @@ let check_in = async (raw, { yaml, axios, notify }, variable ) => {
           log(`${JSON.stringify(resp.data, null, 2)}`)
         }
         if (!/[您你](?:似乎)?已经签到过了/.test(resp.data.msg)) {
-          log(`[info]: "${variable['name']}" checkinDate: ${_time}.`)
-          log(`[info]: "${variable['name']}" checkinMessage: ${resp.data.msg}.`)
-          notify(`check in "${variable['name']}" successful`,resp.data.msg, true)
-
           // total data used
           let total = 0
           // checkin days
           let days = 0
           let total_text = variable['total']
-          if(!total_text){
+          if(!total_text || !/\d+M/.test(total_text)){
             //没有total属性，版本迁移，从日志中统计全部签到流量
             [total, days] = cal_data_used_fromlog(variable['name'])
           }
@@ -181,8 +177,12 @@ let check_in = async (raw, { yaml, axios, notify }, variable ) => {
           nowData['checkinMessage'] = resp.data.msg
           variable['history'].unshift(nowData)
           should_modify = true
+          
+          log(`[info]: "${variable['name']}" checkinDate: ${_time}.`)
+          log(`[info]: "${variable['name']}" checkinMessage: ${resp.data.msg}.`)
+          notify(`check in "${variable['name']}" successful`,resp.data.msg, true)
           log(`[info]: "${variable['name']}" check in completely.`)
-        
+          
         } else {
           log(`[info]: "${variable['name']}" has been already check in.`)
           notify(`You have checked in "${variable['name']}" today.`,resp.data.msg, true)
@@ -268,7 +268,7 @@ let auto_check_in = async (raw, { yaml, axios, console, notify }, { url }) => {
   
   // check log length
   checkLog()
-  
+
   //check variables.yml
   if (!existsSync(variable_path)) {
     log('[warning]: no found "./variables.yaml".')
