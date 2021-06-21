@@ -68,6 +68,7 @@ const cal_data_used_fromlog = function (name) {
         log(`[debug]: 迁移：match:${match[0]} num:${match[1]} start=${match.index} end=${match.index + match[0].length}.`)
     }
   }
+  log(`[info]: calculate total data used from log: ${total}M`)
   return [total, count]
 }
 
@@ -161,12 +162,12 @@ let check_in = async (raw, { yaml, axios, notify }, variable ) => {
           total += parseInt(/\d+/.exec(resp.data.msg)[0])
           days ++
 
-          total_text = total.toString()+'M'
+          total_text = total.toString()+'MB'
           if(total > 1024 * 1024) {
-            total_text += ', i.e., '+(total / (1024*1024)).toFixed(4)+'T'
+            total_text += ', i.e., '+(total / (1024*1024)).toFixed(4)+'TB'
           }
           else if(total > 1024) {
-            total_text += ', i.e., '+(total / 1024).toFixed(2)+'G'
+            total_text += ', i.e., '+(total / 1024).toFixed(2)+'GB'
           }
           variable['total'] = total_text
           variable['days'] = days

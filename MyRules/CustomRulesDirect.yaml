@@ -2,7 +2,6 @@ payload:
   - DOMAIN-SUFFIX,supanx.com
   - DOMAIN-SUFFIX,lauchdarkly.com
   - DOMAIN-SUFFIX,publicsuffix.org
-  - DOMAIN-SUFFIX,bandi.so
   - DOMAIN-SUFFIX,freedownloadmanager.org
   - DOMAIN-SUFFIX,xboxlive.com
   - DOMAIN-SUFFIX,ibit6.com
