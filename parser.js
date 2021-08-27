@@ -187,7 +187,8 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
     delete rawObj['Proxy']
 
     const ret = yaml.stringify(rawObj)
-    var message = ""
+    let message = ""
+    let replace_reg = /^\[[a-z]{4,8}\]: /i
     // 不是新建配置，而是在更新订阅
     if(name){
       if (!_variables['upload_group']) {
@@ -205,6 +206,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
           break
         }
       }
+      
       // 上传gist
       if(fileName){
         // 添加dns，配合安卓Adgurd
@@ -216,7 +218,7 @@ module.exports.parse = async (raw, { axios, yaml, notify, console }, { name, url
         const upload = yaml.stringify(rawObj)
         let files = {}
         files[fileName] = {"content":upload}
-        let replace_reg = /^\[[a-z]{4,8}\]: /i
+        
         // gist id
         if (!_variables['gistId']) {
           message = `[warning]: no found gistId variables, but profile "${name}" has been updated.`

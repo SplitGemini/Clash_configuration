@@ -20,8 +20,9 @@ bypassText: |
     #- "*.office365.com"
     - "*.xboxlive.com"
     - "*.s-microsoft.com"
-    #- "*.office.com"
-    #- "*.live.com"
+    - "*.office.com"
+    - "*.office.net"
+    - "*.live.com"
     #- "*.microsoft.net"
     - "*.microsoft.com"
     #- "aka.ms"
@@ -751,7 +752,7 @@ hideAfterStartup: true
 mixinType: 0
 randomControllerPort: false
 theme: 0
-proxyItemWidth: ""
+proxyItemWidth: "290"
 lightweightMode: false
 iconSpeed: false
 trayText: ""
