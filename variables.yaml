@@ -196,6 +196,7 @@ dns:
 #    keep: true 或者 false
 #    email: 我是邮箱@邮箱.com
 #    pwd: 我是密码
+#    reserve: 设置reserve停止签到，作为保留数据
 auto_check_in:
   - name: 
     domain: 

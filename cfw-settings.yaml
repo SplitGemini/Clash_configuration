@@ -662,26 +662,43 @@ mixinText: |-
       enable: true
       ipv6: false
       #enhanced-mode: redir-host
-      enhanced-mode: normal
-      #listen: 0.0.0.0:53
+      enhanced-mode: redir-host
+      listen: 0.0.0.0:53
       nameserver:
         # 大部分走的都是需要代理的，全部DoH, DoT算了
-        #- 8.8.8.8 #谷歌
+        - 8.8.8.8 #谷歌
         #- 8.8.4.4
         #- 80.80.80.80 #freenomm
         #- 80.80.81.81
         #- 4.2.2.2  #微软
         #- 4.2.2.1
         #- 1.2.4.8  #中科大
-        #- 223.5.5.5 #阿里
+        - 223.5.5.5 #阿里
         #- 223.6.6.6
         #- 202.96.128.86 #电信dns
         #- 202.96.134.33
         # 仅保留4个doh 且尽量使用ip域名
         #- https://doh.opendns.com/dns-query  #opendns
         #- tls://dns.google:853 #谷歌
-        - https://dns.google/dns-query
+        #- https://dns.google/dns-query
         #- https://8.8.8.8/dns-query #貌似不行
+        #- tls://1.1.1.1:853 #cloudflare
+        #- https://dns.cloudflare.com/dns-query
+        #- https://cloudflare-dns.com/dns-query
+        #- https://1.1.1.1/dns-query
+        #- tls://dns.rubyfish.cn:853  #红鱼
+        #- https://dns.rubyfish.cn
+        #- tls://223.5.5.5:853 #alidns
+        #- https://223.5.5.5/dns-query
+        #- tls://dns.quad9.net:853 #qurd9
+        #- https://dns.quad9.net/dns-query
+        #- https://9.9.9.9/dns-query
+      fallback:
+        # 仅保留4个doh 且尽量使用ip域名
+        #- https://doh.opendns.com/dns-query  #opendns
+        #- tls://dns.google:853 #谷歌
+        #- https://dns.google/dns-query
+        - https://8.8.8.8/dns-query
         #- tls://1.1.1.1:853 #cloudflare
         #- https://dns.cloudflare.com/dns-query
         #- https://cloudflare-dns.com/dns-query
@@ -693,6 +710,10 @@ mixinText: |-
         #- tls://dns.quad9.net:853 #qurd9
         #- https://dns.quad9.net/dns-query
         - https://9.9.9.9/dns-query
+      fallback-filter:
+        geoip: true # 默认
+        ipcidr: # 在这个网段内的 IP 地址会被考虑为被污染的 IP
+          - 240.0.0.0/4
     tun:
       enable: false
       #enable: true
@@ -728,22 +749,23 @@ childProcessText: >
         cwd: C:\Users\YOURNAME\.config\clash\subconverter # 子进程工作目录
         windowsHide: true # 隐藏子进程的控制台窗口
     # 用于本地代理网易云音乐解锁
-    - command: "C:\\Users\\YOURNAME\\.config\\clash\\UnblockNeteaseMusic-windows-amd64\\UnblockNeteaseMusic.exe"
-      args:
-        - "-l" # log
-        - "log.log"  # log路径
-        - "-m" # 模式
-        - "2"  # 1 为host模式，需要管理员权限，其他为非host模式
-        - "-p" # http端口
-        - "2223" 
-        - "-sp" # https端口
-        - "2224"
+    #- command: "C:\\Users\\YOURNAME\\.config\\clash\\UnblockNeteaseMusic-windows-amd64\\UnblockNeteaseMusic.exe"
+      #args:
+        #- "-e"
+        #- "-l" # log
+        #- "log.log"  # log路径
+        #- "-m" # 模式
+        #- "2"  # 1 为host模式，需要管理员权限，其他为非host模式
+        #- "-p" # http端口
+        #- "5555" 
+        #- "-sp" # https端口
+        #- ""
         #- "-o" # 源: kuwo:酷我(Default), kugou:酷狗, migu:咪咕
         #- "kugou"
         #- "migu"
-      options:
-        cwd: C:\Users\YOURNAME\.config\clash\UnblockNeteaseMusic-windows-amd64 # 子进程工作目录
-        windowsHide: true # 隐藏子进程的控制台窗口
+      #options:
+        #cwd: C:\Users\YOURNAME\.config\clash\UnblockNeteaseMusic-windows-amd64 # 子进程工作目录
+        #windowsHide: true # 隐藏子进程的控制台窗口
 systemProxyTypeIndex: 0
 pacContentText: ""
 editor: 0
@@ -759,7 +781,7 @@ trayText: ""
 trayScriptPath: C:\Users\YOURNAME\.config\clash\trayscript.js
 trayColorTransparent: true
 trayColorForeground: "#000000"
-trayScriptManualRunTime: 1623761573767
-trayScriptInterval: 0
+trayScriptManualRunTime: 1631341800749
+trayScriptInterval: 1
 runTimeFormat: "hh : mm : ss"
 specifyHttpProxyProtocol: true

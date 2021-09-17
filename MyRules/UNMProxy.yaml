@@ -1,5 +1,6 @@
 payload:
   - DOMAIN-SUFFIX,music.163.com
+  - DOMAIN-SUFFIX,music.126.net 
   - DOMAIN-SUFFIX,interface.music.163.com
   - DOMAIN-SUFFIX,interface3.music.163.com
   - DOMAIN-SUFFIX,apm.music.163.com
