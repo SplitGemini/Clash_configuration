@@ -120,7 +120,9 @@ let check_in = async (raw, { yaml, axios, notify }, variable) => {
 			}
 		} else variable["history"] = [];
 
-		var domain = variable["domain"].replace(/^https?:\/\//, "");
+		var domain = variable["domain"]
+			.replace(/^https?:\/\//, "")
+			.replace(/\/$/, "");
 		// check sign
 		if (!check && !sign) {
 			try {
@@ -132,7 +134,7 @@ let check_in = async (raw, { yaml, axios, notify }, variable) => {
 					log(`${JSON.stringify(resp.data, null, 2)}`);
 				}
 				sign =
-					/用户中心|节点列表|我的账号|退出登录|邀请注册|剩余流量|(?:复制((?!订阅).)*?)?订阅/.test(
+					/(?<!登录)用户中心|节点列表|我的账号|退出登录|剩余流量|(?:复制((?!订阅).)*?)?订阅/.test(
 						resp.data
 					);
 				log(`[info]: signed?: ${sign}.`);
@@ -327,7 +329,8 @@ let auto_check_in = async (raw, { yaml, axios, console, notify }, { url }) => {
 		notify(`auto-check-in failed`, "no found auto_check_in variables", true);
 		return yaml.stringify(rawObj);
 	} else var variables = _variables["auto_check_in"];
-    // skip reserve auto check in
+	// skip reserve auto check in
+	let reserve = variables.filter((item) => item["reserve"]);
 	variables = variables.filter((item) => !item["reserve"]);
 	// try check in
 	try {
@@ -344,12 +347,16 @@ let auto_check_in = async (raw, { yaml, axios, console, notify }, { url }) => {
 				variables[i]
 			);
 		}
-		if (check_list.some((v) => v === true)) {
+		if (check_list.some((v) => v)) {
 			if (debug) log("[debug]: have modified variables.");
 			delete _variables["auto_check_in"];
 			writeFileSync(
 				variable_path,
-				yaml.stringify({ ..._variables, auto_check_in: variables }, null, 2),
+				yaml.stringify(
+					{ ..._variables, auto_check_in: variables.concat(reserve) },
+					null,
+					2
+				),
 				"utf-8"
 			);
 		}
