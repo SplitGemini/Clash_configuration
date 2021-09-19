@@ -147,31 +147,31 @@ module.exports.parse = async (
 							let level = ["V1", "V2", "V3", "V4", ""];
 							// level group
 							let vipLevel = level.map((level) =>
-								node_group["keys"].map((k) => `${k} ${level}`)
+								node_group["keys"].map((k) => (k ? `${k} ${level}` : ""))
 							);
-							if (
-								vipLevel.every((keyLevel, i) => {
-									// find level
-									if (
-										// all key with level match
-										keyLevel.some((key) => {
-											return proxy["name"].indexOf(key) !== -1;
-										})
-									) {
-										push_proxy(
-											_other,
-											`${node_group["name"]} ${level[i]}`,
-											proxy["name"]
-										);
-										return false;
-									}
-									// doesn't match, continue
-									else return true;
-								})
-							) {
+
+							// will definitely be false
+							// last element is same as node_group["keys"]
+							// and it definitely can pass the 'if' test
+							vipLevel.every((keyLevel, i) => {
+								// find level
+								if (
+									// all key with level match
+									keyLevel.some((key) => {
+										return proxy["name"].indexOf(key) !== -1;
+									})
+								) {
+									push_proxy(
+										_other,
+										`${node_group["name"]} ${level[i]}`,
+										proxy["name"]
+									);
+									return false;
+								}
 								// doesn't match, continue
-								return true;
-							} else return false;
+								else return true;
+							});
+							return false;
 						}
 						// doesn't match, continue
 						else return true;

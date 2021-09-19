@@ -328,23 +328,23 @@ let auto_check_in = async (raw, { yaml, axios, console, notify }, { url }) => {
 		log("[warning]: no found auto_check_in variables.");
 		notify(`auto-check-in failed`, "no found auto_check_in variables", true);
 		return yaml.stringify(rawObj);
-	} else var variables = _variables["auto_check_in"];
+	} else var auto_check_in = _variables["auto_check_in"];
 	// skip reserve auto check in
-	let reserve = variables.filter((item) => item["reserve"]);
-	variables = variables.filter((item) => !item["reserve"]);
+	let reserve = auto_check_in.filter((item) => item["reserve"]);
+	auto_check_in = auto_check_in.filter((item) => !item["reserve"]);
 	// try check in
 	try {
 		if (debug) {
 			log("[debug]: auto_check_in variables:");
-			log(`${JSON.stringify(variables, null, 2)}`);
+			log(`${JSON.stringify(auto_check_in, null, 2)}`);
 		}
 		raw = yaml.stringify(rawObj);
-		let check_list = [...Array(variables.length)].map((_) => false);
-		for (let i = 0; i < variables.length; i++) {
-			[raw, variables[i], check_list[i]] = await check_in(
+		let check_list = [...Array(auto_check_in.length)].map((_) => false);
+		for (let i = 0; i < auto_check_in.length; i++) {
+			[raw, auto_check_in[i], check_list[i]] = await check_in(
 				raw,
 				{ yaml, axios, notify },
-				variables[i]
+				auto_check_in[i]
 			);
 		}
 		if (check_list.some((v) => v)) {
@@ -353,7 +353,7 @@ let auto_check_in = async (raw, { yaml, axios, console, notify }, { url }) => {
 			writeFileSync(
 				variable_path,
 				yaml.stringify(
-					{ ..._variables, auto_check_in: variables.concat(reserve) },
+					{ ..._variables, auto_check_in: auto_check_in.concat(reserve) },
 					null,
 					2
 				),
