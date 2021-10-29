@@ -46,3 +46,5 @@ payload:
   - DOMAIN,dingyue.suying666.info
   - DOMAIN-SUFFIX,gstatic.cn
   - DOMAIN-SUFFIX,bandi.so
+  - DOMAIN-SUFFIX,balena.io
+  - DOMAIN-SUFFIX,balena-cloud.com

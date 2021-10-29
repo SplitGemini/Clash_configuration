@@ -9,6 +9,7 @@ payload:
   - DOMAIN-SUFFIX,123345.xyz
   - DOMAIN-SUFFIX,bejingyongjiu.com
   - DOMAIN,office365-test.herokuapp.com
+
   # 机场、订阅
   - DOMAIN-SUFFIX,sy168.site
   - DOMAIN,api.ikuuu.science
@@ -20,6 +21,7 @@ payload:
   - DOMAIN,api.dler.io
   - DOMAIN,clash.razord.top
   - DOMAIN,yacd.haishan.me
+  - DOMAIN,ftp.cn.debian.org
   
   # DNS
   - IP-CIDR,8.8.8.8/32  #谷歌
