@@ -49,3 +49,4 @@ payload:
   - DOMAIN-SUFFIX,balena.io
   - DOMAIN-SUFFIX,balena-cloud.com
   - DOMAIN-SUFFIX,jdbimgs.com
+  - DOMAIN-SUFFIX,googleapis.cn
