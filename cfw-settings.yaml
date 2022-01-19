@@ -662,7 +662,14 @@ mixinText: |-
       enable: true
       ipv6: false
       #enhanced-mode: redir-host
-      enhanced-mode: redir-host
+      enhanced-mode: fake-ip
+      fake-ip-range: 198.18.0.1/16
+      fake-ip-filter: # fake ip white domain list, aka Always Real IP
+        - '*.lan'
+        - localhost.ptlogin2.qq.com
+        - "dns.msftncsi.com"
+        - "www.msftncsi.com"
+        - "www.msftconnecttest.com"
       listen: 0.0.0.0:53
       nameserver:
         # 大部分走的都是需要代理的，全部DoH, DoT算了
@@ -717,11 +724,11 @@ mixinText: |-
     tun:
       enable: false
       #enable: true
-      stack: gvisor
+      stack: system #gvisor
       dns-hijack:
         - 198.18.0.2:53
-      macOS-auto-route: true
-      macOS-auto-detect-interface: true # 自动检测出口网卡
+      auto-route: true
+      auto-detect-interface: true # 自动检测出口网卡
 profileParsersText: >
   parsers: # array
     - reg: ^http://(?:localhost|127\.0\.0\.1):25500/.+$
@@ -785,3 +792,10 @@ trayScriptManualRunTime: 1631341800749
 trayScriptInterval: 1
 runTimeFormat: "hh : mm : ss"
 specifyHttpProxyProtocol: true
+trayOrders:
+  - - icon
+  - - status
+    - traffic
+    - text
+hideTrayIcon: false
+editProfileWithCFWEditor: true
