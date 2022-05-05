@@ -794,8 +794,8 @@ runTimeFormat: "hh : mm : ss"
 specifyHttpProxyProtocol: true
 trayOrders:
   - - icon
-  - - status
-    - traffic
+  - - traffic
+    - status
     - text
 hideTrayIcon: false
 editProfileWithCFWEditor: true

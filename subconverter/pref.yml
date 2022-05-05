@@ -19,9 +19,9 @@ common:
   quanx_rule_base: base/all_base.tpl
   loon_rule_base: base/all_base.tpl
   sssub_rule_base: base/all_base.tpl
-  proxy_config: SYSTEM
-  proxy_ruleset: SYSTEM
-  proxy_subscription: SYSTEM
+  proxy_config: socks5://127.0.0.1:2222
+  proxy_ruleset: socks5://127.0.0.1:2222
+  proxy_subscription: socks5://127.0.0.1:2222
   append_proxy_type: false
 
 userinfo:
@@ -99,7 +99,7 @@ proxy_groups:
   - {import: snippets/groups_clash.txt}
 
 template:
-  template_path: "templates"
+  template_path: 
   globals:
   #- {key: clash.http_port, value: 7890}
   #- {key: clash.socks_port, value: 7891}
