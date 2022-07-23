@@ -9,7 +9,6 @@ payload:
   - DOMAIN-SUFFIX,123345.xyz
   - DOMAIN-SUFFIX,bejingyongjiu.com
   - DOMAIN,office365-test.herokuapp.com
-
   # 机场、订阅
   - DOMAIN-SUFFIX,sy168.site
   - DOMAIN,api.ikuuu.science
@@ -19,12 +18,9 @@ payload:
   - DOMAIN,subconverter-web.now.sh
   - DOMAIN,subconverter.herokuapp.com
   - DOMAIN,api.dler.io
-  - DOMAIN,clash.razord.top
-  - DOMAIN,yacd.haishan.me
+  # others
   - DOMAIN,ftp.cn.debian.org
-  - DOMAIN-SUFFIX,advantech.com.tw
-  - DOMAIN-SUFFIX,advantech.com.cn
-  
+  - DOMAIN-KEYWORD,advantech
   # DNS
   - IP-CIDR,8.8.8.8/32  #谷歌
   - IP-CIDR,8.8.4.4/32

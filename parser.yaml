@@ -275,14 +275,14 @@ mix-object:
     - DOMAIN-SUFFIX,springsunday.net,✔️Direct
     - DOMAIN-SUFFIX,sspai.com,✔️Direct
     - DOMAIN-SUFFIX,staticdn.net,✔️Direct
-    - DOMAIN-SUFFIX,steam-chat.com,✔️Direct
+#    - DOMAIN-SUFFIX,steam-chat.com,✔️Direct
     - DOMAIN-SUFFIX,steamcdn-a.akamaihd.net,✔️Direct
-    - DOMAIN-SUFFIX,steamcontent.com,✔️Direct
-    - DOMAIN-SUFFIX,steamgames.com,✔️Direct
-    - DOMAIN-SUFFIX,steampowered.com,✔️Direct
-    - DOMAIN-SUFFIX,steamstat.us,✔️Direct
-    - DOMAIN-SUFFIX,steamstatic.com,✔️Direct
-    - DOMAIN-SUFFIX,steamusercontent.com,✔️Direct
+#    - DOMAIN-SUFFIX,steamcontent.com,✔️Direct
+#    - DOMAIN-SUFFIX,steamgames.com,✔️Direct
+#    - DOMAIN-SUFFIX,steampowered.com,✔️Direct
+#    - DOMAIN-SUFFIX,steamstat.us,✔️Direct
+#    - DOMAIN-SUFFIX,steamstatic.com,✔️Direct
+#    - DOMAIN-SUFFIX,steamusercontent.com,✔️Direct
     - DOMAIN-SUFFIX,takungpao.com,✔️Direct
     - DOMAIN-SUFFIX,taobao.com,✔️Direct
     - DOMAIN-SUFFIX,teamviewer.com,✔️Direct

@@ -105,7 +105,7 @@ template:
   #- {key: clash.socks_port, value: 7891}
   #- {key: clash.allow_lan, value: true}
   - {key: clash.log_level, value: info}
-  - {key: clash.mixed_port, value: 2222}
+  - {key: clash.mixed_port, value: 6666}
   - {key: clash.external_controller, value: ':19090'}
   - {key: clash.allow_lan, value: true}
   - {key: clash.mode, value: Rule}
