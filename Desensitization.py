@@ -32,7 +32,7 @@ with open(setting, "w", encoding="utf-8") as f:
 # for copy
 copy = ["subconverter/pref.yml", "subconverter/snippets/emoji.txt",
         "subconverter/snippets/groups_clash.txt", "subconverter/base/all_base.tpl",
-        "parser.js", "auto-check-in.js"]
+        "parser.js", "auto-check-in.js", "trayscript.js"]
 try:
     for file in copy:
         filepath = os.path.join(os.getcwd(), file)

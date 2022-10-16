@@ -90,6 +90,17 @@ module.exports.parse = async (
 		} else var node_groups = _variables["merge_nodes"];
 
 		//规则组，往Manual里添加新增的非UNM节点，UNM添加到解锁组
+		// 见 subconverter 的配置文件: snippets/groups_clash.txt
+		/*
+		👋Manual`select`.*
+		⚙️Auto`url-test`.*`http://www.gstatic.com/generate_204`300
+		🔄Load Balance`load-balance`.*`http://www.gstatic.com/generate_204`300
+		🎬Video`select`.*
+		🚀Proxy`select`[]👋Manual`[]⚙️Auto`[]🔄Load Balance`[]DIRECT
+		✔️Direct`select`[]DIRECT`[]🚀Proxy
+		🐟漏网之鱼`select`[]🚀Proxy`[]DIRECT
+		🔓解锁网易云灰色歌曲`select`[]DIRECT
+		*/
 		rawObj["proxies"].forEach((v) => {
 			if (
 				rawObj["proxy-groups"][0]["proxies"].findIndex(
@@ -97,9 +108,12 @@ module.exports.parse = async (
 				) === -1
 			) {
 				if (v["name"].indexOf("UNM") === -1) {
+					// add to Manual and Video
 					rawObj["proxy-groups"][0]["proxies"].push(v["name"]);
+					rawObj["proxy-groups"][3]["proxies"].push(v["name"]);
 				} else {
-					rawObj["proxy-groups"][6]["proxies"].push(v["name"]);
+					// add to 🔓解锁网易云灰色歌曲
+					rawObj["proxy-groups"][7]["proxies"].push(v["name"]);
 				}
 			}
 		});
@@ -220,19 +234,19 @@ module.exports.parse = async (
 		}
 
 		/* //不支持proxy-providers ，subconverter会给删掉
-    // 如果有proxy-providers则添加所含节点，否则删除
-    if (rawObj['proxy-providers'] == undefined || JSON.stringify(rawObj['proxy-providers']) === "{}") {
-      delete rawObj['proxy-providers']
-    }
-    else {
-      log("Found proxy-providers")
-      rawObj['proxy-providers'].forEach((v, i) => {
-        rawObj['proxy-groups'][0]['use'].push(v['name'])
-        rawObj['proxy-groups'][1]['use'].push(v['name'])
-        rawObj['proxy-groups'][2]['use'].push(v['name'])
-      })
-    }
-    */
+	// 如果有proxy-providers则添加所含节点，否则删除
+	if (rawObj['proxy-providers'] == undefined || JSON.stringify(rawObj['proxy-providers']) === "{}") {
+	  delete rawObj['proxy-providers']
+	}
+	else {
+	  log("Found proxy-providers")
+	  rawObj['proxy-providers'].forEach((v, i) => {
+		rawObj['proxy-groups'][0]['use'].push(v['name'])
+		rawObj['proxy-groups'][1]['use'].push(v['name'])
+		rawObj['proxy-groups'][2]['use'].push(v['name'])
+	  })
+	}
+	*/
 		delete rawObj["proxy-providers"];
 		//清理无用字典
 		delete rawObj["port"];
@@ -359,7 +373,7 @@ module.exports.parse = async (
 							notify(
 								"Profile has been updated",
 								`profile "${name}" has been updated. ` +
-									"But fail to upload to gist, see log for more details",
+								"But fail to upload to gist, see log for more details",
 								true
 							);
 							log(message);
@@ -373,7 +387,7 @@ module.exports.parse = async (
 							notify(
 								"Profile has been updated",
 								`profile "${name}" has been updated.` +
-									` And maybe successfully uploaded to gist, see log for more details.`,
+								` And maybe successfully uploaded to gist, see log for more details.`,
 								true
 							);
 							log(message);

@@ -788,15 +788,18 @@ trayText: ""
 trayScriptPath: C:\Users\YOURNAME\.config\clash\trayscript.js
 trayColorTransparent: true
 trayColorForeground: "#000000"
-trayScriptManualRunTime: 1642852652949
-trayScriptInterval: 1
+trayScriptManualRunTime: 1665906490820
+trayScriptInterval: 600
 runTimeFormat: "hh : mm : ss"
 specifyHttpProxyProtocol: true
 trayOrders:
   - - icon
-  - - traffic
-    - status
+    - traffic
     - text
+  - - status
 hideTrayIcon: false
 editProfileWithCFWEditor: true
 hideUnselectableGroup: false
+connShowProcess: true
+showTrayProxyDelayIndicator: true
+trayProxiesStyle: 0
