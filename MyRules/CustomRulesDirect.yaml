@@ -18,6 +18,7 @@ payload:
   - DOMAIN,subconverter-web.now.sh
   - DOMAIN,subconverter.herokuapp.com
   - DOMAIN,api.dler.io
+  - DOMAIN-SUFFIX,glados-config.net
   # others
   - DOMAIN,ftp.cn.debian.org
   - DOMAIN-SUFFIX,advantech.com
