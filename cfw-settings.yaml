@@ -670,7 +670,7 @@ mixinText: |-
         - "dns.msftncsi.com"
         - "www.msftncsi.com"
         - "www.msftconnecttest.com"
-      listen: 0.0.0.0:53
+      listen: 0.0.0.0:5453
       nameserver:
         # 大部分走的都是需要代理的，全部DoH, DoT算了
         - 8.8.8.8 #谷歌
@@ -729,7 +729,7 @@ mixinText: |-
         - 198.18.0.2:53
       auto-route: true
       auto-detect-interface: true # 自动检测出口网卡
-profileParsersText: >
+profileParsersText: >-
   parsers: # array
     - reg: ^http://(?:localhost|127\.0\.0\.1):25500/.+$
       file: 'C:/Users/YOURNAME/.config/clash/parser.yaml'
@@ -737,6 +737,8 @@ profileParsersText: >
       file: 'C:/Users/YOURNAME/.config/clash/parser.js'
     - url: https://cdn.jsdelivr.net/gh/SplitGemini/Clash_configuration@master/test.yaml
       file: 'C:/Users/YOURNAME/.config/clash/auto-check-in.js'
+    - reg: glados
+      file: 'C:/Users/YOURNAME/.config/clash/glados-checkin.js'
 connProfile: true
 connMode: true
 showNewVersionIcon: true
@@ -788,7 +790,7 @@ trayText: ""
 trayScriptPath: C:\Users\YOURNAME\.config\clash\trayscript.js
 trayColorTransparent: true
 trayColorForeground: "#000000"
-trayScriptManualRunTime: 1665906490820
+trayScriptManualRunTime: 1666189038953
 trayScriptInterval: 600
 runTimeFormat: "hh : mm : ss"
 specifyHttpProxyProtocol: true

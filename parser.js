@@ -151,49 +151,23 @@ module.exports.parse = async (
 
 			rawObj["proxies"].forEach((proxy) => {
 				if (
-					node_groups.every((node_group) => {
+					node_groups.filter((node_group) => {
 						// key匹配
 						if (
 							node_group["keys"].some((key) => {
 								return proxy["name"].indexOf(key) !== -1;
 							})
 						) {
-							let levels = ["V1", "V2", "V3", "V4", ""];
-							// level group
-							// foreach keys, get
-							//[ ["key1 V1", "key2 V1",...], ["key1 V2", "key2 V2",...], ...["key1", "key2",...] ]
-							let levelGroup = levels.map((level) =>
-								node_group["keys"].map((key) =>
-									level ? `${key} ${level}` : key
-								)
+							push_proxy(
+								_other,
+								node_group["name"],
+								proxy["name"]
 							);
-
-							// will definitely be false
-							// last element is same as node_group["keys"]
-							// and it definitely can pass the 'if' test
-							levelGroup.every((keyLevels, i) => {
-								// find level
-								if (
-									// all key with level match
-									keyLevels.some((keyLevel) => {
-										return proxy["name"].indexOf(keyLevel) !== -1;
-									})
-								) {
-									push_proxy(
-										_other,
-										node_group["name"] + (levels[i] ? ` ${levels[i]}` : ""),
-										proxy["name"]
-									);
-									return false;
-								}
-								// doesn't match, continue
-								else return true;
-							});
-							return false;
+							return true;
 						}
 						// doesn't match, continue
-						else return true;
-					})
+						else return false;
+					}).length === 0
 				) {
 					// 不匹配任何关键词和UNM
 					if (proxy["name"].indexOf("UNM") === -1)

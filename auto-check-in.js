@@ -17,7 +17,7 @@ const { resolve, join } = require("path");
 const { homedir } = require("os");
 const variable_path = resolve(__dirname, "./variables.yaml");
 const myDate = new Date();
-const debug = true;
+const debug = false;
 const homeDirectory = join(homedir(), ".config/clash");
 // log file路径
 const logFile = join(homeDirectory, "logs/cfw-autocheckin.log");

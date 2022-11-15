@@ -113,7 +113,7 @@ async function getLoadBalanceDelay(proxies) {
     } else timeoutCount++;
   }
   if (count === 0) {
-    return "No Available Proxies";
+    return "Timeout";
   }
 
   const delay = Math.floor(sum / count).toString();
