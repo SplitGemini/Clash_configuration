@@ -39,6 +39,7 @@ bypassText: |
     - "*.windowsupdate.com"
     - "*.msedge.net"
     - "*.bing.com"
+    - "*.bing.net"
     - "*.msecnd.com"
     - "*.msecnd.net"
     - "*.visualstudio.com"
@@ -142,6 +143,7 @@ bypassText: |
     - "*.biligame.com"
     - "*.biligame.net"
     - "*.bilivideo.com"
+    - "*.bilivideo.cn"
     - "*.hdslb.com"
     - "*.im9.com"
     # Blizzard
@@ -176,6 +178,8 @@ bypassText: |
     - "*.douyu.com"
     - "*.douyu.tv"
     - "*.douyutv.com"
+    - "*.edgesrv.com"
+    - "*.douyucdn*.cn"
     # Epic
     - "*.epicgames.com"
     - "*.helpshift.com"
@@ -278,26 +282,11 @@ bypassText: |
     - "*.sohuno.com"
     - "*.sohurdc.com"
     - "*.v-56.com"
-    # Sony
-    - "*.playstation.com"
-    - "*.playstation.net"
-    - "*.playstationnetwork.com"
-    - "*.sony.com"
-    - "*.sonyentertainmentnetwork.com"
     # Spark
     - "*.amplitude.com"
     - "*.firebaseio.com"
     - "*.hockeyapp.net"
     - "*.smartmailcloud.com"
-    # Steam
-    - "*.steam-chat.com"
-    - "*.steamgames.com"
-    - "*.steamusercontent.com"
-    - "*.steamcontent.com"
-    - "*.steamstatic.com"
-    - "*.steamcdn-a.akamaihd.net"
-    - "*.steamstat.us"
-    - "*.steampowered.com"
     # Tencent
     - "*.myqcloud.com"
     - "*.foxmail.com"
@@ -319,6 +308,7 @@ bypassText: |
     - "*.wechat.com"
     - "*.weixin.com"
     - "*.weiyun.com"
+    - blank
     # Vip 唯品会
     - "*.appsimg.com"
     - "*.appvipshop.com"
@@ -670,6 +660,7 @@ mixinText: |-
         - "dns.msftncsi.com"
         - "www.msftncsi.com"
         - "www.msftconnecttest.com"
+        - "ipv6.msftconnecttest.com"
       listen: 0.0.0.0:5453
       nameserver:
         # 大部分走的都是需要代理的，全部DoH, DoT算了
@@ -688,7 +679,7 @@ mixinText: |-
         #- https://doh.opendns.com/dns-query  #opendns
         #- tls://dns.google:853 #谷歌
         #- https://dns.google/dns-query
-        #- https://8.8.8.8/dns-query #貌似不行
+        #- https://8.8.8.8/dns-query #不行
         #- tls://1.1.1.1:853 #cloudflare
         #- https://dns.cloudflare.com/dns-query
         #- https://cloudflare-dns.com/dns-query
@@ -704,8 +695,8 @@ mixinText: |-
         # 仅保留4个doh 且尽量使用ip域名
         #- https://doh.opendns.com/dns-query  #opendns
         #- tls://dns.google:853 #谷歌
-        #- https://dns.google/dns-query
-        - https://8.8.8.8/dns-query
+        - https://dns.google/dns-query
+        #- https://8.8.8.8/dns-query #不行
         #- tls://1.1.1.1:853 #cloudflare
         #- https://dns.cloudflare.com/dns-query
         #- https://cloudflare-dns.com/dns-query
@@ -728,7 +719,8 @@ mixinText: |-
       dns-hijack:
         - 198.18.0.2:53
       auto-route: true
-      auto-detect-interface: true # 自动检测出口网卡
+      # 自动检测出口网卡
+      auto-detect-interface: true
 profileParsersText: >-
   parsers: # array
     - reg: ^http://(?:localhost|127\.0\.0\.1):25500/.+$
@@ -790,10 +782,10 @@ trayText: ""
 trayScriptPath: C:\Users\YOURNAME\.config\clash\trayscript.js
 trayColorTransparent: true
 trayColorForeground: "#000000"
-trayScriptManualRunTime: 1666189038953
+trayScriptManualRunTime: 1673090283028
 trayScriptInterval: 600
 runTimeFormat: "hh : mm : ss"
-specifyHttpProxyProtocol: true
+specifyHttpProxyProtocol: false
 trayOrders:
   - - icon
     - traffic
@@ -804,4 +796,7 @@ editProfileWithCFWEditor: true
 hideUnselectableGroup: false
 connShowProcess: true
 showTrayProxyDelayIndicator: true
-trayProxiesStyle: 0
+trayProxiesStyle: 1
+randomMixedPort: false
+useModeIcons: false
+connChainType: 2

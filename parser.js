@@ -89,35 +89,6 @@ module.exports.parse = async (
 			node_groups = [];
 		} else var node_groups = _variables["merge_nodes"];
 
-		//规则组，往Manual里添加新增的非UNM节点，UNM添加到解锁组
-		// 见 subconverter 的配置文件: snippets/groups_clash.txt
-		/*
-		👋Manual`select`.*
-		⚙️Auto`url-test`.*`http://www.gstatic.com/generate_204`300
-		🔄Load Balance`load-balance`.*`http://www.gstatic.com/generate_204`300
-		🎬Video`select`.*
-		🚀Proxy`select`[]👋Manual`[]⚙️Auto`[]🔄Load Balance`[]DIRECT
-		✔️Direct`select`[]DIRECT`[]🚀Proxy
-		🐟漏网之鱼`select`[]🚀Proxy`[]DIRECT
-		🔓解锁网易云灰色歌曲`select`[]DIRECT
-		*/
-		rawObj["proxies"].forEach((v) => {
-			if (
-				rawObj["proxy-groups"][0]["proxies"].findIndex(
-					(x) => x === v["name"]
-				) === -1
-			) {
-				if (v["name"].indexOf("UNM") === -1) {
-					// add to Manual and Video
-					rawObj["proxy-groups"][0]["proxies"].push(v["name"]);
-					rawObj["proxy-groups"][3]["proxies"].push(v["name"]);
-				} else {
-					// add to 🔓解锁网易云灰色歌曲
-					rawObj["proxy-groups"][7]["proxies"].push(v["name"]);
-				}
-			}
-		});
-
 		if (node_groups.length != 0) {
 			if (name) log(`[info]: start merge nodes in "${name}".`);
 			else log(`[info]: start merge nodes in new profile.`);
@@ -132,21 +103,65 @@ module.exports.parse = async (
 					.indexOf(name);
 			};
 
-			let push_proxy = (array, group_name, proxy_name) => {
-				let index = indexByName(array, group_name);
+			let push_proxy_load_balance = (array, group_name, proxy_name) => {
+				const group_name_ = group_name + ' 动态均衡'
+				let index = indexByName(array, group_name_);
 				// 新建
 				if (index === -1) {
 					index =
 						array.push({
-							name: group_name,
+							name: group_name_,
 							type: "load-balance",
 							url: "http://www.gstatic.com/generate_204",
 							interval: 300,
 							proxies: [],
+							lazy: true
 						}) - 1;
 				}
-				if (debug) log(`[debug]: add "${proxy_name}" into "${group_name}".`);
+				if (debug) log(`[debug]: add "${proxy_name}" into "${group_name_}".`);
 				array[index]["proxies"].push(proxy_name);
+			};
+
+			let push_proxy_url_test = (array, group_name, proxy_name) => {
+				const group_name_ = group_name + ' 自动切换'
+				let index = indexByName(array, group_name_);
+				// 新建
+				if (index === -1) {
+					index =
+						array.push({
+							name: group_name_,
+							type: "url-test",
+							url: "http://www.gstatic.com/generate_204",
+							interval: 300,
+							proxies: [],
+							lazy: true,
+							tolerance: 500
+						}) - 1;
+				}
+				if (debug) log(`[debug]: add "${proxy_name}" into "${group_name_}".`);
+				array[index]["proxies"].push(proxy_name);
+			};
+
+			let push_proxy_manual = (array, group_name, proxy_name) => {
+				const group_name_ = group_name + ' 手动选择'
+				let index = indexByName(array, group_name_);
+				// 新建
+				if (index === -1) {
+					index =
+						array.push({
+							name: group_name_,
+							type: "select",
+							proxies: [],
+						}) - 1;
+				}
+				if (debug) log(`[debug]: add "${proxy_name}" into "${group_name_}".`);
+				array[index]["proxies"].push(proxy_name);
+			};
+
+			let push_proxy = (array, group_name, proxy_name) => {
+				push_proxy_load_balance(array, group_name, proxy_name)
+				push_proxy_url_test(array, group_name, proxy_name)
+				push_proxy_manual(array, group_name, proxy_name)
 			};
 
 			rawObj["proxies"].forEach((proxy) => {
@@ -180,6 +195,7 @@ module.exports.parse = async (
 			for (let i = _other.length - 1; i > 0; i--) {
 				for (let k = i - 1; k >= 0; k--) {
 					if (
+						_other[i].type === _other[k].type &&
 						yaml.stringify(_other[i]["proxies"]) ===
 						yaml.stringify(_other[k]["proxies"])
 					) {
@@ -207,20 +223,6 @@ module.exports.parse = async (
 			log("[warning]: keys need to set.");
 		}
 
-		/* //不支持proxy-providers ，subconverter会给删掉
-	// 如果有proxy-providers则添加所含节点，否则删除
-	if (rawObj['proxy-providers'] == undefined || JSON.stringify(rawObj['proxy-providers']) === "{}") {
-	  delete rawObj['proxy-providers']
-	}
-	else {
-	  log("Found proxy-providers")
-	  rawObj['proxy-providers'].forEach((v, i) => {
-		rawObj['proxy-groups'][0]['use'].push(v['name'])
-		rawObj['proxy-groups'][1]['use'].push(v['name'])
-		rawObj['proxy-groups'][2]['use'].push(v['name'])
-	  })
-	}
-	*/
 		delete rawObj["proxy-providers"];
 		//清理无用字典
 		delete rawObj["port"];

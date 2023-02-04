@@ -13,15 +13,9 @@
 #操作：=：覆盖，+：插入，-：删除
 #支持[]proxyNames，[]groupNames和[]shuffledProxyNames，并支持使用正则过滤'|'其中节点
 
-append-proxies: # 自定义节点，带关键词UNM的添加到解锁组，不带的添加到手动组
-  - name: 🎵 UNM丨Local
-    type: http
-    server: 127.0.0.1
-    port: 2223
 mix-object:
   # 自定义覆盖规则
   rules:
-    - RULE-SET,UNMProxy,🔓解锁网易云灰色歌曲
     # Direct ips
     - IP-CIDR,101.71.154.241/32,✔️Direct,no-resolve
     - IP-CIDR,115.236.112.0/20,✔️Direct,no-resolve
@@ -1251,9 +1245,3 @@ mix-rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
     path: ./RuleSet/gfw.yaml
     interval: 86400
-  UNMProxy:
-    type: http
-    behavior: classical
-    path: ./MyRules/UNMProxy.yaml
-    url: https://cdn.jsdelivr.net/gh/SplitGemini/Clash_configuration@master/MyRules/UNMProxy.yaml
-    interval: 0

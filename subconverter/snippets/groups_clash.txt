@@ -1,8 +1,5 @@
 👋Manual`select`.*
-⚙️Auto`url-test`.*`http://www.gstatic.com/generate_204`300
-🔄Load Balance`load-balance`.*`http://www.gstatic.com/generate_204`300
 🎬Video`select`.*
-🚀Proxy`select`[]👋Manual`[]⚙️Auto`[]🔄Load Balance`[]DIRECT
+🚀Proxy`select`[]👋Manual`[]DIRECT
 ✔️Direct`select`[]DIRECT`[]🚀Proxy
 🐟漏网之鱼`select`[]🚀Proxy`[]DIRECT
-🔓解锁网易云灰色歌曲`select`[]DIRECT
