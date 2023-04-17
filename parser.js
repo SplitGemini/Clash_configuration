@@ -142,26 +142,9 @@ module.exports.parse = async (
 				array[index]["proxies"].push(proxy_name);
 			};
 
-			let push_proxy_manual = (array, group_name, proxy_name) => {
-				const group_name_ = group_name + ' 手动选择'
-				let index = indexByName(array, group_name_);
-				// 新建
-				if (index === -1) {
-					index =
-						array.push({
-							name: group_name_,
-							type: "select",
-							proxies: [],
-						}) - 1;
-				}
-				if (debug) log(`[debug]: add "${proxy_name}" into "${group_name_}".`);
-				array[index]["proxies"].push(proxy_name);
-			};
-
 			let push_proxy = (array, group_name, proxy_name) => {
 				push_proxy_load_balance(array, group_name, proxy_name)
 				push_proxy_url_test(array, group_name, proxy_name)
-				push_proxy_manual(array, group_name, proxy_name)
 			};
 
 			rawObj["proxies"].forEach((proxy) => {
@@ -205,14 +188,19 @@ module.exports.parse = async (
 				}
 			}
 			if (debug) log(`[debug]: _other[${_other.length}].`);
-
-			rawObj["proxy-groups"][0]["proxies"] = yaml.parse(
-				yaml.stringify(
-					rawObj["proxy-groups"][0]["proxies"].concat(
-						_other.map((item) => item["name"])
+			let i = 0;
+			// first 4 groups append all other groups
+			while (i < 4) {
+				rawObj["proxy-groups"][i]["proxies"] = yaml.parse(
+					yaml.stringify(
+						rawObj["proxy-groups"][i]["proxies"].concat(
+							_other.map((item) => item["name"])
+						)
 					)
-				)
-			);
+				);
+				i++;
+			}
+
 			rawObj["proxy-groups"] = yaml.parse(
 				yaml.stringify(rawObj["proxy-groups"].concat(_other))
 			);

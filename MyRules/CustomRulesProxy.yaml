@@ -48,7 +48,6 @@ payload:
   - DOMAIN-SUFFIX,bandi.so
   - DOMAIN-SUFFIX,balena.io
   - DOMAIN-SUFFIX,balena-cloud.com
-  - DOMAIN-SUFFIX,jdbimgs.com
   - DOMAIN-SUFFIX,googleapis.cn
   - DOMAIN,clash.razord.top
   - DOMAIN,yacd.haishan.me

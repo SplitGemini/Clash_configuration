@@ -24,7 +24,7 @@ bypassText: |
     - "*.office.net"
     - "*.live.com"
     #- "*.microsoft.net"
-    - "*.microsoft.com"
+    #- "*.microsoft.com"
     #- "aka.ms"
     #- "*.msftauth.net"
     #- "*.msft*.com"
@@ -38,8 +38,8 @@ bypassText: |
     - "*.windows.com"
     - "*.windowsupdate.com"
     - "*.msedge.net"
-    - "*.bing.com"
-    - "*.bing.net"
+    #- "*.bing.com"
+    #- "*.bing.net"
     - "*.msecnd.com"
     - "*.msecnd.net"
     - "*.visualstudio.com"
@@ -121,6 +121,7 @@ bypassText: |
     - "*.xiami.net"
     - "*.ykimg.com"
     - "*.youku.com"
+    - "*.aliyundrive.com"
     # Baidu
     - "*.baidu.com"
     - "*.baidubcr.com"
@@ -712,6 +713,9 @@ mixinText: |-
         geoip: true # 默认
         ipcidr: # 在这个网段内的 IP 地址会被考虑为被污染的 IP
           - 240.0.0.0/4
+      nameserver-policy:
+        '+.bing.com': 'https://1.1.1.1/dns-query'
+        '+.bingapis.com': 'https://1.1.1.1/dns-query'
     tun:
       enable: false
       #enable: true
@@ -727,6 +731,8 @@ profileParsersText: >-
       file: 'C:/Users/YOURNAME/.config/clash/parser.yaml'
     - reg: ^http://(?:localhost|127\.0\.0\.1):25500/.+$
       file: 'C:/Users/YOURNAME/.config/clash/parser.js'
+    - reg: ^http://(?:localhost|127\.0\.0\.1):25500/.+$
+      file: 'C:/Users/YOURNAME/.config/clash/javdb.js'
     - url: https://cdn.jsdelivr.net/gh/SplitGemini/Clash_configuration@master/test.yaml
       file: 'C:/Users/YOURNAME/.config/clash/auto-check-in.js'
     - reg: glados

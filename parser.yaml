@@ -16,6 +16,11 @@
 mix-object:
   # 自定义覆盖规则
   rules:
+    - RULE-SET,Video,🎬Video
+    - DOMAIN-KEYWORD,google.com,🔍Search
+    - DOMAIN-KEYWORD,bing,🔍Search
+    - DOMAIN-SUFFIX,openai.com,💡OpenAI
+    - DOMAIN-SUFFIX,ai.com,💡OpenAI
     # Direct ips
     - IP-CIDR,101.71.154.241/32,✔️Direct,no-resolve
     - IP-CIDR,115.236.112.0/20,✔️Direct,no-resolve
@@ -1181,10 +1186,8 @@ mix-object:
     - DOMAIN,news-events.apple.com,🚀Proxy
     - DOMAIN,oneclient.sfx.ms,🚀Proxy
     - DOMAIN,testflight.apple.com,🚀Proxy
-    - DOMAIN,youtubei.googleapis.com,🚀Proxy
     # Rule providers set
     - RULE-SET,direct,✔️Direct
-    - RULE-SET,google,🚀Proxy
     - RULE-SET,apple,🚀Proxy
     - RULE-SET,icloud,🚀Proxy
     - RULE-SET,proxy,🚀Proxy
@@ -1227,12 +1230,6 @@ mix-rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt"
     path: ./RuleSet/apple.yaml
     interval: 86400
-  google:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt"
-    path: ./RuleSet/google.yaml
-    interval: 86400
   lancidr:
     type: http
     behavior: ipcidr
@@ -1245,3 +1242,9 @@ mix-rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
     path: ./RuleSet/gfw.yaml
     interval: 86400
+  Video:
+    type: http
+    behavior: classical
+    path: ./MyRules/Video.yaml
+    url: https://cdn.jsdelivr.net/gh/SplitGemini/Clash_configuration@master/MyRules/Video.yaml
+    interval: 0

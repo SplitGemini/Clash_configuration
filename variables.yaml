@@ -248,3 +248,6 @@ update_group:
     key: 
   - name: 
     key: 
+GlaDOSAutoCheckin:
+  cookie: 
+  plusplusToken:
