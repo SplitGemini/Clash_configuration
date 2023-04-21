@@ -21,7 +21,7 @@ payload:
   - DOMAIN,api.dler.io
   - DOMAIN-SUFFIX,glados-config.net
   - DOMAIN-SUFFIX,glados-config.com
-  - IP-CIDR6,2606:4700:3036::ac43:cebd/128
+  - IP-CIDR6,2606:4700::0/32
   # others
   - DOMAIN,ftp.cn.debian.org
   - DOMAIN-SUFFIX,advantech.com
