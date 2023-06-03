@@ -28,6 +28,7 @@ payload:
   - DOMAIN-SUFFIX,advantech.com.tw
   - DOMAIN-SUFFIX,advantech.com.cn
   - DOMAIN-SUFFIX,advantech.corp
+  - DOMAIN-SUFFIX,wise-iot-cloud.com
   # DNS
   - IP-CIDR,8.8.8.8/32  #谷歌
   - IP-CIDR,8.8.4.4/32
