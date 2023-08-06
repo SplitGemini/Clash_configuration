@@ -18,9 +18,10 @@ mix-object:
   rules:
     - RULE-SET,Video,🎬Video
     - DOMAIN-KEYWORD,google.com,🔍Search
-    - DOMAIN-KEYWORD,bing,🔍Search
     - DOMAIN-SUFFIX,openai.com,💡OpenAI
     - DOMAIN-SUFFIX,ai.com,💡OpenAI
+    - DOMAIN,openaiapi-site.azureedge.net,💡OpenAI
+    - DOMAIN-SUFFIX,bing.com,💡OpenAI
     # Direct ips
     - IP-CIDR,101.71.154.241/32,✔️Direct,no-resolve
     - IP-CIDR,115.236.112.0/20,✔️Direct,no-resolve

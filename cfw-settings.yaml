@@ -788,7 +788,7 @@ trayText: ""
 trayScriptPath: C:\Users\YOURNAME\.config\clash\trayscript.js
 trayColorTransparent: true
 trayColorForeground: "#000000"
-trayScriptManualRunTime: 1673090283028
+trayScriptManualRunTime: 1691214353221
 trayScriptInterval: 600
 runTimeFormat: "hh : mm : ss"
 specifyHttpProxyProtocol: false

@@ -111,7 +111,7 @@ const checkInAndGetStatus = async (cookie) => {
                     'Content-Type': 'application/json;charset=utf-8',
                 },
                 body: JSON.stringify({
-                    token: "glados.network"
+                    token: "glados.one"
                 })
             }).catch(error => {
                 return { reason: '网络错误' + error.message }

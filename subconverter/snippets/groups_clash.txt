@@ -1,6 +1,5 @@
 👋Manual`select`.*
 🎬Video`select`.*
-🎬Video`select`.*
 💡OpenAI`select`.*
 🔍Search`select`.*
 🚀Proxy`select`[]👋Manual`[]DIRECT

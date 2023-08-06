@@ -78,3 +78,24 @@ payload:
   - DOMAIN-SUFFIX,bahamut.com.tw
   - DOMAIN-SUFFIX,gamer.com.tw
   - DOMAIN-SUFFIX,hinet.net
+  
+  # youtube
+  - DOMAIN-KEYWORD,youtube
+  - DOMAIN-SUFFIX,youtu.be
+  - DOMAIN-SUFFIX,youtube.com
+  - DOMAIN-SUFFIX,yt.be
+  - DOMAIN-SUFFIX,ytimg.com
+  - DOMAIN-SUFFIX,googlevideo.com
+  - DOMAIN-SUFFIX,googleusercontent.com
+  - DOMAIN-SUFFIX,gvt2.com,Video
+  
+  # tiktok
+  - DOMAIN-SUFFIX,byteoversea.com
+  - DOMAIN-SUFFIX,muscdn.com
+  - DOMAIN-SUFFIX,musical.ly
+  - DOMAIN-SUFFIX,tik-tokapi.com
+  - DOMAIN-SUFFIX,tiktokcdn.com
+  - DOMAIN-SUFFIX,tiktok.com
+  - DOMAIN-SUFFIX,tiktokv.com
+  - DOMAIN-SUFFIX,full:p16-tiktokcdn-com.akamaized.net
+  
