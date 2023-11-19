@@ -16,16 +16,12 @@
 mix-object:
   # 自定义覆盖规则
   rules:
+    - RULE-SET,AI,💡OpenAI
     - RULE-SET,Video,🎬Video
-    - DOMAIN-KEYWORD,google.com,🔍Search
-    - DOMAIN-SUFFIX,openai.com,💡OpenAI
-    - DOMAIN-SUFFIX,ai.com,💡OpenAI
-    - DOMAIN,openaiapi-site.azureedge.net,💡OpenAI
-    - DOMAIN-SUFFIX,bing.com,💡OpenAI
+    - RULE-SET,GoogleSearch,🔍Search
     # Rule providers set
     - RULE-SET,reject,REJECT
     # local hosts
-    - DOMAIN-SUFFIX,local,✔️Direct
     - RULE-SET,lancidr,✔️Direct
     - RULE-SET,private,✔️Direct
     # direct
@@ -106,4 +102,16 @@ mix-rule-providers:
     behavior: classical
     path: ./MyRules/Video.yaml
     url: https://cdn.jsdelivr.net/gh/SplitGemini/Clash_configuration@master/MyRules/Video.yaml
+    interval: 86400
+  AI:
+    type: http
+    behavior: classical
+    path: ./MyRules/AI.yaml
+    url: https://cdn.jsdelivr.net/gh/SplitGemini/Clash_configuration@master/MyRules/AI.yaml
+    interval: 86400
+  GoogleSearch:
+    type: http
+    behavior: classical
+    path: ./MyRules/GoogleSearch.yaml
+    url: https://cdn.jsdelivr.net/gh/SplitGemini/Clash_configuration@master/MyRules/GoogleSearch.yaml
     interval: 86400

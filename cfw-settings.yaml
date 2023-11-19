@@ -17,24 +17,25 @@ bypassText: |
     # 微软
     #- "*.azureedge.*"
     - "*.azurefd.*"
-    #- "*.office365.com"
+    - "*.office365.com"
     - "*.xboxlive.com"
     - "*.s-microsoft.com"
     - "*.office.com"
     - "*.office.net"
     - "*.live.com"
-    #- "*.microsoft.net"
-    #- "*.microsoft.com"
-    #- "aka.ms"
-    #- "*.msftauth.net"
-    #- "*.msft*.com"
-    #- "*.msauth.net"
+    - "*.outlook.com"
+    - "*.microsoft.net"
+    - "*.microsoft.com"
+    - "aka.ms"
+    - "*.msftauth.net"
+    - "*.msft*.com"
+    - "*.msauth.net"
     - "*.xbox.com"
     - "*.onestore.ms"
     - "*.msn.com"
     #- "config.edge.skype.com"
     #- "*.akamized.com"
-    - "*.windows.net"
+    #- "*.windows.net"
     - "*.windows.com"
     - "*.windowsupdate.com"
     - "*.msedge.net"
@@ -43,8 +44,9 @@ bypassText: |
     - "*.msecnd.com"
     - "*.msecnd.net"
     - "*.visualstudio.com"
-    #- "*.microsoftonline.com"
+    - "*.microsoftonline.com"
     - "*.hotmail.com"
+    - "*.live.com"
     # CN域名直连
     - "*.cn"
     - "*.中国"
@@ -165,6 +167,21 @@ bypassText: |
     - "*.snssdk.com"
     - "*.toutiao.com"
     - "*.yximgs.com"
+    - "*.douyin.com"
+    - "*.zijieapi.com"
+    - "*.douyinpic.com"
+    - "*.douyinvod.com"
+    - "*.idouyinvod.com"
+    - "*.bytetos.com"
+    - "*.ibytedapm.com"
+    - "*.douyincdn.com"
+    - "*.bytegoofy.com"
+    - "*.ecombdimg.com"
+    - "*.extfans.com"
+    - "*.supercachenet.com"
+    - "*.byteacctimg.com"
+    - "*.bytetcc.com"
+    - "*.ndcpp.com"
     # CCTV
     - "*.cctv.com"
     - "*.cctvpic.com"
@@ -727,16 +744,10 @@ mixinText: |-
       auto-detect-interface: true
 profileParsersText: >-
   parsers: # array
-    - reg: ^http://(?:localhost|127\.0\.0\.1):25500/.+$
+    - reg: ^http://(?:localhost|127\.0\.0\.1):(?:25500|3333)/.+$
       file: 'C:/Users/YOURNAME/.config/clash/parser.yaml'
-    - reg: ^http://(?:localhost|127\.0\.0\.1):25500/.+$
+    - reg: ^http://(?:localhost|127\.0\.0\.1):(?:25500|3333)/.+$
       file: 'C:/Users/YOURNAME/.config/clash/parser.js'
-    - reg: ^http://(?:localhost|127\.0\.0\.1):25500/.+$
-      file: 'C:/Users/YOURNAME/.config/clash/javdb.js'
-    - url: https://cdn.jsdelivr.net/gh/SplitGemini/Clash_configuration@master/test.yaml
-      file: 'C:/Users/YOURNAME/.config/clash/auto-check-in.js'
-    - reg: glados
-      file: 'C:/Users/YOURNAME/.config/clash/glados-checkin.js'
 connProfile: true
 connMode: true
 showNewVersionIcon: true
@@ -753,7 +764,7 @@ childProcessText: >
         - "-l"
         - "log.log"
       options:
-        cwd: C:\Users\YOURNAME\.config\clash\subconverter # 子进程工作目录
+        cwd: C:\Users\\YOURNAME\\.config\clash\subconverter # 子进程工作目录
         windowsHide: true # 隐藏子进程的控制台窗口
     # 用于本地代理网易云音乐解锁
     #- command: "C:\\Users\\YOURNAME\\.config\\clash\\UnblockNeteaseMusic-windows-amd64\\UnblockNeteaseMusic.exe"
@@ -771,7 +782,7 @@ childProcessText: >
         #- "kugou"
         #- "migu"
       #options:
-        #cwd: C:\Users\YOURNAME\.config\clash\UnblockNeteaseMusic-windows-amd64 # 子进程工作目录
+        #cwd: C:\Users\\YOURNAME\\.config\clash\UnblockNeteaseMusic-windows-amd64 # 子进程工作目录
         #windowsHide: true # 隐藏子进程的控制台窗口
 systemProxyTypeIndex: 0
 pacContentText: ""
@@ -785,18 +796,19 @@ proxyItemWidth: "290"
 lightweightMode: false
 iconSpeed: false
 trayText: ""
-trayScriptPath: C:\Users\YOURNAME\.config\clash\trayscript.js
+trayScriptPath: C:\Users\\YOURNAME\\.config\clash\trayscript.js
 trayColorTransparent: true
 trayColorForeground: "#000000"
-trayScriptManualRunTime: 1691214353221
+trayScriptManualRunTime: 1696218947016
 trayScriptInterval: 600
 runTimeFormat: "hh : mm : ss"
 specifyHttpProxyProtocol: false
 trayOrders:
+  - []
   - - icon
-    - traffic
+    - status
     - text
-  - - status
+    - traffic
 hideTrayIcon: false
 editProfileWithCFWEditor: true
 hideUnselectableGroup: false
@@ -806,3 +818,4 @@ trayProxiesStyle: 1
 randomMixedPort: false
 useModeIcons: false
 connChainType: 2
+checkForUpdates: true
