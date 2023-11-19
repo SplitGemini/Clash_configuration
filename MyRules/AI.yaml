@@ -5,4 +5,6 @@ payload:
   - DOMAIN-SUFFIX,ai.com
   - DOMAIN,openaiapi-site.azureedge.net
   - DOMAIN-SUFFIX,bing.com
-  - DOMAIN-SUFFIX,bing.com
+  - DOMAIN-SUFFIX,bing.net
+  - DOMAIN-SUFFIX,applicationinsights.azure.com
+  - DOMAIN-SUFFIX,edge-consumer-static.azureedge.net
