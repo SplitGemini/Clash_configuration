@@ -1,0 +1,12 @@
+payload:
+  # 迅雷
+  - PROCESS-NAME,DownloadSDKServer.exe
+  - PROCESS-NAME,Thunder.exe
+  # 下载
+  - PROCESS-NAME,Ibit6.exe
+  #- PROCESS-NAME,aria2c.exe
+  - PROCESS-NAME,SpeedPanX.exe
+  - PROCESS-NAME,KinhDown.exe
+  - PROCESS-NAME,FlashDownloadDesktop.exe
+  - PROCESS-NAME,XDown.exe
+  - PROCESS-NAME,MiniThunderPlatform.exe

@@ -1,0 +1,8 @@
+payload:
+  - DOMAIN-SUFFIX,oaiusercontent.com
+  - DOMAIN-SUFFIX,oaistatic.com 
+  - DOMAIN-SUFFIX,openai.com
+  - DOMAIN-SUFFIX,ai.com
+  - DOMAIN,openaiapi-site.azureedge.net
+  - DOMAIN-SUFFIX,bing.com
+  - DOMAIN-SUFFIX,bing.com
