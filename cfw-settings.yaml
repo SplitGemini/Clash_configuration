@@ -17,20 +17,20 @@ bypassText: |
     # 微软
     #- "*.azureedge.*"
     - "*.azurefd.*"
-    - "*.office365.com"
-    - "*.xboxlive.com"
-    - "*.s-microsoft.com"
-    - "*.office.com"
-    - "*.office.net"
-    - "*.live.com"
+    #- "*.office365.com"
+    #- "*.xboxlive.com"
+    #- "*.s-microsoft.com"
+    #- "*.office.com"
+    #- "*.office.net"
+    #- "*.live.com"
     - "*.outlook.com"
-    - "*.microsoft.net"
-    - "*.microsoft.com"
-    - "aka.ms"
+    #- "*.microsoft.net"
+    #- "*.microsoft.com"
+    #- "aka.ms"
     - "*.msftauth.net"
     - "*.msft*.com"
     - "*.msauth.net"
-    - "*.xbox.com"
+    #- "*.xbox.com"
     - "*.onestore.ms"
     - "*.msn.com"
     #- "config.edge.skype.com"
@@ -46,7 +46,7 @@ bypassText: |
     - "*.visualstudio.com"
     - "*.microsoftonline.com"
     - "*.hotmail.com"
-    - "*.live.com"
+    #- "*.live.com"
     # CN域名直连
     - "*.cn"
     - "*.中国"
@@ -819,3 +819,4 @@ randomMixedPort: false
 useModeIcons: false
 connChainType: 2
 checkForUpdates: true
+titleBarText: Clash
