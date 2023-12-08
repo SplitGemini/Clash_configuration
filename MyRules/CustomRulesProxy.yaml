@@ -49,6 +49,7 @@ payload:
   - DOMAIN-SUFFIX,balena.io
   - DOMAIN-SUFFIX,balena-cloud.com
   - DOMAIN-SUFFIX,googleapis.cn
+  - DOMAIN-SUFFIX,gstatic.com
   - DOMAIN,clash.razord.top
   - DOMAIN,yacd.haishan.me
   - DOMAIN,gist.github.com

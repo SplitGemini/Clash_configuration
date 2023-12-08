@@ -744,9 +744,9 @@ mixinText: |-
       auto-detect-interface: true
 profileParsersText: >-
   parsers: # array
-    - reg: ^http://(?:localhost|127\.0\.0\.1):(?:25500|3333)/.+$
+    - reg: ^http://(?:localhost|127\.0\.0\.1):(?:25500)/.+$
       file: 'C:/Users/YOURNAME/.config/clash/parser.yaml'
-    - reg: ^http://(?:localhost|127\.0\.0\.1):(?:25500|3333)/.+$
+    - reg: ^http://(?:localhost|127\.0\.0\.1):(?:25500)/.+$
       file: 'C:/Users/YOURNAME/.config/clash/parser.js'
 connProfile: true
 connMode: true
