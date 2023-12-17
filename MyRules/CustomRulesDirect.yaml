@@ -47,3 +47,7 @@ payload:
   - IP-CIDR,208.67.220.220/32
   - IP-CIDR,9.9.9.9/32  #qurd9
   - PROCESS-NAME,SearchApp.exe
+  # 手机连接
+  - PROCESS-NAME,PhoneExperienceHost.exe
+  - DOMAIN-SUFFIX,dcg.microsoft.com
+  - DOMAIN-SUFFIX,mp.microsoft.com
