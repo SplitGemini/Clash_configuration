@@ -54,3 +54,4 @@ payload:
   - DOMAIN,yacd.haishan.me
   - DOMAIN,gist.github.com
   - DOMAIN,fonts.gstatic.com
+  - DOMAIN-SUFFIX,t.co
