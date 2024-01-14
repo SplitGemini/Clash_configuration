@@ -7,6 +7,7 @@ const {
 const { resolve, join } = require("path");
 const { homedir } = require("os");
 const variable_path = resolve(__dirname, "./variables.yaml");
+const { getCurrentBrowserFingerPrint } = require("./broprint");
 const myDate = new Date();
 const debug = false;
 const homeDirectory = join(homedir(), ".config/clash");
@@ -54,8 +55,10 @@ const log = function (text) {
 };
 
 let axios;
+let yaml;
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+const { Agent } = require("http");
 
 puppeteer.use(StealthPlugin());
 
@@ -64,7 +67,11 @@ const INFO = {
     leftDays: '天数',
     checkInMessage: '签到情况',
     checkInFailed: '签到失败',
-    getStatusFailed: '获取信息失败'
+    getStatusFailed: '获取信息失败',
+    authorization: '',
+    'koa:sess.sig': "",
+    "koa:sess": "",
+    "mailcode": ""
 };
 
 const rawCookie2JSON = (cookie) => {
@@ -83,12 +90,145 @@ const rawCookie2JSON = (cookie) => {
     }, []);
 };
 
+function waitForOneMinute() {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve();
+        }, 60000);
+    });
+}
+
+const getAuthorization = async () => {
+    const fingerPrint = await getCurrentBrowserFingerPrint();
+    return fingerPrint + "-" + window.screen.height + "-" + window.screen.width;
+}
+
+const login = async () => {
+    const browser = await puppeteer.launch({
+        headless: true,
+        executablePath: 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
+        args: ['--proxy-server=socks5://127.0.0.1:2222']
+    });
+
+    const page = await browser.newPage();
+
+    await page.goto('https://glados.rocks/login', {
+        timeout: 0,
+        waitUntil: 'load'
+    });
+
+    page.on('console', msg => {
+        log(msg.text());
+    });
+
+    var _variables = yaml.parse(readFileSync(variable_path, "utf-8"));
+    INFO.mail = _variables['GlaDOSAutoCheckin']["mail"]
+
+    await page.evaluate(async (INFO) => {
+        const auth = () =>
+            fetch('https://glados.rocks/api/authorization', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    // hack broprint
+                    Authorization: INFO.authorization,
+                    'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0",
+                },
+                body: JSON.stringify({
+                    "address": INFO.mail,
+                    "site": "glados.network"
+                }),
+            }).catch(error => {
+                return { reason: '网络错误' + error.message }
+            });
+
+        const authRes = await auth();
+        if (!authRes.ok) {
+            const reason = authRes.reason || `状态码：${authRes.status}`;
+            console.log(reason);
+        } else {
+            const { message } = await authRes.json();
+            console.log(message);
+        }
+    }, INFO);
+
+    log(`fill 'GlaDOSAutoCheckin: mailcode' with your login code sent to your email: ${INFO.email} in 1 minute`);
+    await waitForOneMinute();
+
+    _variables = yaml.parse(readFileSync(variable_path, "utf-8"));
+    INFO.mailcode = _variables['GlaDOSAutoCheckin']["mailcode"].toString();
+    if (!INFO.mailcode) {
+        log("login code empty");
+        await browser.close();
+        return _variables;
+    }
+
+    await page.evaluate(async (INFO) => {
+        const login = () => fetch('https://glados.rocks/api/login', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                // hack broprint
+                Authorization: INFO.authorization,
+                'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0",
+            },
+            body: JSON.stringify({
+                "method": "email",
+                "site": "glados.network",
+                "email": INFO.mail,
+                "mailcode": INFO.mailcode
+            })
+        }).catch(error => {
+            console.log('网络错误: ' + error.message)
+            return { reason: '网络错误: ' + error.message }
+        });
+
+        const loginRes = await login();
+        if (!loginRes.ok) {
+            const reason = loginRes.reason || `状态码：${loginRes.status}`;
+            console.log(reason);
+        } else {
+            const message = await loginRes.json();
+            console.log(JSON.stringify(message));
+        }
+    }, INFO);
+
+    const cookies = await page.cookies();
+
+    const koaSessCookie = cookies.find(cookie => cookie.name === 'koa:sess');
+    if (koaSessCookie) {
+        log(`koaSessCookie: ${koaSessCookie.value}`); // 输出 Cookie 的值
+        INFO['koa:sess'] = koaSessCookie.value
+    } else {
+        log('Cookie "koa:sess" not found');
+    }
+
+    const koaSessSigCookie = cookies.find(cookie => cookie.name === 'koa:sess.sig');
+    if (koaSessSigCookie) {
+        log(`koaSessSigCookie ${koaSessSigCookie.value}`); // 输出 Cookie 的值
+        INFO['koa:sess.sig'] = koaSessSigCookie.value
+    } else {
+        log('Cookie "koa:sess" not found');
+    }
+    await browser.close();
+
+    if (!INFO['koa:sess.sig'] || !INFO['koa:sess']) {
+        log("get cookie failed")
+        return _variables;
+    }
+
+    _variables['GlaDOSAutoCheckin']['cookie'] = `koa:sess=${INFO["koa:sess"]}; koa:sess.sig=${INFO["koa:sess.sig"]}`;
+    writeFileSync(variable_path, yaml.stringify(_variables), "utf-8");
+    return _variables;
+}
+
 const checkInAndGetStatus = async (cookie) => {
     const browser = await puppeteer.launch({
         headless: true,
         executablePath: 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
         args: ['--proxy-server=socks5://127.0.0.1:2222']
     });
+
     const page = await browser.newPage();
 
     const cookieJSON = rawCookie2JSON(cookie);
@@ -108,16 +248,26 @@ const checkInAndGetStatus = async (cookie) => {
             fetch('https://glados.rocks/api/user/checkin', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json;charset=utf-8',
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    // hack broprint
+                    Authorization: INFO.authorization,
+                    'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0"
                 },
                 body: JSON.stringify({
                     token: "glados.one"
-                })
+                }),
             }).catch(error => {
                 return { reason: '网络错误' + error.message }
             });
 
-        const getStatus = () => fetch('https://glados.rocks/api/user/status').catch(error => {
+        const getStatus = () => fetch('https://glados.rocks/api/user/status', {
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                // hack broprint
+                Authorization: '40512156764265187610939451908986-1440-2560',
+                'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0",
+            },
+        }).catch(error => {
             console.log('网络错误: ' + error.message)
             return { reason: '网络错误: ' + error.message }
         });
@@ -134,14 +284,16 @@ const checkInAndGetStatus = async (cookie) => {
             ret[INFO.checkInMessage] = message;
             console.log(message);
         }
-        
+
         const statusRes = await getStatus();
         if (!statusRes.ok) {
             const reason = statusRes.reason || `状态码：${statusRes.status}`;
             console.log(reason)
             ret[INFO.getStatusFailed] = reason;
         } else {
-            const { data: { email, phone, leftDays } = {} } = await statusRes.json();
+            const stateJson = await statusRes.json();
+            const { data: { email, phone, leftDays } = {} } = stateJson;
+            console.log(JSON.stringify(stateJson))
             let account = '未知账号';
             if (email) {
                 account = email.replace(/^(.)(.*)(.@.*)$/,
@@ -194,8 +346,9 @@ const pushplus = (token, info) => {
     });
 };
 
-let auto_check_in = async (raw, { yaml, axios: _axios, console, notify }, { url }) => {
-    axios = _axios
+let auto_check_in = async (raw, { yaml: _yaml, axios: _axios, console, notify }, { url }) => {
+    axios = _axios;
+    yaml = _yaml;
     // check log length
     checkLog();
 
@@ -212,8 +365,17 @@ let auto_check_in = async (raw, { yaml, axios: _axios, console, notify }, { url 
         return raw;
     }
 
+    INFO.authorization = await getAuthorization();
+    
     // try check in
     try {
+        if (!_variables["GlaDOSAutoCheckin"]["cookie"]) {
+            _variables = await login()
+        }
+        if (!_variables["GlaDOSAutoCheckin"]["cookie"]) {
+            log("login failed");
+            return raw;
+        }
         const info = await checkInAndGetStatus(_variables["GlaDOSAutoCheckin"]["cookie"]);
         log(JSON.stringify(info))
         notify(`GlaDOS 签到`, `剩余天数： ${info[INFO.leftDays]}`, true);
