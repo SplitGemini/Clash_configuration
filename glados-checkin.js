@@ -264,7 +264,7 @@ const checkInAndGetStatus = async (cookie) => {
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8',
                 // hack broprint
-                Authorization: '40512156764265187610939451908986-1440-2560',
+                Authorization: INFO.authorization,
                 'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0",
             },
         }).catch(error => {
