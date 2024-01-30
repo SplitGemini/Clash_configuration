@@ -132,7 +132,6 @@ const login = async () => {
                     'Content-Type': 'application/json;charset=UTF-8',
                     // hack broprint
                     Authorization: INFO.authorization,
-                    'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0",
                 },
                 body: JSON.stringify({
                     "address": INFO.mail,
@@ -170,7 +169,6 @@ const login = async () => {
                 'Content-Type': 'application/json;charset=UTF-8',
                 // hack broprint
                 Authorization: INFO.authorization,
-                'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0",
             },
             body: JSON.stringify({
                 "method": "email",
@@ -251,7 +249,6 @@ const checkInAndGetStatus = async (cookie) => {
                     'Content-Type': 'application/json;charset=UTF-8',
                     // hack broprint
                     Authorization: INFO.authorization,
-                    'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0"
                 },
                 body: JSON.stringify({
                     token: "glados.one"
@@ -265,7 +262,6 @@ const checkInAndGetStatus = async (cookie) => {
                 'Content-Type': 'application/json;charset=UTF-8',
                 // hack broprint
                 Authorization: INFO.authorization,
-                'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0",
             },
         }).catch(error => {
             console.log('网络错误: ' + error.message)

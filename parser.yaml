@@ -19,8 +19,6 @@ mix-object:
     - RULE-SET,AI,💡OpenAI
     - RULE-SET,Video,🎬Video
     - RULE-SET,GoogleSearch,🔍Search
-    # Rule providers set
-    - RULE-SET,reject,REJECT
     # local hosts
     - RULE-SET,lancidr,✔️Direct
     - RULE-SET,private,✔️Direct
@@ -90,12 +88,6 @@ mix-rule-providers:
     behavior: domain
     path: ./RuleSet/private.yaml
     url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt
-    interval: 86400
-  reject:
-    type: http
-    behavior: domain
-    path: ./RuleSet/reject.yaml
-    url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt
     interval: 86400
   Video:
     type: http

@@ -359,7 +359,7 @@ bypassText: |
     - "*.zmzfile.com"
     # Private Tracker
     - "*announce*"
-    - "*torrent*"
+    #- "*torrent*"
     - "*tracker*"
     - "*.animetorrents.me"
     - "*.awesome-hd.me"
