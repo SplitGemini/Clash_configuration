@@ -8,3 +8,4 @@ payload:
   - DOMAIN-SUFFIX,bing.net
   - DOMAIN-SUFFIX,applicationinsights.azure.com
   - DOMAIN-SUFFIX,edge-consumer-static.azureedge.net
+  - DOMAIN-KEYWORD,chatgpt
