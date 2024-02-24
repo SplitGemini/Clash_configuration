@@ -4,8 +4,10 @@ payload:
   - DOMAIN-SUFFIX,openai.com
   - DOMAIN-SUFFIX,ai.com
   - DOMAIN,openaiapi-site.azureedge.net
-  - DOMAIN-SUFFIX,bing.com
-  - DOMAIN-SUFFIX,bing.net
+  - DOMAIN-SUFFIX,bingapis.com
+  - DOMAIN,edgeservices.bing.com
+  - DOMAIN-SUFFIX,bingapis.com
+  - DOMAIN-SUFFIX,copilot.microsoft.com
   - DOMAIN-SUFFIX,applicationinsights.azure.com
   - DOMAIN-SUFFIX,edge-consumer-static.azureedge.net
   - DOMAIN-KEYWORD,chatgpt
