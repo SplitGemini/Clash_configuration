@@ -22,8 +22,31 @@ payload:
   - DOMAIN-SUFFIX,glados-config.net
   - DOMAIN-SUFFIX,glados-config.com
   - IP-CIDR6,2606:4700::0/32
-  # others
+  # epic cdn
+  - DOMAIN-SUFFIX,fastly-edge.com
+  # steam download
+  - DOMAIN-SUFFIX,steamcontent.com
+  - DOMAIN-SUFFIX,steamchina.com
+  - DOMAIN,csgo.wmsj.cn
+  - DOMAIN,dota2.wmsj.cn
+  - DOMAIN,wmsjsteam.com
+  - DOMAIN,dl.steam.clngaa.com
+  - DOMAIN,dl.steam.ksyna.com
+  - DOMAIN,st.dl.bscstorage.net
+  - DOMAIN,st.dl.eccdnx.com
+  - DOMAIN,st.dl.pinyuncloud.com
+  - DOMAIN,steampipe.steamcontent.tnkjmec.com
+  - DOMAIN,steampowered.com.8686c.com
+  - DOMAIN,steamstatic.com.8686c.com
+  - DOMAIN,steambroadcast.akamaized.net
+  - DOMAIN,steamcdn-a.akamaihd.net
+  - DOMAIN,steamcommunity-a.akamaihd.net
+  - DOMAIN,steamstore-a.akamaihd.net
+  - DOMAIN,steamusercontent-a.akamaihd.net
+  - DOMAIN,steamuserimages-a.akamaihd.net
+  # debian mirror
   - DOMAIN,ftp.cn.debian.org
+  # company
   - DOMAIN-SUFFIX,advantech.com
   - DOMAIN-SUFFIX,advantech.com.tw
   - DOMAIN-SUFFIX,advantech.com.cn
