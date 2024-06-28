@@ -50,6 +50,7 @@ payload:
   - DOMAIN,steampipe.akamaized.net
   - DOMAIN-SUFFIX,steam.eca.qtlglb.com
   - DOMAIN,steam.cdn.on.net
+  - DOMAIN,cdn.steamstatic.com:443
   # debian mirror
   - DOMAIN,ftp.cn.debian.org
   # company
