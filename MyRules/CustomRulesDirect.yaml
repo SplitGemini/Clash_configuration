@@ -44,6 +44,12 @@ payload:
   - DOMAIN,steamstore-a.akamaihd.net
   - DOMAIN,steamusercontent-a.akamaihd.net
   - DOMAIN,steamuserimages-a.akamaihd.net
+  - DOMAIN-SUFFIX,steamserver.net
+  - DOMAIN,steampipe-kr.akamaized.net
+  - DOMAIN,steampipe-partner.akamaized.net
+  - DOMAIN,steampipe.akamaized.net
+  - DOMAIN-SUFFIX,steam.eca.qtlglb.com
+  - DOMAIN,steam.cdn.on.net
   # debian mirror
   - DOMAIN,ftp.cn.debian.org
   # company
