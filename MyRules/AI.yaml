@@ -12,3 +12,4 @@ payload:
   - DOMAIN-SUFFIX,applicationinsights.azure.com
   - DOMAIN-SUFFIX,edge-consumer-static.azureedge.net
   - DOMAIN-KEYWORD,chatgpt
+  - DOMAIN-SUFFIX,files.oaiusercontent.com
