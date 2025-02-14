@@ -1,4 +1,0 @@
-proxies:
-proxy-groups:
-rules:
-  - MATCH,DIRECT
