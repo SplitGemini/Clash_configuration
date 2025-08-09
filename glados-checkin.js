@@ -362,6 +362,7 @@ let auto_check_in = async (raw, { yaml: _yaml, axios: _axios, console, notify },
     }
 
     INFO.authorization = await getAuthorization();
+    log(INFO.authorization)
     
     // try check in
     try {
