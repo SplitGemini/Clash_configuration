@@ -53,3 +53,4 @@ payload:
   - DOMAIN,yacd.haishan.me
   - DOMAIN,fonts.gstatic.com
   - DOMAIN-SUFFIX,t.co
+  - DOMAIN-SUFFIX,googleapis.cn
