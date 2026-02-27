@@ -84,3 +84,15 @@ payload:
   - DOMAIN-SUFFIX,trae.com.cn
   - DOMAIN-SUFFIX,tron.jiyunhudong.com
   - DOMAIN-SUFFIX,starling.zijieapi.com
+  # ChatGPT client
+  - PROCESS-NAME,ChatGPT
+  - PROCESS-NAME,ChatGPTHelper
+  # ChatGPT Atlas
+  - PROCESS-NAME,ChatGPT Atlas
+  - PROCESS-NAME,ChatGPT Atlas (Service)
+  - PROCESS-NAME,ChatGPT Atlas (Renderer)
+  - PROCESS-NAME,ChatGPT Atlas (GPU)
+  # Codex client
+  - PROCESS-NAME,Codex
+  - PROCESS-NAME,codex
+  - PROCESS-NAME,Codex Helper
