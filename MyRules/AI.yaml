@@ -3,8 +3,6 @@ payload:
   - DOMAIN-SUFFIX,openai.com
   - DOMAIN-SUFFIX,auth0.com
   - DOMAIN-SUFFIX,sentry.io
-  - DOMAIN-SUFFIX,google.com
-  - DOMAIN-SUFFIX,googleapis.com
   - DOMAIN-SUFFIX,hcaptcha.com
   - DOMAIN-SUFFIX,recaptcha.net
   - DOMAIN-SUFFIX,gstatic.com
@@ -96,3 +94,5 @@ payload:
   - PROCESS-NAME,Codex
   - PROCESS-NAME,codex
   - PROCESS-NAME,Codex Helper
+  # 
+  - DOMAIN-SUFFIX,challenges.cloudflare.com
