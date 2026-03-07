@@ -1,18 +1,16 @@
 payload:
-  - DOMAIN-SUFFIX,supanx.com
   - DOMAIN-SUFFIX,lauchdarkly.com
   - DOMAIN-SUFFIX,publicsuffix.org
   - DOMAIN-SUFFIX,freedownloadmanager.org
   - DOMAIN-SUFFIX,xboxlive.com
   - DOMAIN-SUFFIX,ibit6.com
   - DOMAIN,api.nuget.org
-  - DOMAIN-SUFFIX,123345.xyz
   - DOMAIN-SUFFIX,bejingyongjiu.com
   - DOMAIN,office365-test.herokuapp.com
   - DOMAIN,linuxlink.timesys.com
   # 机场、订阅
   - DOMAIN-SUFFIX,sy168.site
-  - DOMAIN,api.ikuuu.science
+  - DOMAIN-KEYWORD,ikuuu
   - DOMAIN,api.wcc.best
   - DOMAIN,rss.cnrss.xyz
   - DOMAIN,subcon.dlj.tf
@@ -22,35 +20,6 @@ payload:
   - DOMAIN-SUFFIX,glados-config.net
   - DOMAIN-SUFFIX,glados-config.com
   - IP-CIDR6,2606:4700::0/32
-  # epic cdn
-  - DOMAIN-SUFFIX,fastly-edge.com
-  # steam download
-  - DOMAIN-SUFFIX,steamcontent.com
-  - DOMAIN-SUFFIX,steamchina.com
-  - DOMAIN,csgo.wmsj.cn
-  - DOMAIN,dota2.wmsj.cn
-  - DOMAIN,wmsjsteam.com
-  - DOMAIN,dl.steam.clngaa.com
-  - DOMAIN,dl.steam.ksyna.com
-  - DOMAIN,st.dl.bscstorage.net
-  - DOMAIN,st.dl.eccdnx.com
-  - DOMAIN,st.dl.pinyuncloud.com
-  - DOMAIN,steampipe.steamcontent.tnkjmec.com
-  - DOMAIN,steampowered.com.8686c.com
-  - DOMAIN,steamstatic.com.8686c.com
-  - DOMAIN,steambroadcast.akamaized.net
-  - DOMAIN,steamcdn-a.akamaihd.net
-  - DOMAIN,steamcommunity-a.akamaihd.net
-  - DOMAIN,steamstore-a.akamaihd.net
-  - DOMAIN,steamusercontent-a.akamaihd.net
-  - DOMAIN,steamuserimages-a.akamaihd.net
-  - DOMAIN-SUFFIX,steamserver.net
-  - DOMAIN,steampipe-kr.akamaized.net
-  - DOMAIN,steampipe-partner.akamaized.net
-  - DOMAIN,steampipe.akamaized.net
-  - DOMAIN-SUFFIX,steam.eca.qtlglb.com
-  - DOMAIN,steam.cdn.on.net
-  - DOMAIN,cdn.steamstatic.com:443
   # debian mirror
   - DOMAIN,ftp.cn.debian.org
   # company
@@ -76,6 +45,8 @@ payload:
   - IP-CIDR,208.67.222.222/32  #opendns
   - IP-CIDR,208.67.220.220/32
   - IP-CIDR,9.9.9.9/32  #qurd9
+  # windows 进程
+  - PROCESS-NAME,SystemSettings.exe
   - PROCESS-NAME,SearchApp.exe
   # 手机连接
   - PROCESS-NAME,PhoneExperienceHost.exe
