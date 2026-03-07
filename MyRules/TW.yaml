@@ -1,0 +1,7 @@
+payload:
+  # tw
+  - DOMAIN-SUFFIX,javdb.com
+  - DOMAIN-SUFFIX,jdbstatic.com
+  - DOMAIN-SUFFIX,jdbimgs.com
+  - DOMAIN-SUFFIX,clickme.net
+  - DOMAIN-SUFFIX,bestjavcdn.com
