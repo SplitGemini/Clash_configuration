@@ -12,7 +12,6 @@ payload:
   - DOMAIN-SUFFIX,msftconnecttest.com
   - DOMAIN-SUFFIX,live.com
   - DOMAIN-SUFFIX,sfx.ms
-  - DOMAIN-SUFFIX,microsoft.com
   - DOMAIN-SUFFIX,oaistatic.com
   - DOMAIN-SUFFIX,oaiusercontent.com
   - DOMAIN,browser-intake-datadoghq.com
@@ -67,9 +66,11 @@ payload:
   - DOMAIN-SUFFIX,generativeai.google
   - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
   - DOMAIN-SUFFIX,apis.google.com
+  - DOMAIN,aistudio.google.com
   - DOMAIN-KEYWORD,colab
   - DOMAIN-KEYWORD,developerprofiles
   - DOMAIN-KEYWORD,generativelanguage
+  - DOMAIN,notebooklm.google.com
   # >> Trae
   - DOMAIN-SUFFIX,trae.ai
   - DOMAIN-SUFFIX,byteoversea.com
@@ -94,5 +95,12 @@ payload:
   - PROCESS-NAME,Codex
   - PROCESS-NAME,codex
   - PROCESS-NAME,Codex Helper
-  # 
+  # challenges
   - DOMAIN-SUFFIX,challenges.cloudflare.com
+  # copilot
+  - DOMAIN-SUFFIX,copilot.cloud.microsoft
+  - DOMAIN-SUFFIX,copilot.microsoft.com
+  - DOMAIN-SUFFIX,ai.azure.com
+  - DOMAIN,api.githubcopilot.com
+  - DOMAIN,copilot-proxy.githubusercontent.com
+  - DOMAIN-KEYWORD,copilot
