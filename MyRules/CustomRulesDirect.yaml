@@ -47,6 +47,7 @@ payload:
   - IP-CIDR,9.9.9.9/32  #qurd9
   # windows 进程
   - PROCESS-NAME,SystemSettings.exe
+  - PROCESS-NAME,backgroundTaskHost.exe
   - PROCESS-NAME,SearchApp.exe
   # 手机连接
   - PROCESS-NAME,PhoneExperienceHost.exe
