@@ -1,0 +1,7 @@
+payload:
+    - DOMAIN,mypikpak.com
+    - DOMAIN,mypikpak.net
+    - DOMAIN,user.mypikpak.com
+    - DOMAIN,access.mypikpak.com
+    - DOMAIN,api-drive.mypikpak.com
+    - DOMAIN-KEYWORD,pikpak
