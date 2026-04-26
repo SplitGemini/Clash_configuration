@@ -55,3 +55,4 @@ payload:
   - DOMAIN-SUFFIX,mp.microsoft.com
   - CrossDeviceService.exe
   - WeChatAppEx.exe
+  - DOMAIN-SUFFIX,msftconnecttest.com
