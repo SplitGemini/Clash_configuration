@@ -53,6 +53,6 @@ payload:
   - PROCESS-NAME,PhoneExperienceHost.exe
   - DOMAIN-SUFFIX,dcg.microsoft.com
   - DOMAIN-SUFFIX,mp.microsoft.com
-  - CrossDeviceService.exe
-  - WeChatAppEx.exe
+  - PROCESS-NAME,CrossDeviceService.exe
+  - PROCESS-NAME,WeChatAppEx.exe
   - DOMAIN-SUFFIX,msftconnecttest.com
