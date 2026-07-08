@@ -4,4 +4,7 @@ payload:
     - DOMAIN,user.mypikpak.com
     - DOMAIN,access.mypikpak.com
     - DOMAIN,api-drive.mypikpak.com
+    - DOMAIN,access.mypikpak.net
+    - DOMAIN,access.pikpakdrive.com
+    - DOMAIN,access.pikpak.me
     - DOMAIN-KEYWORD,pikpak
