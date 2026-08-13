@@ -56,3 +56,7 @@ payload:
   - PROCESS-NAME,CrossDeviceService.exe
   - PROCESS-NAME,WeChatAppEx.exe
   - DOMAIN-SUFFIX,msftconnecttest.com
+  # netbird
+  - DOMAIN-SUFFIX,netbird.selfhosted,DIRECT
+  - IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
+
