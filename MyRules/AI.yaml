@@ -80,7 +80,6 @@ payload:
   - DOMAIN-SUFFIX,abtestvm-sg.bytedance.com
   - DOMAIN-SUFFIX,tron-sg.bytelemon.com
   - DOMAIN-SUFFIX,sf16-short-sg.bytedapm.com
-  - DOMAIN-SUFFIX,trae.com.cn
   - DOMAIN-SUFFIX,tron.jiyunhudong.com
   - DOMAIN-SUFFIX,starling.zijieapi.com
   # ChatGPT client
