@@ -7,4 +7,5 @@ payload:
   - PROCESS-NAME,UnrealCEFSubProcess.exe
   - PROCESS-NAME,EpicWebHelper.exe
   - PROCESS-NAME,UnrealVersionSelector.exe
+  - PROCESS-NAME,EpicOnlineServicesInstallHelper.exe
   - DOMAIN,download.epicgames.com
